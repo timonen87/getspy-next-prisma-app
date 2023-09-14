@@ -4,19 +4,27 @@ import { cn } from "@/lib/utils";
 import { Button } from "./ui/Button";
 import { Icons } from "./Icons";
 import { signIn } from "next-auth/react";
+import { useToast } from "@/hooks/use-toast";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { toast } = useToast();
 
   const LoginWithGoogle = async () => {
     setIsLoading(true);
 
     try {
-      await signIn;
+      await signIn("google");
     } catch (error) {
-      // toast
+      toast({
+        title: "Ощибка входа",
+        description: "Ошибка авторизации через Google",
+        variant: "destructive",
+      });
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
