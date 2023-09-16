@@ -5,20 +5,24 @@ import { cn } from "@/lib/utils";
 import { getAuthSession } from "@/lib/auth";
 import UserAccountNav from "./UserAccountNav";
 import DropdownMenuButton from "./DropdownMenuButton";
+import NavBurger from "./sidebar/NavBurger";
 
 const Navbar = async () => {
   const session = await getAuthSession();
 
   return (
-    <header className="supports-backdrop-blur:bg-background/60 sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
+    <header className=" sticky top-0 z-10 w-full border-b bg-background/95 backdrop-blur">
       <div className="fixed top-0 inset-x-0 bg-white border-b border-zinc-300 z-[10] py-2">
         <div className="container  max-w-7xl h-full mx-auto flex items-center justify-between gap-2">
           <div className="flex gap-2 items-center">
             <Link href="/" className="flex gap-2 items-center">
-              <Icons.logo className="h-18 w-36 sm:h-12 sm:w-24" />
+              <Icons.logo className="h-12 w-24" />
             </Link>
+            <div>
+              {/* <NavBurger /> */}
+              <DropdownMenuButton />
+            </div>
             <div className="hidden md:block">{/* <SearchBar /> */}</div>
-            <DropdownMenuButton />
           </div>
           {/* <DropdownMenuButton /> */}
           {session?.user ? (

@@ -37,4 +37,20 @@ export const Icons = {
       <path d="M1 1h22v22H1z" fill="none" />
     </svg>
   ),
+  burger: (props: LucideProps) => (
+    <svg
+      {...props}
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth={1.5}
+      stroke="currentColor"
+      className="w-6 h-6"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5"
+      />
+    </svg>
+  ),
 };

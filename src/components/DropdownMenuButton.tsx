@@ -13,6 +13,9 @@ import {
   User,
   UserPlus,
   Users,
+  Home,
+  Group,
+  ChevronDown,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/Button";
@@ -30,6 +33,7 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/DropdownMenu";
+import { Icons } from "./Icons";
 
 interface DropdownMenuButtonProps {}
 
@@ -37,43 +41,68 @@ const DropdownMenuButton: FC<DropdownMenuButtonProps> = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline">Профиль</Button>
+        {/* <Button variant="outline">Профиль</Button> */}
+        <button className="flex cursor-pointer bg-slate-100 rounded hover:bg-slate-200 p-1">
+          <Home className="p-1 h-7 w-7" />
+          <ChevronDown className="p-1 h-7 w-7" />
+          {/* <Icons.burger /> */}
+        </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+      <DropdownMenuContent className="ml-2 w-60">
+        <DropdownMenuLabel>Каналы</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            <User className="mr-2 h-4 w-4" />
-            <span>Profile</span>
-            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+            <Plus className="mr-2 h-4 w-4" />
+            <span>Добавить канал</span>
+            <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <CreditCard className="mr-2 h-4 w-4" />
-            <span>Billing</span>
+            <Group className="mr-2 h-4 w-4" />
+            <span>Python</span>
             <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Settings className="mr-2 h-4 w-4" />
-            <span>Settings</span>
+            <span>FastApi</span>
             <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Keyboard className="mr-2 h-4 w-4" />
-            <span>Keyboard shortcuts</span>
+            <span>Node JS</span>
             <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
+        <DropdownMenuLabel>Лента</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuGroup>
+          <DropdownMenuItem>
+            <Home className="mr-2 h-4 w-4" />
+            <span>Главная</span>
+            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Group className="mr-2 h-4 w-4" />
+            <span>Популярное</span>
+            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Settings className="mr-2 h-4 w-4" />
+            <span>Все</span>
+            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+        <DropdownMenuLabel>Аккаунт</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <Users className="mr-2 h-4 w-4" />
-            <span>Team</span>
+            <span>Команда</span>
           </DropdownMenuItem>
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>
               <UserPlus className="mr-2 h-4 w-4" />
-              <span>Invite users</span>
+              <span>Написать автору</span>
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
               <DropdownMenuSubContent>
@@ -88,14 +117,14 @@ const DropdownMenuButton: FC<DropdownMenuButtonProps> = () => {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
                   <PlusCircle className="mr-2 h-4 w-4" />
-                  <span>More...</span>
+                  <span>Больше...</span>
                 </DropdownMenuItem>
               </DropdownMenuSubContent>
             </DropdownMenuPortal>
           </DropdownMenuSub>
           <DropdownMenuItem>
             <Plus className="mr-2 h-4 w-4" />
-            <span>New Team</span>
+            <span>Добавить пост</span>
             <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
@@ -106,7 +135,7 @@ const DropdownMenuButton: FC<DropdownMenuButtonProps> = () => {
         </DropdownMenuItem>
         <DropdownMenuItem>
           <LifeBuoy className="mr-2 h-4 w-4" />
-          <span>Support</span>
+          <span>Поддержка</span>
         </DropdownMenuItem>
         <DropdownMenuItem disabled>
           <Cloud className="mr-2 h-4 w-4" />
@@ -115,7 +144,7 @@ const DropdownMenuButton: FC<DropdownMenuButtonProps> = () => {
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <LogOut className="mr-2 h-4 w-4" />
-          <span>Log out</span>
+          <span>Выйти</span>
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
