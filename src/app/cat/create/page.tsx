@@ -57,7 +57,7 @@ const Page = () => {
   });
 
   return (
-    <div className="container flex items-center h-full max-2-3xl mx-auto">
+    <div className="container flex items-center h-full max-2-3xl mx-auto md:w-[700px]">
       <div className="relative bg-white w-full h-fit p-4 rounded-lg space-y-6">
         <div className="flex justify-between items-center">
           <h1 className="text-xl font-semibold">Создать категорию</h1>

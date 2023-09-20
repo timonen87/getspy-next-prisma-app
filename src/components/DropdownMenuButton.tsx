@@ -16,9 +16,9 @@ import {
   Home,
   Group,
   ChevronDown,
-} from "lucide-react";
+} from 'lucide-react';
 
-import { Button } from "@/components/ui/Button";
+import { Button } from '@/components/ui/Button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -32,8 +32,8 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@/components/ui/DropdownMenu";
-import { Icons } from "./Icons";
+} from '@/components/ui/DropdownMenu';
+import { Icons } from './Icons';
 
 interface DropdownMenuButtonProps {}
 
@@ -42,10 +42,10 @@ const DropdownMenuButton: FC<DropdownMenuButtonProps> = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         {/* <Button variant="outline">Профиль</Button> */}
-        <button className="flex cursor-pointer bg-slate-100 rounded hover:bg-slate-200 p-1">
-          <Home className="p-1 h-7 w-7" />
-          <ChevronDown className="p-1 h-7 w-7" />
-          {/* <Icons.burger /> */}
+        <button className="block flex cursor-pointer bg-slate-100 rounded hover:bg-slate-200 p-1 md:hidden">
+          <Icons.burger />
+          {/* <Home className="p-1 h-7 w-7" />
+          <ChevronDown className="p-1 h-7 w-7" /> */}
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="ml-2 w-60">
