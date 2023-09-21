@@ -36,7 +36,7 @@ export default function Home() {
             </div>
             <dl className="divide-y divide-gray-100 px-6 py-4 text-sm leading-6 bg-white">
               <div className="flex flex-col gap-x-4 py-3">
-                <dt className="text-gray-500">Создать новую категорию</dt>
+                <dt className="text-gray-500">Создать новую ленту</dt>
 
                 <Link
                   className={buttonVariants({
@@ -44,7 +44,7 @@ export default function Home() {
                   })}
                   href="/cat/create"
                 >
-                  Создать категорию
+                  Создать ленту
                 </Link>
               </div>
             </dl>

@@ -1,6 +1,7 @@
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
-import { CategorySubscriptionValidator } from '@/lib/validators/category';
+
+import { PostValidator } from '@/lib/validators/post';
 import { z } from 'zod';
 
 export async function POST(req: Request) {
@@ -13,29 +14,32 @@ export async function POST(req: Request) {
 
     const body = await req.json();
 
-    const { categoryId } = CategorySubscriptionValidator.parse(body);
-
-    const subscriptionExsists = await db.subscription.findFirst({
+    const { categoryId, title, content } = PostValidator.parse(body);
+    // verify user is subscribed to passed subreddit id
+    const subscription = await db.subscription.findFirst({
       where: {
         categoryId,
         userId: session.user.id,
       },
     });
 
-    if (subscriptionExsists) {
-      return new Response('Вы уже подписаны на категорию', { status: 400 });
+    if (!subscription) {
+      return new Response('Подписаться на пост', { status: 400 });
     }
 
-    await db.subscription.create({
+    await db.post.create({
       data: {
+        title,
+        content,
+        authorId: session.user.id,
         categoryId,
-        userId: session.user.id,
       },
     });
-    return new Response(categoryId);
+
+    return new Response('OK');
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return new Response('Запрос не выполнен', { status: 422 });
+      return new Response('Пост не создан', { status: 400 });
     }
 
     return new Response('Не удалось подписться, попробуйте позже', {

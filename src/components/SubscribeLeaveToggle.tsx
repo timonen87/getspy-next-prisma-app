@@ -7,7 +7,7 @@ import axios, { AxiosError } from 'axios';
 import { toast, useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import { startTransition } from 'react';
-import { useCustomToast } from '@/hooks/use-custom-toast';
+import { useCustomToasts } from '@/hooks/use-custom-toasts';
 
 interface SubscribeLeaveToggleProps {
   isSubcribed: boolean;
@@ -21,7 +21,7 @@ const SubscribeLeaveToggle: FC<SubscribeLeaveToggleProps> = ({
   categoryName,
 }: SubscribeLeaveToggleProps) => {
   const { toast } = useToast();
-  const { loginToast } = useCustomToast();
+  const { loginToast } = useCustomToasts();
   const router = useRouter();
 
   const { mutate: subscribe, isLoading: isSubLoading } = useMutation({
@@ -39,12 +39,6 @@ const SubscribeLeaveToggle: FC<SubscribeLeaveToggleProps> = ({
           return loginToast();
         }
       }
-
-      return toast({
-        title: 'Возникла проблема.',
-        description: 'Что то произошло. Попробуйте позже',
-        variant: 'destructive',
-      });
     },
     onSuccess: () => {
       startTransition(() => {
@@ -54,13 +48,48 @@ const SubscribeLeaveToggle: FC<SubscribeLeaveToggleProps> = ({
       });
       toast({
         title: 'Подписка!',
-        description: `Вы подписались на категорию${categoryName}`,
+        description: `Вы подписались на категорию @${categoryName}`,
+      });
+    },
+  });
+
+  const { mutate: unsubscribe, isLoading: isUnsubLoading } = useMutation({
+    mutationFn: async () => {
+      const payload: SubscribeToCategoryPayload = {
+        categoryId,
+      };
+
+      const { data } = await axios.post('/api/category/unsubscribe', payload);
+      return data as string;
+    },
+    onError: (err) => {
+      if (err instanceof AxiosError) {
+        if (err.response?.status === 401) {
+          return loginToast();
+        }
+      }
+    },
+    onSuccess: () => {
+      startTransition(() => {
+        // Refresh the current route and fetch new data from the server without
+        // losing client-side browser or React state.
+        router.refresh();
+      });
+      toast({
+        title: 'Вы покинули канал',
+        description: `Вы отподписались от @${categoryName}`,
       });
     },
   });
 
   return isSubcribed ? (
-    <Button className="w-full mt-1 mb-4">Отписаться</Button>
+    <Button
+      className="w-full mt-1 mb-4"
+      onClick={() => unsubscribe()}
+      isLoading={isUnsubLoading}
+    >
+      Отписаться
+    </Button>
   ) : (
     <Button
       className="w-full mt-1 mb-4"

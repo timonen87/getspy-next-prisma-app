@@ -1,13 +1,16 @@
-import Link from 'next/link';
-import { toast } from './use-toast';
 import { buttonVariants } from '@/components/ui/Button';
+import { toast } from '@/hooks/use-toast';
+import Link from 'next/link';
 
-export const useCustomToast = () => {
-  const LoginToast = () => {
+interface useCustomToastsProps {
+  loginToast: () => void;
+}
+
+export const useCustomToasts = () => {
+  const loginToast = () => {
     const { dismiss } = toast({
       title: 'Войдите в систему',
-      description:
-        'Вы должны авторизоваться и получить доступ к редактированию',
+      description: 'Вы должны авторизоваться на сайте',
       variant: 'destructive',
       action: (
         <Link
@@ -21,5 +24,5 @@ export const useCustomToast = () => {
     });
   };
 
-  return { LoginToast };
+  return { loginToast };
 };

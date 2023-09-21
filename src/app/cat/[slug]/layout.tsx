@@ -60,12 +60,12 @@ const layout = async ({
           {/* Правый блок */}
           <div className="hidden md:block overflow-hidden h-fit rounded-lg border border-gray-200 order-first md:order-last">
             <div className="px-6 py-4">
-              <p className="font-semibold py-3">@ {category.name} </p>
+              <p className="font-semibold py-3">{category.name} </p>
             </div>
 
             <dl className="divide-y divide-gray-100 px-6 py-4 text-sm leading-6 bg-white">
               <div className="flex justify-between gap-4 py-3">
-                <dt className="text-gray-500">Создать</dt>
+                <dt className="text-gray-500">Создано</dt>
                 <dt className="text-gray-700">
                   <time dateTime={category.createdAt.toDateString()}>
                     {format(category.createdAt, 'MMMM d, yyyy')}
@@ -73,26 +73,23 @@ const layout = async ({
                 </dt>
               </div>
               <div className="flex justify-between gap-x-4 py-3">
-                <dt className="text-gray-500">Всего публикаций</dt>
+                <dt className="text-gray-500">Подписки</dt>
                 <dd className="flex items-start gap-x-2">
                   <div className="text-gray-900">{memberCount}</div>
                 </dd>
               </div>
-              <div className="flex justify-between gap-x-4 py-3">
-                <dt className="text-gray-500">Откуда</dt>
-                Москва
-              </div>
-              <div className="flex justify-between gap-x-4 py-3">
-                <dt className="text-gray-500">Специализация</dt>
-                Fullstack разработчик
-              </div>
+
               {category.creatorId === session?.user?.id ? (
                 <div className="flex justify-between gap-x-4 py-3">
                   <dt className="text-gray-500">Вы создали данную категорию</dt>
                 </div>
               ) : null}
               {category.creatorId !== session?.user?.id ? (
-                <SubscribeLeaveToggle />
+                <SubscribeLeaveToggle
+                  isSubcribed={isSubcribed}
+                  categoryName={category.name}
+                  categoryId={category.id}
+                />
               ) : null}
               <Link
                 className={buttonVariants({

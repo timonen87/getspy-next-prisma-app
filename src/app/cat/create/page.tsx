@@ -2,18 +2,21 @@
 
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
+
+import { toast } from '@/hooks/use-toast';
+
+import { useCustomToasts } from '@/hooks/use-custom-toasts';
+import { CreateCategoryPayload } from '@/lib/validators/category';
 import { useMutation } from '@tanstack/react-query';
+
+import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import axios, { AxiosError } from 'axios';
-import { CreateCategoryPayload } from '@/lib/validators/category';
-import { toast } from '@/hooks/use-toast';
-import { useCustomToast } from '@/hooks/use-custom-toast';
 
 const Page = () => {
   const router = useRouter();
   const [input, setInput] = useState<string>('');
-  const { LoginToast } = useCustomToast;
+  const { loginToast } = useCustomToasts();
 
   const { mutate: CreateCategory, isLoading } = useMutation({
     mutationFn: async () => {
@@ -41,7 +44,12 @@ const Page = () => {
         }
 
         if (err.response?.status === 401) {
-          return LoginToast();
+          return loginToast();
+          // return toast({
+          //   title: 'Вы не авторизованы',
+          //   description: 'Вы не можете создать канал',
+          //   variant: 'destructive',
+          // });
         }
       }
 
@@ -60,24 +68,29 @@ const Page = () => {
     <div className="container flex items-center h-full max-2-3xl mx-auto md:w-[700px]">
       <div className="relative bg-white w-full h-fit p-4 rounded-lg space-y-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-xl font-semibold">Создать категорию</h1>
+          <h1 className="text-xl font-semibold">Создать ленту</h1>
         </div>
 
         <hr className="bg-zinc-500 h-px" />
 
         <div>
           <p className="text-lg font-medium">Название </p>
-          <p className="text-xs pb-2">Введите название категории</p>
+          <p className="text-xs pb-2">Введите жедаемый url (slug)</p>
 
           <div className="relative">
-            <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-400">
-              @
-            </p>
+            <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-400"></p>
             <Input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               className="pl-6"
             />
+          </div>
+          <div className="pt-2">
+            <p className="text-xs pb-2">Введите назвине категории</p>
+            <div className="relative">
+              <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-400"></p>
+              <Input className="pl-6" />
+            </div>
           </div>
         </div>
 

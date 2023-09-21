@@ -44,10 +44,10 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
           <Link href="/">Лента</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/dragts">Черновики</Link>
+          <Link href="/drafts">Черновики</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/cat/create">Созадть категорию</Link>
+          <Link href="/cat/create">Созадть ленту</Link>
         </DropdownMenuItem>
 
         <DropdownMenuItem asChild>

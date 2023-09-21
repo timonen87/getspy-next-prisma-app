@@ -22,14 +22,32 @@ export async function POST(req: Request) {
       },
     });
 
-    if (subscriptionExsists) {
-      return new Response('Вы уже подписаны на категорию', { status: 400 });
+    if (!subscriptionExsists) {
+      return new Response('Вы не подписаны на данную категорию', {
+        status: 400,
+      });
     }
 
-    await db.subscription.create({
-      data: {
-        categoryId,
-        userId: session.user.id,
+    const category = await db.category.findFirst({
+      where: {
+        id: categoryId,
+        creatorId: session.user.id,
+      },
+    });
+
+    if (category) {
+      return new Response(
+        'Вы не можете отписаться от категории, которую вы создали',
+        { status: 400 },
+      );
+    }
+
+    await db.subscription.delete({
+      where: {
+        userId_categoryId: {
+          categoryId,
+          userId: session.user.id,
+        },
       },
     });
     return new Response(categoryId);
