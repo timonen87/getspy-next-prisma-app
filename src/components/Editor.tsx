@@ -198,11 +198,11 @@ const Editor: FC<EditorProps> = ({ categoryId }) => {
 
           <div id="editor" className="min-h-[500px]" />
           <p className="text-sm text-gray-500">
-            Use{' '}
+            Используйте{' '}
             <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">
               Tab
             </kbd>{' '}
-            to open the command menu.
+            чтобы открыть меню редактора
           </p>
         </div>
       </form>

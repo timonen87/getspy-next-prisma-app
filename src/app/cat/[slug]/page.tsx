@@ -1,4 +1,5 @@
 import MiniCreatePost from '@/components/MiniCreatePost';
+import PostFeed from '@/components/PostFeed';
 import { INFINITE_SCROLLING_PAGINATION_RESULTS } from '@/config';
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
@@ -26,7 +27,8 @@ const page = async ({ params }: PageProps) => {
           category: true,
         },
 
-        take: INFINITE_SCROLLING_PAGINATION_RESULTS,
+        // take: INFINITE_SCROLLING_PAGINATION_RESULTS,
+        take: 5,
       },
     },
   });
@@ -38,6 +40,7 @@ const page = async ({ params }: PageProps) => {
       <h1 className="font-bold text-3xl md:text-4xl h-14">{category.name}</h1>
 
       <MiniCreatePost session={session} />
+      <PostFeed initialPosts={category.posts} categoryName={category.name} />
     </>
   );
 };

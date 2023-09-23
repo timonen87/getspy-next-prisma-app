@@ -28,28 +28,28 @@ const Page = () => {
 
         <div>
           <p className="text-lg font-medium">Имя </p>
-          <p className="text-xs pb-2">Введите Ваше имя</p>
 
           <div className="relative">
             <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-400"></p>
             <Input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="pl-6"
+              className="pl-2"
+              placeholder="Имя"
             />
           </div>
           <div className="pt-2">
             <p className="text-lg font-medium">Фамилия</p>
             <div className="relative">
               <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-400"></p>
-              <Input className="pl-6" />
+              <Input className="pl-2" placeholder="Фамилия" />
             </div>
           </div>
           <div className="pt-2">
             <p className="text-lg font-medium">Email</p>
             <div className="relative">
               <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-400"></p>
-              <Input className="pl-6" />
+              <Input className="pl-2" placeholder="Email" />
             </div>
           </div>
         </div>
