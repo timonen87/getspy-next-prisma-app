@@ -64,12 +64,20 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, categoryName }) => {
         if (index === posts.length - 1) {
           return (
             <li key={post.id} ref={ref}>
-              <Post post={post} categoryName={post.category.name} />
+              <Post
+                currenVote={currentVote}
+                votesAmt={votesAmt}
+                post={post}
+                commentAmt={post.comments.length}
+                categoryName={post.category.name}
+              />
             </li>
           );
         } else {
           return (
             <Post
+              currenVote={currentVote}
+              votesAmt={votesAmt}
               post={post}
               commentAmt={post.comments.length}
               categoryName={post.category.name}
