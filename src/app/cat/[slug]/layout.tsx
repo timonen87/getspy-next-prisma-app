@@ -52,7 +52,7 @@ const layout = async ({
   });
 
   return (
-    <div className="sm:container max-w-7xl mx-auto h-full pt-12">
+    <div className="sm:container max-w-7xl mx-auto h-full pt-8">
       <div>
         {/* Кнопка НАЗАД */}
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-y-4 xl:gap-x-4">
@@ -60,12 +60,12 @@ const layout = async ({
           {/* Правый блок */}
           <div className="hidden md:block overflow-hidden h-fit rounded-lg border border-gray-200 order-first md:order-last">
             <div className="px-6 py-4">
-              <p className="font-semibold py-3">{category.name} </p>
+              <p className="text-2xl font-semibold py-3">@{category.name} </p>
             </div>
 
             <dl className="divide-y divide-gray-100 px-6 py-4 text-sm leading-6 bg-white">
               <div className="flex justify-between gap-4 py-3">
-                <dt className="text-gray-500">Создано</dt>
+                <dt className="text-gray-500">Дата создания</dt>
                 <dt className="text-gray-700">
                   <time dateTime={category.createdAt.toDateString()}>
                     {format(category.createdAt, 'MMMM d, yyyy')}

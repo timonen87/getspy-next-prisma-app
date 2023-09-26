@@ -18,15 +18,15 @@ interface PostProps {
   };
   commentAmt: number;
   votesAmt: number;
-  currenVote?: PartialVote;
+  currentVote?: PartialVote;
 }
 
 const Post: FC<PostProps> = ({
   post,
   commentAmt,
   categoryName,
-  votesAmt,
-  currenVote,
+  votesAmt: _votesAmt,
+  currentVote: _currentVote,
 }) => {
   const pRef = useRef<HTMLParagraphElement>(null);
 
@@ -35,8 +35,8 @@ const Post: FC<PostProps> = ({
       <div className="px-6 py-4 flex justify-between">
         <PostVoteClient
           postId={post.id}
-          initialVote={currenVote?.type}
-          intitalVotesAmt={votesAmt}
+          initialVote={_currentVote?.type}
+          intitalVotesAmt={_votesAmt}
         />
         <div className="w-0 flex-1">
           <div className="flex items-center gap-1">
@@ -80,22 +80,21 @@ const Post: FC<PostProps> = ({
             ref={pRef}
           >
             <EditorOutput content={post.content} />
-            {pRef.current?.clientHeight === 180 ? (
+            {pRef.current?.clientHeight === 160 ? (
               // blur bottom if content is too long
               <div className="absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-white to-transparent"></div>
             ) : null}
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between bg-gray-50 z-20 text-sm  sm:px-6">
-        <div className="">
-          <Link
-            href={`/cat/${categoryName}/post/${post.id}`}
-            className="w-fit flex items-center gap-2"
-          >
-            <MessageSquare className="h-4 w-4" /> {commentAmt} комментариев
-          </Link>
-        </div>
+      <div className="flex items-center justify-between bg-gray-50 z-20 text-sm ">
+        <Link
+          href={`/cat/${categoryName}/post/${post.id}`}
+          className="w-fit flex items-center gap-2 pl-8"
+        >
+          <MessageSquare className="h-4 w-4 " /> {commentAmt}
+        </Link>
+
         <div className="flex items-center gap-2 py-4">
           <Newspaper className="h-4 w-4 mr-1" />
           {categoryName ? (

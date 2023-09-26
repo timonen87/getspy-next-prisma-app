@@ -4,5 +4,5 @@ export type ExtendedPost = Post & {
   category: Category;
   votes: Vote[];
   author: User;
-  comments: Comment[];
+  // comments: Comment[];
 };

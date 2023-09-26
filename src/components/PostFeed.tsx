@@ -28,7 +28,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, categoryName }) => {
     async ({ pageParam = 1 }) => {
       const query =
         `/api/posts?limit=${INFINITE_SCROLLING_PAGINATION_RESULTS}&page=${pageParam}` +
-        (!!categoryName ? `&subredditName=${categoryName}` : '');
+        (!!categoryName ? `&categoryName=${categoryName}` : '');
 
       const { data } = await axios.get(query);
       return data as ExtendedPost[];
@@ -65,26 +65,32 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, categoryName }) => {
           return (
             <li key={post.id} ref={ref}>
               <Post
-                currenVote={currentVote}
-                votesAmt={votesAmt}
                 post={post}
                 commentAmt={post.comments.length}
                 categoryName={post.category.name}
+                votesAmt={votesAmt}
+                currentVote={currentVote}
               />
             </li>
           );
         } else {
           return (
             <Post
-              currenVote={currentVote}
-              votesAmt={votesAmt}
+              key={post.id}
               post={post}
               commentAmt={post.comments.length}
               categoryName={post.category.name}
+              votesAmt={votesAmt}
+              currentVote={currentVote}
             />
           );
         }
       })}
+      {isFetchingNextPage && (
+        <li className="flex justify-center">
+          <Loader2 className="w-6 h-6 text-zinc-500 animate-spin" />
+        </li>
+      )}
     </ul>
   );
 };

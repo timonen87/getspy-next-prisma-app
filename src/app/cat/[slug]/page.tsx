@@ -29,8 +29,8 @@ const page = async ({ params }: PageProps) => {
           category: true,
         },
 
-        // take: INFINITE_SCROLLING_PAGINATION_RESULTS,
-        take: 10,
+        take: INFINITE_SCROLLING_PAGINATION_RESULTS,
+        // take: 10,
       },
     },
   });
