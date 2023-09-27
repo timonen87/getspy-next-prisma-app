@@ -1,28 +1,21 @@
-import CustomFeed from '@/components/homepage/CustomFeed';
-import GeneralFeed from '@/components/homepage/GeneralFeed';
+import CustomFeed from '@/components/home/CustomFeed';
+import GeneralFeed from '@/components/home/GeneralFeed';
 import { buttonVariants } from '@/components/ui/Button';
+import { getAuthSession } from '@/lib/auth';
 import { User } from 'lucide-react';
+
 import Link from 'next/link';
 
-export default function Home() {
+export default async function Home() {
+  const session = await getAuthSession();
   return (
     <>
       {/* <h1 className="font-bold text-3xl md:text-4xl">Лента</h1> */}
       <div className="grid sm:grid-cols-1 md:gap-x-4 md:grid-cols-5 xl:grid-cols-7 py-6">
         <div className="hidden w-full min-w-100 md:block">Navbar</div>
         <ul className="flex flex-col md:col-span-4 xl:col-span-4 space-y-6">
-          <li className="flex justify-center">
-            <dl className="divide-y divide-gray-100 px-6 py-4 text-sm leading-6 bg-white">
-              <div className="flex flex-col gap-x-4 py-3">
-                <dt className="text-gray-500">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Corporis dicta provident molestiae dolorem eaque cumque dolor
-                  maxime quaerat, enim, magnam quas voluptatum a soluta
-                  repudiandae expedita. Sunt dicta eligendi sed.
-                </dt>
-              </div>
-            </dl>
-          </li>
+          {/* @ts-expect-error server component */}
+          {session ? <CustomFeed /> : <GeneralFeed />}
         </ul>
 
         {/* subreddit info */}

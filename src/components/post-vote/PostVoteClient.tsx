@@ -13,17 +13,17 @@ import { toast } from '@/hooks/use-toast';
 
 interface PostVoteClientProps {
   postId: string;
-  intitalVotesAmt: number;
+  initialVotesAmt: number;
   initialVote?: VoteType | null;
 }
 
 const PostVoteClient: FC<PostVoteClientProps> = ({
   postId,
-  intitalVotesAmt,
+  initialVotesAmt,
   initialVote,
 }: PostVoteClientProps) => {
   const { loginToast } = useCustomToasts();
-  const [votesAmt, setVotesAmt] = useState<number>(intitalVotesAmt);
+  const [votesAmt, setVotesAmt] = useState<number>(initialVotesAmt);
   const [currentVote, setCurrentVote] = useState(initialVote);
   const prevVote = usePrevious(currentVote);
 
