@@ -15,12 +15,24 @@ interface EditorOutputProps {
 const renderers = {
   image: CustomImageRenderer,
   code: CustomCodeRenderer,
+  // header: CustomHeaderRender,
 };
 
 const style = {
   paragraph: {
-    fontSize: '0.875rem',
-    lineHeight: '1.25rem',
+    fontSize: '1rem',
+    lineHeight: '1.5rem',
+  },
+  header: {
+    h2: {
+      fontSize: '1.5rem',
+      lineHeight: '2rem',
+      fontWeight: '600',
+    },
+    list: {
+      container: {},
+      listItem: {},
+    },
   },
 };
 
@@ -28,11 +40,21 @@ function CustomCodeRenderer({ data }: any) {
   data;
 
   return (
-    <pre className="bg-gray-800 rounded-md p-4">
+    <pre className="bg-gray-700 rounded-md p-4">
       <code className="text-gray-100 text-sm">{data.code}</code>
     </pre>
   );
 }
+
+// function CustomHeaderRender({ data }: any) {
+//   data;
+
+//   return (
+//     <div>
+//       <h2 className=" text-2xl">{data.h}</h2>
+//     </div>
+//   );
+// }
 
 function CustomImageRenderer({ data }: any) {
   const src = data.file.url;
@@ -49,7 +71,7 @@ const EditorOutput: FC<EditorOutputProps> = ({ content }) => {
     // @ts-expect-error
     <Output
       style={style}
-      className="text-sm"
+      className="text-xl"
       renderers={renderers}
       data={content}
     />

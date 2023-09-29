@@ -1,8 +1,11 @@
+import LeftButton from '@/components/LeftButton';
+import LetButton from '@/components/LeftButton';
 import CustomFeed from '@/components/home/CustomFeed';
 import GeneralFeed from '@/components/home/GeneralFeed';
+
 import { buttonVariants } from '@/components/ui/Button';
 import { getAuthSession } from '@/lib/auth';
-import { User } from 'lucide-react';
+import { HomeIcon, User } from 'lucide-react';
 
 import Link from 'next/link';
 
@@ -12,7 +15,9 @@ export default async function Home() {
     <>
       {/* <h1 className="font-bold text-3xl md:text-4xl">Лента</h1> */}
       <div className="grid sm:grid-cols-1 md:gap-x-4 md:grid-cols-5 xl:grid-cols-7 py-6">
-        <div className="hidden w-full min-w-100 md:block">Navbar</div>
+        <div className="hidden w-full min-w-100 md:block">
+          <LeftButton />
+        </div>
         <ul className="flex flex-col md:col-span-4 xl:col-span-4 space-y-6">
           {/* @ts-expect-error server component */}
           {session ? <CustomFeed /> : <GeneralFeed />}
@@ -20,7 +25,7 @@ export default async function Home() {
 
         {/* subreddit info */}
         <div className=" hidden flex-col gap-4 xl:block col-span-2">
-          <div className="overflow-hidden h-fit rounded-lg border border-gray-200 gap-2 mb-2">
+          {/* <div className="overflow-hidden h-fit rounded-lg border border-gray-200 gap-2 mb-2">
             <div className="px-3 py-2 bg-slate-50">
               <p className="font-semibold py-3 px-3 flex items-center gap-1.5">
                 <User className="h-6 w-6" />
@@ -41,12 +46,13 @@ export default async function Home() {
                 </Link>
               </div>
             </dl>
-          </div>
+          </div> */}
 
           <div className="overflow-hidden h-fit rounded-lg border border-gray-200 gap-2 ">
             <div className="px-3 py-2 bg-slate-50">
-              <p className="font-semibold py-3 px-3 flex items-center">
-                {/* <HomeIcon className="h-4 w-4" /> */}# Другие статьи автора
+              <p className="font-semibold py-3 px-3 flex items-center gap-2">
+                <HomeIcon className="h-6 w-6 " />
+                Комментарии
               </p>
             </div>
             <dl className="divide-y divide-gray-100 px-6 py-4 text-sm leading-6 bg-white">

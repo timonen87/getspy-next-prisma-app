@@ -52,55 +52,59 @@ const layout = async ({
   });
 
   return (
-    <div className="sm:container max-w-7xl mx-auto h-full pt-8">
+    <div className="container max-w-7xl mx-auto h-full pt-4">
       <div>
         {/* Кнопка НАЗАД */}
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-y-4 xl:gap-x-4">
           <ul className="flex flex-col col-span-2 space-y-6">{children}</ul>
           {/* Правый блок */}
-          <div className="hidden md:block overflow-hidden h-fit rounded-lg border border-gray-200 order-first md:order-last">
-            <div className="px-6 py-4">
-              <p className="text-2xl font-semibold py-3">@{category.name} </p>
-            </div>
-
-            <dl className="divide-y divide-gray-100 px-6 py-4 text-sm leading-6 bg-white">
-              <div className="flex justify-between gap-4 py-3">
-                <dt className="text-gray-500">Дата создания</dt>
-                <dt className="text-gray-700">
-                  <time dateTime={category.createdAt.toDateString()}>
-                    {format(category.createdAt, 'MMMM d, yyyy')}
-                  </time>
-                </dt>
-              </div>
-              <div className="flex justify-between gap-x-4 py-3">
-                <dt className="text-gray-500">Подписки</dt>
-                <dd className="flex items-start gap-x-2">
-                  <div className="text-gray-900">{memberCount}</div>
-                </dd>
+          <div className="ml-20 xl:ml-0">
+            <div className=" h-fit rounded-lg border border-gray-200 order-first md:order-last ">
+              <div className="px-6 py-4">
+                <p className="text-2xl font-semibold py-3">@{category.name} </p>
               </div>
 
-              {category.creatorId === session?.user?.id ? (
-                <div className="flex justify-between gap-x-4 py-3">
-                  <dt className="text-gray-500">Вы создали данную категорию</dt>
+              <dl className="divide-y divide-gray-100 px-6 py-4 text-sm leading-6 bg-white">
+                <div className="flex justify-between gap-4 py-3">
+                  <dt className="text-gray-500">Дата создания</dt>
+                  <dt className="text-gray-700">
+                    <time dateTime={category.createdAt.toDateString()}>
+                      {format(category.createdAt, 'MMMM d, yyyy')}
+                    </time>
+                  </dt>
                 </div>
-              ) : null}
-              {category.creatorId !== session?.user?.id ? (
-                <SubscribeLeaveToggle
-                  isSubcribed={isSubcribed}
-                  categoryName={category.name}
-                  categoryId={category.id}
-                />
-              ) : null}
-              <Link
-                className={buttonVariants({
-                  variant: 'outline',
-                  className: 'w-full mb-6',
-                })}
-                href={`/cat/${slug}/submit`}
-              >
-                Создать пост
-              </Link>
-            </dl>
+                <div className="flex justify-between gap-x-4 py-3">
+                  <dt className="text-gray-500">Подписки</dt>
+                  <dd className="flex items-start gap-x-2">
+                    <div className="text-gray-900">{memberCount}</div>
+                  </dd>
+                </div>
+
+                {category.creatorId === session?.user?.id ? (
+                  <div className="flex justify-between gap-x-4 py-3">
+                    <dt className="text-gray-500">
+                      Вы создали данную категорию
+                    </dt>
+                  </div>
+                ) : null}
+                {category.creatorId !== session?.user?.id ? (
+                  <SubscribeLeaveToggle
+                    isSubcribed={isSubcribed}
+                    categoryName={category.name}
+                    categoryId={category.id}
+                  />
+                ) : null}
+                <Link
+                  className={buttonVariants({
+                    variant: 'outline',
+                    className: 'w-full mb-6',
+                  })}
+                  href={`/cat/${slug}/submit`}
+                >
+                  Создать пост
+                </Link>
+              </dl>
+            </div>
           </div>
         </div>
       </div>

@@ -7,11 +7,12 @@ import { redis } from '@/lib/redis';
 import { formatTimeToNow } from '@/lib/utils';
 import { CachedPost } from '@/types/redis';
 import { Post, User, Vote } from '@prisma/client';
-import { UserAvatar } from '@/components/UserAvatar';
+
 import { ArrowBigDown, ArrowBigUp, Loader2 } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import Link from 'next/link';
+import UserAvatar from '@/components/UserAvatar ';
 
 interface CategoryPostPageProps {
   params: {
@@ -45,7 +46,7 @@ const CategorPostPage = async ({ params }: CategoryPostPageProps) => {
 
   return (
     <div>
-      <div className="h-full flex flex-col lg:flex-row items-center lg:items-start justify-between">
+      <div className="h-full flex flex-row items-start justify-between">
         <Suspense fallback={<PostVoteShell />}>
           {/* @ts-expect-error server component */}
           <PostVoteServer
@@ -63,12 +64,27 @@ const CategorPostPage = async ({ params }: CategoryPostPageProps) => {
           />
         </Suspense>
 
-        <div className="lg:w-0 w-full flex-1 bg-white p-4 rounded-sm">
-          <p className="max-h-40 mt-1 truncate text-xs text-gray-500">
-            {post?.author.username ?? cachedPost.authorUsername}{' '}
-            {formatTimeToNow(new Date(post?.createdAt ?? cachedPost.createdAt))}
-          </p>
-          <h1 className="text-xl font-semibold py-2 leading-6 text-gray-900">
+        <div className="lg:w-0 w-full flex-1 bg-white p-4 rounded-lg border border-gray-200">
+          <div className="flex items-center gap-1">
+            <UserAvatar
+              user={{
+                name:
+                  post?.author.username ?? (cachedPost.authorUsername || null),
+                image: post?.author.image ?? (cachedPost.authorImage || null),
+              }}
+              className="h-10 w-10"
+            />
+            <div className="flex flex-col items-start gap-0 ml-2">
+              <span>{post?.author.username ?? cachedPost.authorUsername}</span>{' '}
+              <span className="text-xs">
+                {formatTimeToNow(
+                  new Date(post?.createdAt ?? cachedPost.createdAt),
+                )}
+              </span>
+            </div>
+          </div>
+
+          <h1 className="text-3xl font-semibold  py-2 text-gray-900">
             {post?.title ?? cachedPost.title}
           </h1>
 
@@ -79,7 +95,7 @@ const CategorPostPage = async ({ params }: CategoryPostPageProps) => {
             }
           >
             {/* @ts-expect-error Server Component */}
-            {/* <CommentsSection postId={post?.id ?? cachedPost.id} /> */}
+            <CommentsSection postId={post?.id ?? cachedPost.id} />
           </Suspense>
         </div>
       </div>
