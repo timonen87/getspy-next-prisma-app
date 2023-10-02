@@ -1,5 +1,5 @@
 'use client';
-
+import { FC } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 
@@ -68,7 +68,6 @@ function CustomImageRenderer({ data }: any) {
 
 const EditorOutput: FC<EditorOutputProps> = ({ content }) => {
   return (
-    // @ts-expect-error
     <Output
       style={style}
       className="text-xl"

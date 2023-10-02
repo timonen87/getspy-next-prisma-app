@@ -1,7 +1,6 @@
 'use client';
 import {
   Cloud,
-  CreditCard,
   Github,
   Keyboard,
   LifeBuoy,
@@ -11,15 +10,12 @@ import {
   Plus,
   PlusCircle,
   Settings,
-  User,
   UserPlus,
   Users,
   Home,
   Group,
-  ChevronDown,
 } from 'lucide-react';
 
-import { Button } from '@/components/ui/Button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -35,7 +31,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
 import { Icons } from './Icons';
-import { useState } from 'react';
+import { FC } from 'react';
 
 interface DropdownMenuButtonProps {}
 

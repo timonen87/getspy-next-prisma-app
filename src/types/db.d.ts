@@ -1,4 +1,4 @@
-import { Category, Post, User, Vote } from '@prisma/client';
+import { Category, Post, User, Vote, Comment } from '@prisma/client';
 
 export type ExtendedPost = Post & {
   category: Category;

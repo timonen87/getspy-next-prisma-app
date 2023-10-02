@@ -1,13 +1,9 @@
 import LeftButton from '@/components/LeftButton';
-import LetButton from '@/components/LeftButton';
 import CustomFeed from '@/components/home/CustomFeed';
 import GeneralFeed from '@/components/home/GeneralFeed';
 
-import { buttonVariants } from '@/components/ui/Button';
 import { getAuthSession } from '@/lib/auth';
-import { HomeIcon, User } from 'lucide-react';
-
-import Link from 'next/link';
+import { HomeIcon } from 'lucide-react';
 
 export default async function Home() {
   const session = await getAuthSession();
@@ -58,7 +54,7 @@ export default async function Home() {
             <dl className="divide-y divide-gray-100 px-6 py-4 text-sm leading-6 bg-white">
               <div className="flex flex-col gap-x-4 py-3">
                 <dt className="text-gray-500">
-                  What's Your Current Project's Elevator Pitch?
+                  Whats Your Current Projects Elevator Pitch?
                 </dt>
                 <dd className="flex items-start gap-x-2">
                   <div className="text-gray-900">5 комментариев</div>
@@ -66,7 +62,7 @@ export default async function Home() {
               </div>
               <div className="flex flex-col gap-x-4 py-3">
                 <dt className="text-gray-500">
-                  What's Your Current Project's Elevator Pitch?
+                  Whats Your Current Projects Elevator Pitch?
                 </dt>
                 <dd className="flex items-start gap-x-2">
                   <div className="text-gray-900">5 комментариев</div>
@@ -74,7 +70,7 @@ export default async function Home() {
               </div>
               <div className="flex flex-col gap-x-4 py-3">
                 <dt className="text-gray-500">
-                  What's Your Current Project's Elevator Pitch?
+                  Whats Your Current Projects Elevator Pitch?
                 </dt>
                 <dd className="flex items-start gap-x-2">
                   <div className="text-gray-900">5 комментариев</div>
@@ -82,7 +78,7 @@ export default async function Home() {
               </div>
               <div className="flex flex-col gap-x-4 py-3">
                 <dt className="text-gray-500">
-                  What's Your Current Project's Elevator Pitch?
+                  Whats Your Current Projects Elevator Pitch?
                 </dt>
                 <dd className="flex items-start gap-x-2">
                   <div className="text-gray-900">5 комментариев</div>

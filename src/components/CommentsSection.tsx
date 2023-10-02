@@ -2,7 +2,6 @@ import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { Comment, CommentVote, User } from '@prisma/client';
 
-import { FC } from 'react';
 import PostComment from './comments/PostComment';
 import CreateComment from './CreateComment';
 

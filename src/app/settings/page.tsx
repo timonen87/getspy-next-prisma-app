@@ -1,68 +1,34 @@
-'use client';
+import { redirect } from 'next/navigation';
 
-import { Button } from '@/components/ui/Button';
-import { Input } from '@/components/ui/Input';
+import { UserNameForm } from '@/components/UserNameForm';
+import { authOptions, getAuthSession } from '@/lib/auth';
 
-import { toast } from '@/hooks/use-toast';
+export const metadata = {
+  title: 'Settings',
+  description: 'Manage account and website settings.',
+};
 
-import { useCustomToasts } from '@/hooks/use-custom-toasts';
-import { CreateCategoryPayload } from '@/lib/validators/category';
-import { useMutation } from '@tanstack/react-query';
+export default async function SettingsPage() {
+  const session = await getAuthSession();
 
-import axios, { AxiosError } from 'axios';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
-
-const Page = () => {
-  const router = useRouter();
-  const [input, setInput] = useState<string>('');
+  if (!session?.user) {
+    redirect(authOptions?.pages?.signIn || '/login');
+  }
 
   return (
-    <div className="container flex items-center h-full max-2-3xl mx-auto md:w-[700px]">
-      <div className="relative bg-white w-full h-fit p-4 rounded-lg space-y-6">
-        <div className="flex justify-between items-center">
-          <h1 className="text-xl font-semibold">Профиль</h1>
-        </div>
+    <div className="max-w-4xl mx-auto py-12">
+      <div className="grid items-start gap-8">
+        <h1 className="font-bold text-3xl md:text-4xl">Настройки</h1>
 
-        <hr className="bg-zinc-500 h-px" />
-
-        <div>
-          <p className="text-lg font-medium">Имя </p>
-
-          <div className="relative">
-            <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-400"></p>
-            <Input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              className="pl-2"
-              placeholder="Имя"
-            />
-          </div>
-          <div className="pt-2">
-            <p className="text-lg font-medium">Фамилия</p>
-            <div className="relative">
-              <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-400"></p>
-              <Input className="pl-2" placeholder="Фамилия" />
-            </div>
-          </div>
-          <div className="pt-2">
-            <p className="text-lg font-medium">Email</p>
-            <div className="relative">
-              <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-400"></p>
-              <Input className="pl-2" placeholder="Email" />
-            </div>
-          </div>
-        </div>
-
-        <div className="flex justify-end gap-4">
-          <Button variant="subtle" onClick={() => router.back()}>
-            Закрыть
-          </Button>
-          <Button disabled={input.length === 0}>Сохранить</Button>
+        <div className="grid gap-10">
+          <UserNameForm
+            user={{
+              id: session.user.id,
+              username: session.user.username || '',
+            }}
+          />
         </div>
       </div>
     </div>
   );
-};
-
-export default Page;
+}

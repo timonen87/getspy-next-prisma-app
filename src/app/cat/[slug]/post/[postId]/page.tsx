@@ -11,8 +11,12 @@ import { Post, User, Vote } from '@prisma/client';
 import { ArrowBigDown, ArrowBigUp, Loader2 } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
-import Link from 'next/link';
 import UserAvatar from '@/components/UserAvatar ';
+
+export const metadata = {
+  title: 'Статьи',
+  description: 'Стать',
+};
 
 interface CategoryPostPageProps {
   params: {
@@ -70,7 +74,7 @@ const CategorPostPage = async ({ params }: CategoryPostPageProps) => {
               user={{
                 name:
                   post?.author.username ?? (cachedPost.authorUsername || null),
-                image: post?.author.image ?? (cachedPost.authorImage || null),
+                image: post?.author.image,
               }}
               className="h-10 w-10"
             />
