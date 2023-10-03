@@ -1,7 +1,6 @@
 import { redirect } from 'next/navigation';
-
-import { UserNameForm } from '@/components/UserNameForm';
 import { authOptions, getAuthSession } from '@/lib/auth';
+import { UserNameForm } from '@/components/UserNameForm';
 
 export const metadata = {
   title: 'Settings',

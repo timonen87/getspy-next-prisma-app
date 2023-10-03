@@ -4,13 +4,12 @@ interface FooterProps {}
 
 const Footer: FC<FooterProps> = ({}) => {
   return (
-    <footer className="w-full bg-white p-8 mt-2">
-        <div className='container mx-auto'>
-      2023 Copyright:
-      <a className="text-neutral-800 dark:text-neutral-400" href="/">
-        GetSpy.ru — A constructive and inclusive social network for software
-        developers. With you every step of your journey.
-      </a>
+    <footer className="w-full bg-white p-8  mt-4">
+        <div className='container max-w-7xl grid-cols-1 mx-auto grid sm:grid-cols-5 gap-4 '>
+        	<div className='col-span-4'>&copy; GetSpy.ru 2020 - 2023 Copyright</div>
+            <a className="text-sm col-auto" href="#">
+                Все права защищены
+            </a>
       </div>
     </footer>
   );

@@ -1,16 +1,16 @@
-import { db } from "@/lib/db";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { nanoid } from "nanoid";
-import { NextAuthOptions, getServerSession } from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
+import { db } from '@/lib/db';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { nanoid } from 'nanoid';
+import { NextAuthOptions, getServerSession } from 'next-auth';
+import GoogleProvider from 'next-auth/providers/google';
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
   session: {
-    strategy: "jwt",
+    strategy: 'jwt',
   },
   pages: {
-    signIn: "/sign-in",
+    signIn: '/sign-in',
   },
   providers: [
     GoogleProvider({
@@ -24,6 +24,7 @@ export const authOptions: NextAuthOptions = {
         session.user.id = token.id;
         session.user.name = token.name;
         session.user.email = token.email;
+        session.user.role = token.role;
         session.user.image = token.picture;
         session.user.username = token.username;
       }
@@ -58,12 +59,13 @@ export const authOptions: NextAuthOptions = {
         id: dbUser.id,
         name: dbUser.name,
         email: dbUser.email,
+        role: dbUser.role,
         picture: dbUser.image,
         username: dbUser.username,
       };
     },
     redirect() {
-      return "/";
+      return '/';
     },
   },
 };

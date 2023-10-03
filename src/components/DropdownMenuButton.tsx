@@ -14,6 +14,7 @@ import {
   Users,
   Home,
   Group,
+  FileTextIcon,
 } from 'lucide-react';
 
 import {
@@ -22,16 +23,14 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
 import { Icons } from './Icons';
 import { FC } from 'react';
+import Link from 'next/link';
+import { signOut } from 'next-auth/react';
 
 interface DropdownMenuButtonProps {}
 
@@ -40,21 +39,37 @@ const DropdownMenuButton: FC<DropdownMenuButtonProps> = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         {/* <Button variant="outline">Профиль</Button> */}
-        <button className="block flex cursor-pointer bg-slate-100 rounded hover:bg-slate-200 p-1 md:hidden">
+        <button className="flex cursor-pointer bg-slate-100 rounded hover:bg-slate-200 p-1">
           <Icons.burger />
           {/* <Home className="p-1 h-7 w-7" />
           <ChevronDown className="p-1 h-7 w-7" /> */}
         </button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="ml-2 w-60">
-        <DropdownMenuLabel>Каналы</DropdownMenuLabel>
+        <DropdownMenuLabel>Главная</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            <Plus className="mr-2 h-4 w-4" />
-            <span>Добавить канал</span>
-            <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
+            <Home className="mr-2 h-4 w-4" />
+            <Link href="/">Главная</Link>
+            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Group className="mr-2 h-4 w-4" />
+            <Link href="/">Моя лента</Link>
+            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <FileTextIcon className="mr-2 h-4 w-4" />
+            <Link href="/">Все</Link>
+            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+          </DropdownMenuItem>
+        </DropdownMenuGroup>
+
+        <DropdownMenuLabel>Каналы</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+
+        <DropdownMenuGroup>
           <DropdownMenuItem>
             <Group className="mr-2 h-4 w-4" />
             <span>Python</span>
@@ -71,31 +86,25 @@ const DropdownMenuButton: FC<DropdownMenuButtonProps> = () => {
             <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
-        <DropdownMenuLabel>Лента</DropdownMenuLabel>
+
+        {/* Githab и Аккаунт */}
+        {/* <DropdownMenuLabel>Аккаунт</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem>
-            <Home className="mr-2 h-4 w-4" />
-            <span>Главная</span>
-            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+            <Plus className="mr-2 h-4 w-4" />
+            <Link href="/cat/create">Добавить канал</Link>
+
+            <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Group className="mr-2 h-4 w-4" />
-            <span>Популярное</span>
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+            <Plus className="mr-2 h-4 w-4" />
+            <span>Добавить пост</span>
+            <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Settings className="mr-2 h-4 w-4" />
-            <span>Все</span>
-            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
-        <DropdownMenuLabel>Аккаунт</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
           <DropdownMenuItem>
             <Users className="mr-2 h-4 w-4" />
-            <span>Команда</span>
+            <Link href="/settings">Настройки</Link>
           </DropdownMenuItem>
           <DropdownMenuSub>
             <DropdownMenuSubTrigger>
@@ -120,11 +129,6 @@ const DropdownMenuButton: FC<DropdownMenuButtonProps> = () => {
               </DropdownMenuSubContent>
             </DropdownMenuPortal>
           </DropdownMenuSub>
-          <DropdownMenuItem>
-            <Plus className="mr-2 h-4 w-4" />
-            <span>Добавить пост</span>
-            <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-          </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
@@ -138,12 +142,21 @@ const DropdownMenuButton: FC<DropdownMenuButtonProps> = () => {
         <DropdownMenuItem disabled>
           <Cloud className="mr-2 h-4 w-4" />
           <span>API</span>
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
+        {/* Githab и Аккаунт */}
+
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem
+          className="cursor-pointer"
+          onSelect={(event) => {
+            event.preventDefault();
+            signOut({
+              callbackUrl: `${window.location.origin}/sign-in`,
+            });
+          }}
+        >
           <LogOut className="mr-2 h-4 w-4" />
           <span>Выйти</span>
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

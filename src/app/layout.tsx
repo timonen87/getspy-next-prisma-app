@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar';
 import { Toaster } from '@/components/ui/Toaster';
 import { Roboto } from 'next/font/google';
 import Footer from '@/components/Footer';
+
 export const metadata = {
   title: 'GetSpy.ru',
   description: 'GetSpy.ru',
@@ -36,7 +37,7 @@ export default function RootLayout({
           <Navbar />
           {authModal}
 
-          <div className="container max-w-7xl mx-auto h-full pt-6">
+          <div className="container max-w-7xl mx-auto pt-6 min-h-screen">
             {children}
           </div>
           <Footer />

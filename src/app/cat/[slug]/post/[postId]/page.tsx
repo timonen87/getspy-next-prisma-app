@@ -29,7 +29,7 @@ export const fetchCache = 'force-no-store';
 
 const CategorPostPage = async ({ params }: CategoryPostPageProps) => {
   const cachedPost = (await redis.hgetall(
-    `post:${params.postId}`,
+    `post:${params.postId}`
   )) as CachedPost;
 
   let post: (Post & { votes: Vote[]; author: User }) | null = null;
@@ -50,25 +50,27 @@ const CategorPostPage = async ({ params }: CategoryPostPageProps) => {
 
   return (
     <div>
-      <div className="h-full flex flex-row items-start justify-between">
-        <Suspense fallback={<PostVoteShell />}>
-          {/* @ts-expect-error server component */}
-          <PostVoteServer
-            postId={post?.id ?? cachedPost.id}
-            getData={async () => {
-              return await db.post.findUnique({
-                where: {
-                  id: params.postId,
-                },
-                include: {
-                  votes: true,
-                },
-              });
-            }}
-          />
-        </Suspense>
+      <div className="h-full flex flex-row items-start justify-between ">
+        <aside className=" hidden md:block fixed rounded-lg border border-gray-200 w-14">
+          <Suspense fallback={<PostVoteShell />}>
+            {/* @ts-expect-error server component */}
+            <PostVoteServer
+              postId={post?.id ?? cachedPost.id}
+              getData={async () => {
+                return await db.post.findUnique({
+                  where: {
+                    id: params.postId,
+                  },
+                  include: {
+                    votes: true,
+                  },
+                });
+              }}
+            />
+          </Suspense>
+        </aside>
 
-        <div className="lg:w-0 w-full flex-1 bg-white p-4 rounded-lg border border-gray-200">
+        <div className="ml-0 lg:w-0 w-full flex-1 bg-white p-4 rounded-lg border border-gray-200 md:ml-16">
           <div className="flex items-center gap-1">
             <UserAvatar
               user={{
@@ -82,7 +84,7 @@ const CategorPostPage = async ({ params }: CategoryPostPageProps) => {
               <span>{post?.author.username ?? cachedPost.authorUsername}</span>{' '}
               <span className="text-xs">
                 {formatTimeToNow(
-                  new Date(post?.createdAt ?? cachedPost.createdAt),
+                  new Date(post?.createdAt ?? cachedPost.createdAt)
                 )}
               </span>
             </div>

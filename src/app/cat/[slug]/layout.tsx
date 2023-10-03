@@ -58,7 +58,7 @@ const layout = async ({
         <div className="grid grid-cols-1 xl:grid-cols-4 gap-y-4 xl:gap-x-4">
           <ul className="flex flex-col col-span-3 space-y-6">{children}</ul>
           {/* Правый блок */}
-          <div className="ml-20 xl:ml-0">
+          <div className="ml-0 md:ml-16 xl:ml-0">
             <div className=" h-fit rounded-lg border border-gray-200 order-first md:order-last ">
               <div className="px-6 py-4">
                 <p className="text-2xl font-semibold py-3">@{category.name} </p>

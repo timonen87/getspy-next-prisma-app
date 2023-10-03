@@ -14,11 +14,11 @@ const Navbar = async () => {
     <div className="fixed top-0 inset-x-0 bg-white border-b border-zinc-300 z-[10] py-2">
       <div className="container  max-w-7xl h-full mx-auto flex items-center justify-between gap-2">
         <div className="flex gap-2 items-center">
-          <div>
+          <div className="block md:hidden">
             <DropdownMenuButton />
           </div>
           <Link href="/" className="flex gap-2 items-center">
-            <Icons.logo className="h-12 w-24" />
+            <Icons.logo className="w-28" />
           </Link>
           <div className="hidden md:block w-[400px]">
             <SearchBar />

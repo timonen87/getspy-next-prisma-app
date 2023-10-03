@@ -68,30 +68,30 @@ const Page = () => {
     <div className="container flex items-center h-full max-2-3xl mx-auto md:w-[700px]">
       <div className="relative bg-white w-full h-fit p-4 rounded-lg space-y-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-xl font-semibold">Создать ленту</h1>
+          <h1 className="text-xl font-semibold">Создать категорию</h1>
         </div>
 
         <hr className="bg-zinc-500 h-px" />
 
         <div>
           <p className="text-lg font-medium">Название </p>
-          <p className="text-xs pb-2">Введите жедаемый url (slug)</p>
+          <p className="text-xs pb-2">Введите желаемый url(slug)</p>
 
           <div className="relative">
             <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-400"></p>
             <Input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              className="pl-6"
+              className="pl-2"
             />
           </div>
-          <div className="pt-2">
+          {/* <div className="pt-2">
             <p className="text-xs pb-2">Введите назвине категории</p>
             <div className="relative">
               <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-400"></p>
               <Input className="pl-6" />
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="flex justify-end gap-4">

@@ -54,22 +54,22 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
       if (err instanceof AxiosError) {
         if (err.response?.status === 409) {
           return toast({
-            title: 'Username already taken.',
-            description: 'Please choose another username.',
+            title: 'Такое имя уже существует.',
+            description: 'Пожалуйста выберите другое имя.',
             variant: 'destructive',
           });
         }
       }
 
       return toast({
-        title: 'Something went wrong.',
-        description: 'Your username was not updated. Please try again.',
+        title: 'Что-то произошло.',
+        description: 'Ваше имя не удалось обрновить. Попробуйте позжу',
         variant: 'destructive',
       });
     },
     onSuccess: () => {
       toast({
-        description: 'Your username has been updated.',
+        description: 'Ваще имя успешно изменено👋 ',
       });
       router.refresh();
     },
@@ -108,7 +108,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
           </div>
         </CardContent>
         <CardFooter>
-          <Button isLoading={isLoading}>Изменить Имя</Button>
+          <Button isLoading={isLoading}>Изменить</Button>
         </CardFooter>
       </Card>
     </form>

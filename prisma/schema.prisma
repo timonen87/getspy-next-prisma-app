@@ -42,10 +42,10 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-enum UserRole {
-  ADMIN
-  USER
-}
+// enum UserRole {
+//   ADMIN
+//   USER
+// }
 
 model User {
   id                String         @id @default(cuid())
@@ -55,7 +55,8 @@ model User {
   createdCategories Category[]     @relation("CreatedBy")
   subscriptions     Subscription[]
   votes             Vote[]
-  role              UserRole       @default(USER)
+  // role              UserRole       @default(USER)
+  role              String         @default("user")
 
   username String? @unique
 
