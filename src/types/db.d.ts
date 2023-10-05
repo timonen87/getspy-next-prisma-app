@@ -6,3 +6,12 @@ export type ExtendedPost = Post & {
   author: User;
   comments: Comment[];
 };
+
+export type ExtendedCategory = Category & {
+  posts: Post[];
+};
+
+export type ExtendedCommnets = Comment & {
+  post: Post;
+  author: User;
+};

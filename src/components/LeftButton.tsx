@@ -38,7 +38,7 @@ const LeftButton = () => {
                 })}
               >
                 <div className="mr-2">{obj.icon}</div>
-                <div className="text-xl"> {obj.text} </div>
+                <div className="text-sm"> {obj.text} </div>
               </Link>
             </li>
           ))}

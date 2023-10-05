@@ -50,7 +50,7 @@ const PostComment: FC<PostCommentProps> = ({
 
       const { data } = await axios.patch(
         `/api/category/post/comment/`,
-        payload,
+        payload
       );
 
       return data;
@@ -116,7 +116,7 @@ const PostComment: FC<PostCommentProps> = ({
               onFocus={(e) =>
                 e.currentTarget.setSelectionRange(
                   e.currentTarget.value.length,
-                  e.currentTarget.value.length,
+                  e.currentTarget.value.length
                 )
               }
               autoFocus

@@ -1,14 +1,39 @@
 import LeftButton from '@/components/LeftButton';
 import CustomFeed from '@/components/home/CustomFeed';
 import GeneralFeed from '@/components/home/GeneralFeed';
-import { db } from '@/lib/db';
 
 import { getAuthSession } from '@/lib/auth';
 
 import SideCategory from '@/components/SideCategory';
 import SideComments from '@/components/SideComments';
+import SideCategoryItem from '@/components/SideCategoryItem';
+import { db } from '@/lib/db';
+import SideCommnetsItem from '@/components/SideCommenItem';
+import { Users } from 'lucide-react';
 
 export default async function Home() {
+  const category = await db.category.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
+    include: {
+      posts: true,
+    },
+  });
+  const comments = await db.comment.findMany({
+    orderBy: {
+      createdAt: 'desc',
+    },
+    include: {
+      post: {
+        include: {
+          category: true,
+        },
+      },
+      author: true,
+    },
+  });
+
   const session = await getAuthSession();
 
   return (
@@ -17,7 +42,8 @@ export default async function Home() {
       <div className="grid sm:grid-cols-1 md:gap-x-4 md:grid-cols-5 xl:grid-cols-7 py-6">
         <div className="hidden w-full min-w-100 md:block col-auto">
           <LeftButton />
-          <SideCategory />
+
+          {session ? <SideCategoryItem category={category} /> : ''}
         </div>
         <ul className="flex flex-col md:col-span-4 xl:col-span-4 space-y-6">
           {/* @ts-expect-error server component */}
@@ -49,7 +75,7 @@ export default async function Home() {
             </dl>
           </div> */}
           <div className=" mb-4">
-            <SideComments />
+            <SideCommnetsItem comments={comments} />
           </div>
         </div>
       </div>
