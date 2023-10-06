@@ -1,11 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { Group, Keyboard } from 'lucide-react';
+import { Group, Keyboard, Menu, MenuSquare } from 'lucide-react';
 import { UserCategoryBlock } from '@/types/db';
 import { FC } from 'react';
-import UserAvatar from './UserAvatar ';
-import { formatTimeToNow } from '@/lib/utils';
+
 import { buttonVariants } from './ui/Button';
 
 interface SideCategoryBlockProps {
@@ -26,7 +25,7 @@ const SideCategoryBlock: FC<SideCategoryBlockProps> = ({ category }) => {
                 })}
               >
                 <Keyboard className="mr-2 h-4 w-4" />
-                <div className="text-sm"> {obj.category.name} </div>
+                <div className="text-xl"> {obj.category.name} </div>
               </Link>
             </li>
           ))}

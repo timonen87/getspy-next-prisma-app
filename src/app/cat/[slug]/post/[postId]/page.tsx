@@ -76,7 +76,7 @@ const CategorPostPage = async ({ params }: CategoryPostPageProps) => {
               user={{
                 name:
                   post?.author.username ?? (cachedPost.authorUsername || null),
-                image: post?.author.image,
+                image: post?.author.image ?? (cachedPost.image || null),
               }}
               className="h-10 w-10"
             />

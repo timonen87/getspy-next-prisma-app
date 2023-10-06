@@ -7,6 +7,9 @@ import { getAuthSession } from '@/lib/auth';
 import SideCategoryBlock from '@/components/SideCategorysBlock';
 import { db } from '@/lib/db';
 import SideCommnetsItem from '@/components/SideCommenItem';
+import Link from 'next/link';
+import { buttonVariants } from '@/components/ui/Button';
+import { Menu } from 'lucide-react';
 
 export default async function Home() {
   const session = await getAuthSession();
@@ -34,15 +37,82 @@ export default async function Home() {
     <>
       {/* <h1 className="font-bold text-3xl md:text-4xl">Лента</h1> */}
       <div className="grid sm:grid-cols-1 md:gap-x-4 md:grid-cols-5 xl:grid-cols-7 py-6">
-        <div className="hidden w-full min-w-100 md:block col-auto">
-          <LeftButton />
-          <hr className="mb-4" />
-          <SideCategoryBlock category={category} />
-        </div>
-        <ul className="flex flex-col md:col-span-4 xl:col-span-4 space-y-6">
-          {/* @ts-expect-error server component */}
-          {session ? <CustomFeed /> : <GeneralFeed />}
-        </ul>
+        {session ? (
+          <div className="hidden w-full min-w-100 md:block col-auto">
+            <LeftButton />
+            <hr className="mb-4" />
+            {session ? <SideCategoryBlock category={category} /> : ''}
+          </div>
+        ) : (
+          ''
+        )}
+
+        {session ? (
+          <ul className="flex flex-col md:col-span-4 xl:col-span-4 space-y-6">
+            {/* @ts-expect-error server component */}
+            <CustomFeed />
+          </ul>
+        ) : (
+          <ul className="flex flex-col md:col-span-5 xl:col-span-5 space-y-6">
+            <ul className="flex jas gap-4">
+              <li className="mb-1 mr-1 ">
+                <Link
+                  href={'/javascript'}
+                  className={buttonVariants({
+                    variant: 'subtle',
+                  })}
+                >
+                  <div className="mr-2">
+                    <Menu />
+                  </div>
+                  <div className="text-xl"> JavaScript </div>
+                </Link>
+              </li>
+              <li className="mb-1 mr-1">
+                <Link
+                  href={'/cat/python'}
+                  className={buttonVariants({
+                    variant: 'subtle',
+                  })}
+                >
+                  <div className="mr-2">
+                    <Menu />
+                  </div>
+                  <div className="text-xl"> Python </div>
+                </Link>
+              </li>
+              <li className="mb-1 mr-1">
+                <Link
+                  href={'/cat/react'}
+                  className={buttonVariants({
+                    variant: 'subtle',
+                  })}
+                >
+                  <div className="mr-2">
+                    <Menu />
+                  </div>
+                  <div className="text-xl"> React </div>
+                </Link>
+              </li>
+              <li className="mb-1 mr-1">
+                <Link
+                  href={'/cat/tailwind'}
+                  className={buttonVariants({
+                    variant: 'subtle',
+                  })}
+                >
+                  <div className="mr-2">
+                    <Menu />
+                  </div>
+                  <div className="text-xl"> Tailwind</div>
+                </Link>
+              </li>
+            </ul>
+
+            {/* @ts-expect-error server component */}
+            <GeneralFeed />
+          </ul>
+        )}
 
         {/* subreddit info */}
         <div className=" hidden flex-col gap-4 xl:block col-span-2">

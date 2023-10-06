@@ -10,7 +10,7 @@ import {
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+
 import { buttonVariants } from './ui/Button';
 
 const menu = [
@@ -38,7 +38,7 @@ const LeftButton = () => {
                 })}
               >
                 <div className="mr-2">{obj.icon}</div>
-                <div className="text-sm"> {obj.text} </div>
+                <div className="text-xl"> {obj.text} </div>
               </Link>
             </li>
           ))}

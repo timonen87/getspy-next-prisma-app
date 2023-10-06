@@ -14,7 +14,7 @@ const formatDistanceLocale = {
   lessThanXMinutes: '{{count}} минута',
   xMinutes: '{{count}} минуты',
   aboutXHours: '{{count}} часов',
-  xHours: '{{count}} часа',
+  xHours: '{{count}} часов',
   xDays: '{{count}} дней',
   aboutXWeeks: '{{count}}недель',
   xWeeks: '{{count}}недель',
