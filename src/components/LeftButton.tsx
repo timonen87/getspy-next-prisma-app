@@ -16,8 +16,8 @@ import { buttonVariants } from './ui/Button';
 const menu = [
   { text: ' Моя лента', icon: <Menu />, path: '/' },
   { text: 'Все', icon: <MenuSquare />, path: '/all' },
-  { text: 'Закладки', icon: <BookMarked />, path: '/bookmarks' },
-  { text: 'Подписки', icon: <ArrowDownUp />, path: '/follows' },
+  // { text: 'Закладки', icon: <BookMarked />, path: '/bookmarks' },
+  // { text: 'Подписки', icon: <ArrowDownUp />, path: '/follows' },
 ];
 
 const LeftButton = () => {
