@@ -2,6 +2,7 @@ import LeftButton from '@/components/LeftButton';
 import PostFeed from '@/components/PostFeed';
 import SideCategoryBlock from '@/components/SideCategorysBlock';
 import SideCommnetsItem from '@/components/SideCommenItem';
+import GeneralFeed from '@/components/home/GeneralFeed';
 
 import { INFINITE_SCROLLING_PAGINATION_RESULTS } from '@/config';
 import { getAuthSession } from '@/lib/auth';
@@ -31,7 +32,11 @@ const page = async () => {
       createdAt: 'desc',
     },
     include: {
-      post: true,
+      post: {
+        include: {
+          category: true,
+        },
+      },
       author: true,
     },
   });
@@ -57,7 +62,7 @@ const page = async () => {
         <ul className="flex flex-col md:col-span-4 xl:col-span-4 space-y-6">
           <h1 className="font-bold text-3xl md:text-4xl h-14">Все статьи</h1>
 
-          <PostFeed initialPosts={posts} />
+          <GeneralFeed />
         </ul>
 
         {/* subreddit info */}

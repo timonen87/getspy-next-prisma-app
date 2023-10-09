@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  ChevronLeft,
-  BookMarked,
-  Menu,
-  MenuSquare,
-  ArrowDownUp,
-} from 'lucide-react';
+import { Menu, MenuSquare } from 'lucide-react';
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
@@ -38,7 +32,7 @@ const LeftButton = () => {
                 })}
               >
                 <div className="mr-2">{obj.icon}</div>
-                <div className="text-xl"> {obj.text} </div>
+                <div className="text-sm"> {obj.text} </div>
               </Link>
             </li>
           ))}

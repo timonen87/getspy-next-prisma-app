@@ -5,8 +5,9 @@ import { Post, User, Vote } from '@prisma/client';
 import { formatTimeToNow } from '@/lib/utils';
 import EditorOutput from './EditorOutput';
 import Link from 'next/link';
-import { MessageSquare, Newspaper } from 'lucide-react';
+import { Divide, MessageSquare, Newspaper } from 'lucide-react';
 import PostVoteClient from './post-vote/PostVoteClient';
+import DraftPostNav from './DraftPostnav';
 
 type PartialVote = Pick<Vote, 'type'>;
 
@@ -40,21 +41,33 @@ const Post: FC<PostProps> = ({
           initialVotesAmt={_votesAmt}
         />
         <div className="w-0 flex-1">
-          <div className="flex items-center gap-1">
-            <UserAvatar
-              user={{
-                name: post.author.name || null,
-                image: post.author.image || null,
-              }}
-              className="h-10 w-10"
-            />
-            <div className="flex flex-col items-start gap-0 ml-2">
-              <span>{post.author.username}</span>{' '}
-              <span className="text-xs">
-                {formatTimeToNow(new Date(post.createdAt))}
-              </span>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1">
+              <UserAvatar
+                user={{
+                  name: post.author.name || null,
+                  image: post.author.image || null,
+                }}
+                className="h-10 w-10"
+              />
+              <div className="flex flex-col items-start gap-0 ml-2">
+                <span>{post.author.username}</span>{' '}
+                <span className="text-xs">
+                  {formatTimeToNow(new Date(post.createdAt))}
+                </span>
+              </div>
+            </div>
+            <div>
+              {post.published == false ? (
+                <div className="text-3xl font-bold cursor-pointer">
+                  <DraftPostNav postId={post.id} />
+                </div>
+              ) : (
+                ''
+              )}
             </div>
           </div>
+
           <div className="max-h-40 mt-1 text-xs text-gray-500">
             {/* {categoryName ? (
               <>
@@ -72,7 +85,7 @@ const Post: FC<PostProps> = ({
           </div>
 
           <a href={`/cat/${categoryName}/post/${post.id}`}>
-            <h2 className="text-xl font-semibold py-2 leading-6 text-gray-900">
+            <h2 className="text-2xl font-semibold py-2 leading-6 text-gray-900">
               {post.title}
             </h2>
           </a>
@@ -100,12 +113,12 @@ const Post: FC<PostProps> = ({
           <Newspaper className="h-4 w-4 mr-1" />
           {categoryName ? (
             <>
-              <a
+              <Link
                 className="underline text-zinc-900 text-sm underline-offset-2"
                 href={`/cat/${categoryName}`}
               >
                 {categoryName}
-              </a>
+              </Link>
               <span className="px-1"></span>
             </>
           ) : null}

@@ -22,15 +22,16 @@ const page = async ({ params }: PageProps) => {
     where: { name: slug },
     include: {
       posts: {
+        where: {
+          published: true,
+        },
         include: {
           author: true,
           votes: true,
           comments: true,
           category: true,
         },
-
         take: INFINITE_SCROLLING_PAGINATION_RESULTS,
-        // take: 10,
       },
     },
   });
@@ -39,7 +40,7 @@ const page = async ({ params }: PageProps) => {
 
   return (
     <>
-      <h1 className="font-bold text-3xl md:text-4xl h-14">{category.name}</h1>
+      <h1 className="font-bold text-3xl md:text-4xl h-14">{category.slug}</h1>
 
       <MiniCreatePost session={session} />
 

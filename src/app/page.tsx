@@ -10,11 +10,24 @@ import SideCommnetsItem from '@/components/SideCommenItem';
 import Link from 'next/link';
 import { buttonVariants } from '@/components/ui/Button';
 import { Menu } from 'lucide-react';
+import SidePostFeed from '@/components/SidePostFeed';
 
 export default async function Home() {
   const session = await getAuthSession();
+  const sidePosts = await db.post.findMany({
+    where: {
+      category: {
+        hideBlock: true,
+      },
+    },
+    include: {
+      comments: true,
+      category: true,
+    },
+    take: 7,
+  });
 
-  const category = await db.subscription.findMany({
+  const sideCategory = await db.subscription.findMany({
     where: {
       userId: session?.user.id,
     },
@@ -28,7 +41,11 @@ export default async function Home() {
       createdAt: 'desc',
     },
     include: {
-      post: true,
+      post: {
+        include: {
+          category: true,
+        },
+      },
       author: true,
     },
   });
@@ -41,7 +58,7 @@ export default async function Home() {
           <div className="hidden w-full min-w-100 md:block col-auto">
             <LeftButton />
             <hr className="mb-4" />
-            {session ? <SideCategoryBlock category={category} /> : ''}
+            {session ? <SideCategoryBlock category={sideCategory} /> : ''}
           </div>
         ) : (
           ''
@@ -50,21 +67,20 @@ export default async function Home() {
         {session ? (
           <ul className="flex flex-col md:col-span-4 xl:col-span-4 space-y-6">
             {/* @ts-expect-error server component */}
-            <CustomFeed />
+
+            {session ? <CustomFeed /> : <GeneralFeed />}
           </ul>
         ) : (
           <ul className="flex flex-col md:col-span-5 xl:col-span-5 space-y-6">
             <ul className="flex jas gap-4">
               <li className="mb-1 mr-1 ">
                 <Link
-                  href={'/javascript'}
+                  href={'/cat/javascript'}
                   className={buttonVariants({
                     variant: 'subtle',
                   })}
                 >
-                  <div className="mr-2">
-                    <Menu />
-                  </div>
+                  <div className="mr-2">#</div>
                   <div className="text-xl"> JavaScript </div>
                 </Link>
               </li>
@@ -75,36 +91,8 @@ export default async function Home() {
                     variant: 'subtle',
                   })}
                 >
-                  <div className="mr-2">
-                    <Menu />
-                  </div>
+                  <div className="mr-2">#</div>
                   <div className="text-xl"> Python </div>
-                </Link>
-              </li>
-              <li className="mb-1 mr-1">
-                <Link
-                  href={'/cat/react'}
-                  className={buttonVariants({
-                    variant: 'subtle',
-                  })}
-                >
-                  <div className="mr-2">
-                    <Menu />
-                  </div>
-                  <div className="text-xl"> React </div>
-                </Link>
-              </li>
-              <li className="mb-1 mr-1">
-                <Link
-                  href={'/cat/tailwind'}
-                  className={buttonVariants({
-                    variant: 'subtle',
-                  })}
-                >
-                  <div className="mr-2">
-                    <Menu />
-                  </div>
-                  <div className="text-xl"> Tailwind</div>
                 </Link>
               </li>
             </ul>
@@ -139,6 +127,7 @@ export default async function Home() {
             </dl>
           </div> */}
           <div className=" mb-4">
+            <SidePostFeed sidePosts={sidePosts} />
             <SideCommnetsItem comments={comments} />
           </div>
         </div>

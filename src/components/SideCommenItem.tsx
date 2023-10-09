@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Users } from 'lucide-react';
+import { Users, Users2 } from 'lucide-react';
 import { ExtendedCommnets } from '@/types/db';
 import { FC } from 'react';
 import UserAvatar from './UserAvatar ';
@@ -16,8 +16,8 @@ const SideCommnetsItem: FC<SideCommnetsItemProps> = ({ comments }) => {
     <div className="overflow-hidden h-fit rounded-lg border border-gray-200 gap-2 ">
       <div className="px-3 py-2 bg-slate-50">
         <p className="font-semibold py-3 px-3 flex items-center gap-2">
-          <Users className="h-6 w-6 " />
-          Это обсуждают
+          <Users2 className="h-6 w-6 " />
+          Комментарии
         </p>
       </div>
       <dl className="divide-y divide-gray-100 px-6 py-4 text-sm leading-6 bg-white">
@@ -43,8 +43,8 @@ const SideCommnetsItem: FC<SideCommnetsItemProps> = ({ comments }) => {
               </div>
             </div>
             <p className="text-sm text-zinc-900 mt-2">
-              <Link href={`/cat/${obj.post.categoryId}/${obj.postId}`}>
-                {obj.text}{' '}
+              <Link href={`/cat/${obj.post.category.name}/post/${obj.postId}`}>
+                {obj.text.slice(0, 100)}...{' '}
               </Link>
             </p>
           </div>

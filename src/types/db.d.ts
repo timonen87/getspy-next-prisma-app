@@ -11,15 +11,25 @@ export type ExtendedCategory = Category & {
   posts: Post[];
 };
 
-export type ExtendedCommnets = Comment & {
-  post: Post;
-  author: User;
-};
-
 export type ExtendedCategory = Category & {
   posts: Post[];
 };
 
 export type UserCategoryBlock = Subscription & {
   category: Category[];
+};
+
+export type PostCategoryName = Post & {
+  сategory: Category;
+};
+
+export type ExtendedCommnets = Comment & {
+  post: PostCategoryName;
+  author: User;
+};
+
+export type SideExtendedPost = Post & {
+  comments: Comment[] & {
+    category: Category;
+  };
 };

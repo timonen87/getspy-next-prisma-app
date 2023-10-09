@@ -6,6 +6,7 @@ import { UserCategoryBlock } from '@/types/db';
 import { FC } from 'react';
 
 import { buttonVariants } from './ui/Button';
+import { Icons } from './Icons';
 
 interface SideCategoryBlockProps {
   category: UserCategoryBlock[];
@@ -16,19 +17,20 @@ const SideCategoryBlock: FC<SideCategoryBlockProps> = ({ category }) => {
     <>
       <div className="hidden col-span-1 md:block w-[200px]">
         <ul className="flex-col justify-start gap-4">
-          {category.map((obj) => (
-            <li className="pb-1 mb-1" key={obj.id}>
-              <Link
-                href={`/cat/${obj.category.name}`}
-                className={buttonVariants({
-                  variant: 'ghost_full',
-                })}
-              >
-                <Keyboard className="mr-2 h-4 w-4" />
-                <div className="text-xl"> {obj.category.name} </div>
-              </Link>
-            </li>
-          ))}
+          {category &&
+            category.map((obj) => (
+              <li className="pb-1 " key={obj.id}>
+                <Link
+                  href={`/cat/${obj.category.name}`}
+                  className={buttonVariants({
+                    variant: 'ghost_full',
+                  })}
+                >
+                  {/* <Icons.main className="w-6 h-6 mr-2 ml-2" /> */}#
+                  <div className="text-sm"> {obj.category.name} </div>
+                </Link>
+              </li>
+            ))}
         </ul>
       </div>
     </>

@@ -12,7 +12,7 @@ export async function PATCH(req: Request) {
     }
 
     const body = await req.json();
-    const { name } = UsernameValidator.parse(body);
+    const { name, email } = UsernameValidator.parse(body);
 
     // check if username is taken
     const username = await db.user.findFirst({
@@ -32,6 +32,7 @@ export async function PATCH(req: Request) {
       },
       data: {
         username: name,
+        email: email,
       },
     });
 

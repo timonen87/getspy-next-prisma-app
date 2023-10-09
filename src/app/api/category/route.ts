@@ -12,7 +12,7 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
-    const { name } = CategoryValidator.parse(body);
+    const { name, slug } = CategoryValidator.parse(body);
 
     const categoryExists = await db.category.findFirst({
       where: {
@@ -27,6 +27,7 @@ export async function POST(req: Request) {
     const category = await db.category.create({
       data: {
         name,
+        slug,
         creatorId: session.user.id,
       },
     });

@@ -17,13 +17,15 @@ export default async function SettingsPage() {
   return (
     <div className="max-w-4xl mx-auto py-12">
       <div className="grid items-start gap-8">
-        <h1 className="font-bold text-3xl md:text-4xl">Настройки</h1>
+        <h1 className="font-bold text-3xl md:text-4xl">Профиль</h1>
 
         <div className="grid gap-10">
           <UserNameForm
             user={{
               id: session.user.id,
               username: session.user.username || '',
+              email: session.user.email || '',
+              image: session.user.image || '',
             }}
           />
         </div>

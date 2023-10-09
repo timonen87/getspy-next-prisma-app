@@ -25,10 +25,10 @@ export default function RootLayout({
 }) {
   return (
     <html
-      lang="en"
+      lang="ru"
       className={cn(
         'bg-white text-slate-900 antialiased light',
-        roboto.className,
+        roboto.className
       )}
     >
       <body className="min-h-screen pt-12 bg-slate-50 antialiased">

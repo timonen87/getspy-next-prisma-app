@@ -23,9 +23,10 @@ import { cn } from '@/lib/utils';
 import { UsernameValidator } from '@/lib/validators/username';
 import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
+import UserAvatar from './UserAvatar ';
 
 interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
-  user: Pick<User, 'id' | 'username'>;
+  user: Pick<User, 'id' | 'username' | 'email' | 'image'>;
 }
 
 type FormData = z.infer<typeof UsernameValidator>;
@@ -40,12 +41,14 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
     resolver: zodResolver(UsernameValidator),
     defaultValues: {
       name: user?.username || '',
+      email: user?.email || '',
+      image: user?.image || '',
     },
   });
 
   const { mutate: updateUsername, isLoading } = useMutation({
-    mutationFn: async ({ name }: FormData) => {
-      const payload: FormData = { name };
+    mutationFn: async ({ name, email, image }: FormData) => {
+      const payload: FormData = { name, email, image };
 
       const { data } = await axios.patch(`/api/username/`, payload);
       return data;
@@ -83,6 +86,23 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
     >
       <Card>
         <CardHeader>
+          <CardTitle>{user.username}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="relative grid gap-1">
+            <div className="absolute top-0 left-0 w-8 h-10 grid place-items-center">
+              <span className="text-sm text-zinc-400"></span>
+            </div>
+            <UserAvatar
+              user={{
+                name: user.username || null,
+                image: user.image || null,
+              }}
+              className="h-28 w-28"
+            />
+          </div>
+        </CardContent>
+        <CardHeader>
           <CardTitle>Ваше имя</CardTitle>
           <CardDescription>
             Пожалуйста выберете имя, которое будет использоваться на сайте
@@ -107,6 +127,31 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
             )}
           </div>
         </CardContent>
+        <CardHeader>
+          <CardTitle>Ваш email</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="relative grid gap-1">
+            <div className="absolute top-0 left-0 w-8 h-10 grid place-items-center">
+              <span className="text-sm text-zinc-400"></span>
+            </div>
+            <Label className="sr-only" htmlFor="email">
+              email
+            </Label>
+            <Input
+              id="email"
+              className="w-[400px] pl-2"
+              size={32}
+              {...register('email')}
+            />
+            {errors?.email && (
+              <p className="px-1 text-xs text-red-600">
+                {errors.email.message}
+              </p>
+            )}
+          </div>
+        </CardContent>
+
         <CardFooter>
           <Button isLoading={isLoading}>Изменить</Button>
         </CardFooter>

@@ -1,10 +1,10 @@
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
-import PostFeed from '../PostFeed';
 import { notFound } from 'next/navigation';
 import { INFINITE_SCROLLING_PAGINATION_RESULTS } from '@/config';
+import DraftFeed from '../DraftFeed';
 
-const CustomFeed = async () => {
+const CustomDraftsFeed = async () => {
   const session = await getAuthSession();
 
   // only rendered if session exists, so this will not happen
@@ -21,7 +21,7 @@ const CustomFeed = async () => {
 
   const posts = await db.post.findMany({
     where: {
-      published: true,
+      published: false,
       category: {
         name: {
           in: followedCommunities.map((sub) => sub.category.name),
@@ -39,9 +39,8 @@ const CustomFeed = async () => {
     },
     take: INFINITE_SCROLLING_PAGINATION_RESULTS,
   });
-  console.log('api:', posts);
 
-  return <PostFeed initialPosts={posts} />;
+  return <DraftFeed initialPosts={posts} />;
 };
 
-export default CustomFeed;
+export default CustomDraftsFeed;

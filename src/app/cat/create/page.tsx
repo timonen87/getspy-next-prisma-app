@@ -12,19 +12,24 @@ import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { date } from 'zod';
+import { json } from 'stream/consumers';
 
 const Page = () => {
   const router = useRouter();
-  const [input, setInput] = useState<string>('');
+  const [inputName, setInputName] = useState<string>('');
+  const [inputSlug, setInputSlug] = useState<string>('');
   const { loginToast } = useCustomToasts();
 
   const { mutate: CreateCategory, isLoading } = useMutation({
     mutationFn: async () => {
       const payload: CreateCategoryPayload = {
-        name: input,
+        name: inputName,
+        slug: inputSlug,
       };
+
       const { data } = await axios.post('/api/category', payload);
-      return data as string;
+      return data;
     },
     onError: (err) => {
       if (err instanceof AxiosError) {
@@ -80,18 +85,23 @@ const Page = () => {
           <div className="relative">
             <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-400"></p>
             <Input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
+              value={inputName}
+              onChange={(e) => setInputName(e.target.value)}
               className="pl-2"
             />
           </div>
-          {/* <div className="pt-2">
+          <div className="pt-2">
             <p className="text-xs pb-2">Введите назвине категории</p>
+            <p className="text-xs pb-2">Название будет отброжаться на сайте</p>
             <div className="relative">
               <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-400"></p>
-              <Input className="pl-6" />
+              <Input
+                value={inputSlug}
+                onChange={(e) => setInputSlug(e.target.value)}
+                className="pl-2"
+              />
             </div>
-          </div> */}
+          </div>
         </div>
 
         <div className="flex justify-end gap-4">
@@ -100,7 +110,7 @@ const Page = () => {
           </Button>
           <Button
             isLoading={isLoading}
-            disabled={input.length === 0}
+            disabled={(inputName.length === 0, inputSlug.length === 0)}
             onClick={() => CreateCategory()}
           >
             Создать

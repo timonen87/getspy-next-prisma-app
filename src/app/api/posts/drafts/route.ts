@@ -39,14 +39,14 @@ export async function GET(req: Request) {
 
     if (categoryName) {
       whereClause = {
-        published: true,
+        published: false,
         category: {
           name: categoryName,
         },
       };
     } else if (session) {
       whereClause = {
-        published: true,
+        published: false,
         category: {
           id: {
             in: followedCommunitiesIds,

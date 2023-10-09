@@ -14,7 +14,7 @@ interface PostFeedProps {
   categoryName?: string;
 }
 
-const PostFeed: FC<PostFeedProps> = ({ initialPosts, categoryName }) => {
+const DraftFeed: FC<PostFeedProps> = ({ initialPosts, categoryName }) => {
   const lastPostRef = useRef<HTMLElement>(null);
   const { ref, entry } = useIntersection({
     root: lastPostRef.current,
@@ -27,7 +27,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, categoryName }) => {
     ['infinite-query'],
     async ({ pageParam = 1 }) => {
       const query =
-        `/api/posts?limit=${INFINITE_SCROLLING_PAGINATION_RESULTS}&page=${pageParam}` +
+        `/api/posts/drafts?limit=${INFINITE_SCROLLING_PAGINATION_RESULTS}&page=${pageParam}` +
         (!!categoryName ? `&categoryName=${categoryName}` : '');
 
       const { data } = await axios.get(query);
@@ -96,4 +96,4 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, categoryName }) => {
   );
 };
 
-export default PostFeed;
+export default DraftFeed;
