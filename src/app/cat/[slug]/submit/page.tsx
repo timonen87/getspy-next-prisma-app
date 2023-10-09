@@ -25,7 +25,7 @@ const page = async ({ params }: PageProps) => {
       <div className="border-b border-gray-200 pb-5">
         <div className="-ml-2 -mt-2 flex flex-wrap items-baseline">
           <h3 className="ml-2 mt-2 text-base font-semibold leading-6 text-gray-900">
-            Создать пост
+            Сохранить
           </h3>
           <p className="ml-2 mt-1 truncate text-sm text-gray-500">
             в @{params.slug}
@@ -37,16 +37,16 @@ const page = async ({ params }: PageProps) => {
 
       <div className="w-full flex justify-end gap-2">
         <Button type="submit" className="w-full" form="category-post-form">
-          Опубликовать
+          Отправить на модерацию
         </Button>
-        <Button
+        {/* <Button
           type="submit"
           variant="subtle"
           className="w-full"
           form="category-post-form"
         >
           Сохранить черновик
-        </Button>
+        </Button> */}
       </div>
     </div>
   );

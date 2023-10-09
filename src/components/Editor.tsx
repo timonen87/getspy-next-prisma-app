@@ -63,7 +63,7 @@ const Editor: FC<EditorProps> = ({ categoryId }) => {
       router.refresh();
 
       return toast({
-        description: 'Ваш пост опубликован.',
+        description: 'Ваш пост сохранен и отравлен на модерацию.',
       });
     },
   });
