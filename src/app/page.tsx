@@ -55,7 +55,7 @@ export default async function Home() {
       {/* <h1 className="font-bold text-3xl md:text-4xl">Лента</h1> */}
       <div className="grid sm:grid-cols-1 md:gap-x-4 md:grid-cols-5 xl:grid-cols-7 py-6">
         {session ? (
-          <div className="hidden w-full min-w-100 md:block col-auto">
+          <div className="hidden col-auto max-w-200 md:block">
             <LeftButton />
             <hr className="mb-4" />
             {session ? <SideCategoryBlock category={sideCategory} /> : ''}
@@ -72,7 +72,7 @@ export default async function Home() {
           </ul>
         ) : (
           <ul className="flex flex-col md:col-span-5 xl:col-span-5 space-y-6">
-            <ul className="flex jas gap-4">
+            <ul className="flex gap-4">
               <li className="mb-1 mr-1 ">
                 <Link
                   href={'/cat/javascript'}

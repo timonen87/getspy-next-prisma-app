@@ -52,21 +52,18 @@ const DropdownMenuButton: FC<DropdownMenuButtonProps> = () => {
           <DropdownMenuItem>
             <Home className="mr-2 h-4 w-4" />
             <Link href="/">Главная</Link>
-            <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Group className="mr-2 h-4 w-4" />
             <Link href="/">Моя лента</Link>
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <FileTextIcon className="mr-2 h-4 w-4" />
             <Link href="/">Все</Link>
-            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuGroup>
 
-        <DropdownMenuLabel>Каналы</DropdownMenuLabel>
+        <DropdownMenuLabel>Категории</DropdownMenuLabel>
         <DropdownMenuSeparator />
 
         <DropdownMenuGroup>
@@ -145,19 +142,8 @@ const DropdownMenuButton: FC<DropdownMenuButtonProps> = () => {
         </DropdownMenuItem> */}
         {/* Githab и Аккаунт */}
 
-        <DropdownMenuSeparator />
-        <DropdownMenuItem
-          className="cursor-pointer"
-          onSelect={(event) => {
-            event.preventDefault();
-            signOut({
-              callbackUrl: `${window.location.origin}/sign-in`,
-            });
-          }}
-        >
-          <LogOut className="mr-2 h-4 w-4" />
-          <span>Выйти</span>
-        </DropdownMenuItem>
+
+
       </DropdownMenuContent>
     </DropdownMenu>
   );

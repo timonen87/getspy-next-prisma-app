@@ -6,6 +6,7 @@ import { getAuthSession } from '@/lib/auth';
 import UserAccountNav from './UserAccountNav';
 import DropdownMenuButton from './DropdownMenuButton';
 import SearchBar from './SearchBar';
+import SheetNavMobile from './SheetNavMobile';
 
 const Navbar = async () => {
   const session = await getAuthSession();
@@ -15,9 +16,10 @@ const Navbar = async () => {
       <div className="container  max-w-7xl h-full mx-auto flex items-center justify-between gap-2">
         <div className="flex gap-2 items-center">
           <div className="block md:hidden">
-            <DropdownMenuButton />
+            {/* <DropdownMenuButton /> */}
+            <SheetNavMobile />
           </div>
-          <Link href="/" className="flex gap-2 items-center">
+          <Link href="/" className="flex gap-4 items-center">
             <Icons.logo className="w-28" />
           </Link>
           <div className="hidden md:block w-[400px]">

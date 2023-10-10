@@ -34,7 +34,6 @@ const DraftPostNav: FC<DraftPostNavProps> = ({ postId }) => {
       const payload: PostPublishRequest = {
         postId,
       };
-      console.log(payload);
 
       const {} = await axios.post('/api/posts/publish', payload);
     },
@@ -61,13 +60,13 @@ const DraftPostNav: FC<DraftPostNavProps> = ({ postId }) => {
 
       <DropdownMenuContent className=" bg-white" align="end">
         <DropdownMenuItem asChild>
-          <Link href="#">Редактрировать</Link>
+          <button onClick={() => {}}>Редактрировать</button>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <button onClick={() => publishPost({ postId })}>Опубликовать</button>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/cat/create">Удалить</Link>
+          <button onClick={() => {}}>Удалить</button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

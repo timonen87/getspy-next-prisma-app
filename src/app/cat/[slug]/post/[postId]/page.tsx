@@ -15,7 +15,7 @@ import UserAvatar from '@/components/UserAvatar ';
 
 export const metadata = {
   title: 'Статьи',
-  description: 'Стать',
+  description: 'Статьи',
 };
 
 interface CategoryPostPageProps {
