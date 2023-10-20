@@ -103,7 +103,6 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
           </div>
         </CardContent>
         <CardHeader>
-          <CardTitle>Ваше имя</CardTitle>
           <CardDescription>
             Пожалуйста выберете имя, которое будет использоваться на сайте
           </CardDescription>

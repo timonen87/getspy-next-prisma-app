@@ -1,5 +1,6 @@
 'use client';
 import EditorJS from '@editorjs/editorjs';
+
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import { useForm } from 'react-hook-form';
@@ -181,7 +182,7 @@ const Editor: FC<EditorProps> = ({ categoryId }) => {
     <div className="w-full p-4 bg-zinc-50 rounded-lg border border-zinc-200">
       <form
         id="category-post-form"
-        className="w-fit"
+        className="w-full"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="prose prose-stone dark:prose-invert">
@@ -196,7 +197,7 @@ const Editor: FC<EditorProps> = ({ categoryId }) => {
             className="w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold focus:outline-none"
           />
 
-          <div id="editor" className="min-h-[500px]" />
+          <div id="editor" className="min-h-[500px] w-full" />
           <p className="text-sm text-gray-500">
             Используйте{' '}
             <kbd className="rounded-md border bg-muted px-1 text-xs uppercase">

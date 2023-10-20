@@ -7,6 +7,7 @@ import UserAccountNav from './UserAccountNav';
 import DropdownMenuButton from './DropdownMenuButton';
 import SearchBar from './SearchBar';
 import SheetNavMobile from './SheetNavMobile';
+import LogoBack from './home/LogoBack';
 
 const Navbar = async () => {
   const session = await getAuthSession();
@@ -19,9 +20,7 @@ const Navbar = async () => {
             {/* <DropdownMenuButton /> */}
             <SheetNavMobile />
           </div>
-          <Link href="/" className="flex gap-4 items-center">
-            <Icons.logo className="w-28" />
-          </Link>
+          <LogoBack />
           <div className="hidden md:block w-[400px]">
             <SearchBar />
           </div>

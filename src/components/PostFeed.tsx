@@ -8,6 +8,7 @@ import axios from 'axios';
 import { Loader2 } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Post from './Post';
+import { useRouter } from 'next/navigation';
 
 interface PostFeedProps {
   initialPosts: ExtendedPost[];

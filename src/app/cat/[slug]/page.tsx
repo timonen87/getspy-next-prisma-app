@@ -1,5 +1,6 @@
 import MiniCreatePost from '@/components/MiniCreatePost';
 import PostFeed from '@/components/PostFeed';
+import ToFeedButton from '@/components/ToFeedButton';
 
 import { INFINITE_SCROLLING_PAGINATION_RESULTS } from '@/config';
 
@@ -39,7 +40,10 @@ const page = async ({ params }: PageProps) => {
 
   return (
     <>
-      <h1 className="font-bold text-3xl md:text-4xl h-14">{category.slug}</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="font-bold text-3xl md:text-4xl h-14">{category.slug}</h1>
+        <ToFeedButton />
+      </div>
 
       <MiniCreatePost session={session} />
 

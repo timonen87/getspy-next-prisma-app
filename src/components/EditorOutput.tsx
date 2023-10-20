@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 const Output = dynamic(
   async () => (await import('editorjs-react-renderer')).default,
-  { ssr: false },
+  { ssr: false }
 );
 
 interface EditorOutputProps {
@@ -29,9 +29,23 @@ const style = {
       lineHeight: '2rem',
       fontWeight: '600',
     },
-    list: {
-      container: {},
-      listItem: {},
+    h3: {
+      fontSize: '1.2rem',
+      lineHeight: '2rem',
+      fontWeight: '600',
+    },
+    h4: {
+      fontSize: '1.2rem',
+      lineHeight: '2rem',
+      fontWeight: '600',
+    },
+  },
+  list: {
+    container: {},
+    listItem: {
+      listStyle: 'disc',
+      listStylePosition: 'outside',
+      marginLeft: '18px',
     },
   },
 };
@@ -41,7 +55,7 @@ function CustomCodeRenderer({ data }: any) {
 
   return (
     <pre className="bg-gray-700 rounded-md p-4">
-      <code className="text-gray-100 text-sm">{data.code}</code>
+      <code className="text-gray-100 text-sm content">{data.code}</code>
     </pre>
   );
 }

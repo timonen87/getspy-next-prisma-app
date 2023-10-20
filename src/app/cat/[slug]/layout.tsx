@@ -61,7 +61,7 @@ const layout = async ({
           <div className="ml-0 md:ml-16 xl:ml-0">
             <div className=" h-fit rounded-lg border border-gray-200 order-first md:order-last ">
               <div className="px-6 py-4">
-                <p className="text-2xl font-semibold py-3">#{category.slug} </p>
+                <p className="text-2xl font-semibold py-3">{category.slug} </p>
               </div>
 
               <dl className="divide-y divide-gray-100 px-6 py-4 text-sm leading-6 bg-white">

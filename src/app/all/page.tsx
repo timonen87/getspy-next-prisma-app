@@ -2,6 +2,7 @@ import LeftButton from '@/components/LeftButton';
 import PostFeed from '@/components/PostFeed';
 import SideCategoryBlock from '@/components/SideCategorysBlock';
 import SideCommnetsItem from '@/components/SideCommenItem';
+import ToFeedButton from '@/components/ToFeedButton';
 import GeneralFeed from '@/components/home/GeneralFeed';
 
 import { INFINITE_SCROLLING_PAGINATION_RESULTS } from '@/config';
@@ -60,8 +61,11 @@ const page = async () => {
           {session ? <SideCategoryBlock category={category} /> : ''}
         </div>
         <ul className="flex flex-col md:col-span-4 xl:col-span-4 space-y-6">
-          <h1 className="font-bold text-3xl md:text-4xl h-14">Все статьи</h1>
-
+          <div className="flex justify-between ">
+            <h1 className="font-bold text-3xl md:text-4xl h-14">Все статьи</h1>
+            <ToFeedButton />
+          </div>
+          {/* @ts-expect-error server component */}
           <GeneralFeed />
         </ul>
 
