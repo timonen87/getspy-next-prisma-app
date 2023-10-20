@@ -7,7 +7,7 @@ import EditorOutput from './EditorOutput';
 import Link from 'next/link';
 import { Divide, MessageSquare, Newspaper } from 'lucide-react';
 import PostVoteClient from './post-vote/PostVoteClient';
-import DraftPostNav from './DraftPostnav';
+import DraftPostNav from './DraftPostNav';
 
 type PartialVote = Pick<Vote, 'type'>;
 

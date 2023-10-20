@@ -59,6 +59,7 @@ export async function PATCH(req: Request) {
             content: JSON.stringify(post.content),
             id: post.id,
             title: post.title,
+            image: post.author.image ?? '',
             currentVote: null,
             createdAt: post.createdAt,
           };
@@ -92,6 +93,7 @@ export async function PATCH(req: Request) {
           content: JSON.stringify(post.content),
           id: post.id,
           title: post.title,
+          image: post.author.image ?? '',
           currentVote: voteType,
           createdAt: post.createdAt,
         };
@@ -121,6 +123,7 @@ export async function PATCH(req: Request) {
         content: JSON.stringify(post.content),
         id: post.id,
         title: post.title,
+        image: post.author.image ?? '',
         currentVote: voteType,
         createdAt: post.createdAt,
       };
@@ -136,7 +139,7 @@ export async function PATCH(req: Request) {
     }
     return new Response(
       'Не удаось найти пост в данной категории в данный момент. Попробйте позже',
-      { status: 500 },
+      { status: 500 }
     );
   }
 }

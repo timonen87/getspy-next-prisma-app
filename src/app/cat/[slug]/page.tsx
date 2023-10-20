@@ -8,6 +8,36 @@ import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { notFound } from 'next/navigation';
 
+export async function generateMetadata({
+  params,
+}: {
+  params: {
+    slug: string;
+  };
+}) {
+  try {
+    const metaData = await db.category.findFirst({
+      where: {
+        name: params.slug,
+      },
+    });
+    if (!metaData)
+      return {
+        title: 'Not Found',
+        description: 'not found',
+      };
+    return {
+      title: `${metaData?.slug} | Getspy.ru`,
+      description: metaData?.slug,
+    };
+  } catch (error) {
+    return {
+      title: 'Not Found',
+      description: 'not found',
+    };
+  }
+}
+
 interface PageProps {
   params: {
     slug: string;
