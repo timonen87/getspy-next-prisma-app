@@ -16,7 +16,7 @@ const SideCategoryItem: FC<SideCategoryItemProps> = ({ category }) => {
         <div className="flex flex-col gap-x-1" key={obj.id}>
           <dt className="text-m flex items-center gap-1">
             <Link
-              href={`/cat/${obj.name}`}
+              href={`/cat/${obj.slug}`}
               className={buttonVariants({
                 variant: 'ghost',
               })}

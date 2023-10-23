@@ -12,11 +12,13 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
-    const { name, slug } = CategoryValidator.parse(body);
+    const { name } = CategoryValidator.parse(body);
+
+    let slug = name.toLocaleLowerCase().replace(' ', '_');
 
     const categoryExists = await db.category.findFirst({
       where: {
-        name,
+        slug,
       },
     });
 

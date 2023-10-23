@@ -13,10 +13,36 @@ import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 import UserAvatar from '@/components/UserAvatar ';
 
-export const metadata = {
-  title: 'Статьи',
-  description: 'Статьи',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: {
+    postId: string;
+  };
+}) {
+  try {
+    const metaData = await db.post.findFirst({
+      where: {
+        id: params.postId,
+      },
+    });
+    if (!metaData)
+      return {
+        title: 'Not Found',
+        description: 'not found',
+      };
+    return {
+      title: metaData?.title,
+      description: metaData?.title,
+    };
+  } catch (error) {
+    console.log(error);
+    return {
+      title: 'Not Found',
+      description: 'not found',
+    };
+  }
+}
 
 interface CategoryPostPageProps {
   params: {

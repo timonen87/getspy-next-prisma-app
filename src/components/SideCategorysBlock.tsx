@@ -21,7 +21,7 @@ const SideCategoryBlock: FC<SideCategoryBlockProps> = ({ category }) => {
             category.map((obj) => (
               <li className="pb-1 " key={obj.id}>
                 <Link
-                  href={`/cat/${obj.category.name}`}
+                  href={`/cat/${obj.category.slug}`}
                   className={buttonVariants({
                     variant: 'ghost_full',
                   })}

@@ -18,14 +18,13 @@ import { json } from 'stream/consumers';
 const Page = () => {
   const router = useRouter();
   const [inputName, setInputName] = useState<string>('');
-  const [inputSlug, setInputSlug] = useState<string>('');
+  // const [inputSlug, setInputSlug] = useState<string>('');
   const { loginToast } = useCustomToasts();
 
   const { mutate: CreateCategory, isLoading } = useMutation({
     mutationFn: async () => {
       const payload: CreateCategoryPayload = {
         name: inputName,
-        slug: inputSlug,
       };
 
       const { data } = await axios.post('/api/category', payload);
@@ -65,7 +64,7 @@ const Page = () => {
       });
     },
     onSuccess: (data) => {
-      router.push(`/cat/${data}`);
+      router.push(`/cat/${data.toLocaleLowerCase().replace(' ', '_')}`);
     },
   });
 
@@ -90,7 +89,7 @@ const Page = () => {
               className="pl-2"
             />
           </div>
-          <div className="pt-2">
+          {/* <div className="pt-2">
             <p className="text-xs pb-2">Введите назвине категории</p>
             <p className="text-xs pb-2">Название будет отброжаться на сайте</p>
             <div className="relative">
@@ -101,7 +100,7 @@ const Page = () => {
                 className="pl-2"
               />
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="flex justify-end gap-4">
@@ -110,7 +109,7 @@ const Page = () => {
           </Button>
           <Button
             isLoading={isLoading}
-            disabled={(inputName.length === 0, inputSlug.length === 0)}
+            disabled={inputName.length === 0}
             onClick={() => CreateCategory()}
           >
             Создать

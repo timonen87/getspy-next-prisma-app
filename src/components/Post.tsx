@@ -7,12 +7,13 @@ import EditorOutput from './EditorOutput';
 import Link from 'next/link';
 import { Divide, MessageSquare, Newspaper } from 'lucide-react';
 import PostVoteClient from './post-vote/PostVoteClient';
-import DraftPostNav from './DraftPostnav';
+import DraftPostNav from './DraftPostNav';
 
 type PartialVote = Pick<Vote, 'type'>;
 
 interface PostProps {
   categoryName: string;
+  categorySlug: string;
   post: Post & {
     author: User;
     votes: Vote[];
@@ -25,6 +26,7 @@ interface PostProps {
 const Post: FC<PostProps> = ({
   post,
   commentAmt,
+  categorySlug,
   categoryName,
   votesAmt: _votesAmt,
   currentVote: _currentVote,
@@ -84,7 +86,7 @@ const Post: FC<PostProps> = ({
             {formatTimeToNow(new Date(post.createdAt))} */}
           </div>
 
-          <a href={`/cat/${categoryName}/post/${post.id}`}>
+          <a href={`/cat/${categorySlug}/post/${post.id}`}>
             <h2 className="text-2xl font-semibold py-2 leading-6 text-gray-900">
               {post.title}
             </h2>
@@ -103,7 +105,7 @@ const Post: FC<PostProps> = ({
       </div>
       <div className="flex items-center justify-between bg-gray-50 z-20 text-sm ">
         <Link
-          href={`/cat/${categoryName}/post/${post.id}`}
+          href={`/cat/${categorySlug}/post/${post.id}`}
           className="w-fit flex items-center gap-2 pl-8"
         >
           <MessageSquare className="h-4 w-4 " /> {commentAmt}
@@ -111,11 +113,11 @@ const Post: FC<PostProps> = ({
 
         <div className="flex items-center gap-2 py-4">
           <Newspaper className="h-4 w-4 mr-1" />
-          {categoryName ? (
+          {categorySlug ? (
             <>
               <Link
                 className="underline text-zinc-900 text-sm underline-offset-2"
-                href={`/cat/${categoryName}`}
+                href={`/cat/${categorySlug}`}
               >
                 {categoryName}
               </Link>

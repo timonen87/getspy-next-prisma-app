@@ -15,7 +15,7 @@ const layout = async ({
 }) => {
   const session = await getAuthSession();
   const category = await db.category.findFirst({
-    where: { name: slug },
+    where: { slug: slug },
     include: {
       posts: {
         include: {
@@ -31,7 +31,7 @@ const layout = async ({
     : await db.subscription.findFirst({
         where: {
           category: {
-            name: slug,
+            slug: slug,
           },
           user: {
             id: session.user.id,
@@ -46,7 +46,7 @@ const layout = async ({
   const memberCount = await db.subscription.count({
     where: {
       category: {
-        name: slug,
+        slug: slug,
       },
     },
   });
@@ -61,7 +61,7 @@ const layout = async ({
           <div className="ml-0 md:ml-16 xl:ml-0">
             <div className=" h-fit rounded-lg border border-gray-200 order-first md:order-last ">
               <div className="px-6 py-4">
-                <p className="text-2xl font-semibold py-3">{category.slug} </p>
+                <p className="text-2xl font-semibold py-3">{category.name} </p>
               </div>
 
               <dl className="divide-y divide-gray-100 px-6 py-4 text-sm leading-6 bg-white">
@@ -85,7 +85,7 @@ const layout = async ({
                 {category.creatorId !== session?.user?.id ? (
                   <SubscribeLeaveToggle
                     isSubcribed={isSubcribed}
-                    categoryName={category.name}
+                    categoryName={category.slug}
                     categoryId={category.id}
                   />
                 ) : null}

@@ -9,10 +9,35 @@ import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { notFound } from 'next/navigation';
 
-export const metadata: Metadata = {
-  title: 'Category Title',
-  description: 'Category description',
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: {
+    slug: string;
+  };
+}) {
+  try {
+    const metaData = await db.category.findFirst({
+      where: {
+        name: params.slug,
+      },
+    });
+    if (!metaData)
+      return {
+        title: 'Not Found',
+        description: 'not found',
+      };
+    return {
+      title: `${metaData?.slug} | Getspy.ru`,
+      description: metaData?.slug,
+    };
+  } catch (error) {
+    return {
+      title: 'Not Found',
+      description: 'not found',
+    };
+  }
+}
 
 interface PageProps {
   params: {
@@ -25,7 +50,7 @@ const page = async ({ params }: PageProps) => {
   const session = await getAuthSession();
 
   const category = await db.category.findFirst({
-    where: { name: slug },
+    where: { slug: slug },
     include: {
       posts: {
         where: {
@@ -47,13 +72,13 @@ const page = async ({ params }: PageProps) => {
   return (
     <>
       <div className="flex justify-between items-center">
-        <h1 className="font-bold text-3xl md:text-4xl h-14">{category.slug}</h1>
+        <h1 className="font-bold text-3xl md:text-4xl h-14">{category.name}</h1>
         <ToFeedButton />
       </div>
 
       <MiniCreatePost session={session} />
 
-      <PostFeed initialPosts={category.posts} categoryName={category.name} />
+      <PostFeed initialPosts={category.posts} categorySlug={category.slug} />
     </>
   );
 };

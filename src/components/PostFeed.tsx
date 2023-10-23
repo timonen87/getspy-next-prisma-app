@@ -12,10 +12,11 @@ import { useRouter } from 'next/navigation';
 
 interface PostFeedProps {
   initialPosts: ExtendedPost[];
+  categorySlug?: string;
   categoryName?: string;
 }
 
-const PostFeed: FC<PostFeedProps> = ({ initialPosts, categoryName }) => {
+const PostFeed: FC<PostFeedProps> = ({ initialPosts, categorySlug }) => {
   const lastPostRef = useRef<HTMLElement>(null);
   const { ref, entry } = useIntersection({
     root: lastPostRef.current,
@@ -29,7 +30,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, categoryName }) => {
     async ({ pageParam = 1 }) => {
       const query =
         `/api/posts?limit=${INFINITE_SCROLLING_PAGINATION_RESULTS}&page=${pageParam}` +
-        (!!categoryName ? `&categoryName=${categoryName}` : '');
+        (!!categorySlug ? `&categorySlug=${categorySlug}` : '');
 
       const { data } = await axios.get(query);
       return data as ExtendedPost[];
@@ -52,48 +53,52 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, categoryName }) => {
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
 
   return (
-    <ul className="flex flex-col md:col-span-4 xl:col-span-4 space-y-6">
-      {posts.map((post, index) => {
-        const votesAmt = post.votes.reduce((acc, vote) => {
-          if (vote.type === 'UP') return acc + 1;
-          if (vote.type === 'DOWN') return acc - 1;
-          return acc;
-        }, 0);
+    <>
+      <ul className="flex flex-col md:col-span-4 xl:col-span-4 space-y-6">
+        {posts.map((post, index) => {
+          const votesAmt = post.votes.reduce((acc, vote) => {
+            if (vote.type === 'UP') return acc + 1;
+            if (vote.type === 'DOWN') return acc - 1;
+            return acc;
+          }, 0);
 
-        const currentVote = post.votes.find(
-          (vote) => vote.userId === session?.user.id
-        );
-        if (index === posts.length - 1) {
-          return (
-            <li key={post.id} ref={ref}>
+          const currentVote = post.votes.find(
+            (vote) => vote.userId === session?.user.id
+          );
+          if (index === posts.length - 1) {
+            return (
+              <li key={post.id} ref={ref}>
+                <Post
+                  post={post}
+                  commentAmt={post.comments.length}
+                  categoryName={post.category.name}
+                  categorySlug={post.category.slug}
+                  votesAmt={votesAmt}
+                  currentVote={currentVote}
+                />
+              </li>
+            );
+          } else {
+            return (
               <Post
+                key={post.id}
                 post={post}
                 commentAmt={post.comments.length}
                 categoryName={post.category.name}
+                categorySlug={post.category.slug}
                 votesAmt={votesAmt}
                 currentVote={currentVote}
               />
-            </li>
-          );
-        } else {
-          return (
-            <Post
-              key={post.id}
-              post={post}
-              commentAmt={post.comments.length}
-              categoryName={post.category.name}
-              votesAmt={votesAmt}
-              currentVote={currentVote}
-            />
-          );
-        }
-      })}
-      {isFetchingNextPage && (
-        <li className="flex justify-center">
-          <Loader2 className="w-6 h-6 text-zinc-500 animate-spin" />
-        </li>
-      )}
-    </ul>
+            );
+          }
+        })}
+        {isFetchingNextPage && (
+          <li className="flex justify-center">
+            <Loader2 className="w-6 h-6 text-zinc-500 animate-spin" />
+          </li>
+        )}
+      </ul>
+    </>
   );
 };
 

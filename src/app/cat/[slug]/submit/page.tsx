@@ -13,7 +13,7 @@ interface PageProps {
 const page = async ({ params }: PageProps) => {
   const category = await db.category.findFirst({
     where: {
-      name: params.slug,
+      slug: params.slug,
     },
   });
 

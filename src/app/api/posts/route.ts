@@ -23,25 +23,25 @@ export async function GET(req: Request) {
   }
 
   try {
-    const { limit, page, categoryName } = z
+    const { limit, page, categorySlug } = z
       .object({
         limit: z.string(),
         page: z.string(),
-        categoryName: z.string().nullish().optional(),
+        categorySlug: z.string().nullish().optional(),
       })
       .parse({
-        categoryName: url.searchParams.get('categoryName'),
+        categorySlug: url.searchParams.get('categorySlug'),
         limit: url.searchParams.get('limit'),
         page: url.searchParams.get('page'),
       });
 
     let whereClause = {};
 
-    if (categoryName) {
+    if (categorySlug) {
       whereClause = {
         published: true,
         category: {
-          name: categoryName,
+          slug: categorySlug,
         },
       };
     } else if (session) {
