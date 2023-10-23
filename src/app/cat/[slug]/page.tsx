@@ -1,12 +1,18 @@
 import MiniCreatePost from '@/components/MiniCreatePost';
 import PostFeed from '@/components/PostFeed';
 import ToFeedButton from '@/components/ToFeedButton';
+import type { Metadata } from 'next';
 
 import { INFINITE_SCROLLING_PAGINATION_RESULTS } from '@/config';
 
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { notFound } from 'next/navigation';
+
+export const metadata: Metadata = {
+  title: 'Category Title',
+  description: 'Category description',
+};
 
 interface PageProps {
   params: {
