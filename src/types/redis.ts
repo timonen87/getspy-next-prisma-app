@@ -5,6 +5,7 @@ export type CachedPost = {
   title: string;
   authorUsername: string;
   image: string;
+  slugPost: string;
   content: string;
   currentVote: Vote['type'] | null;
   createdAt: Date;

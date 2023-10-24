@@ -53,7 +53,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, categorySlug }) => {
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
 
   return (
-    <>
+    <div>
       <ul className="flex flex-col md:col-span-4 xl:col-span-4 space-y-6">
         {posts.map((post, index) => {
           const votesAmt = post.votes.reduce((acc, vote) => {
@@ -98,7 +98,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, categorySlug }) => {
           </li>
         )}
       </ul>
-    </>
+    </div>
   );
 };
 

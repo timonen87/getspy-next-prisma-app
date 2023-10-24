@@ -2,6 +2,7 @@ import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { CategoryValidator } from '@/lib/validators/category';
 import { z } from 'zod';
+import CyrillicToTranslit from 'cyrillic-to-translit-js';
 
 export async function POST(req: Request) {
   try {
@@ -14,7 +15,7 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { name } = CategoryValidator.parse(body);
 
-    let slug = name.toLocaleLowerCase().replace(' ', '_');
+    let slug = CyrillicToTranslit().transform(name, '_').toLocaleLowerCase();
 
     const categoryExists = await db.category.findFirst({
       where: {

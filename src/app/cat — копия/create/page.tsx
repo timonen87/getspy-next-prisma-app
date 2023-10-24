@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 
 import { toast } from '@/hooks/use-toast';
-import CyrillicToTranslit from 'cyrillic-to-translit-js';
+
 import { useCustomToasts } from '@/hooks/use-custom-toasts';
 import { CreateCategoryPayload } from '@/lib/validators/category';
 import { useMutation } from '@tanstack/react-query';
@@ -65,10 +65,7 @@ const Page = () => {
       });
     },
     onSuccess: (data) => {
-      const slug = CyrillicToTranslit()
-        .transform(data, '_')
-        .toLocaleLowerCase();
-      router.push(`/cat/${slug}`);
+      router.push(`/cat/${data}`);
     },
   });
 
@@ -83,7 +80,7 @@ const Page = () => {
 
         <div>
           <p className="text-lg font-medium">Название </p>
-          <p className="text-xs pb-2">Введите желамое название</p>
+          <p className="text-xs pb-2">Введите желаемый url(slug)</p>
 
           <div className="relative">
             <p className="absolute text-sm left-0 w-8 inset-y-0 grid place-items-center text-zinc-400"></p>

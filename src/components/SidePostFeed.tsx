@@ -23,7 +23,7 @@ const SidePostFeed: FC<SidePostFeedProps> = ({ sidePosts }) => {
         {/* <CommentItem  post={post} /> */}
         {sidePosts.map((obj) => (
           <div className="flex flex-col gap-x-4 py-3" key={obj.id}>
-            <Link href={`/cat/${obj.category.name}/post/${obj.id}`}>
+            <Link href={`/cat/${obj.category.slug}/${obj.slug}`}>
               <div className="flex items-center">
                 <div className="flex items-center gap-x-2">
                   <p className="text-sm font-medium text-gray-900">

@@ -43,7 +43,7 @@ const SideCommnetsItem: FC<SideCommnetsItemProps> = ({ comments }) => {
               </div>
             </div>
             <p className="text-sm text-zinc-900 mt-2">
-              <Link href={`/cat/${obj.post.category.name}/post/${obj.postId}`}>
+              <Link href={`/cat/${obj.post.category.slug}/${obj.post.slug}`}>
                 {obj.text.slice(0, 100)}...{' '}
               </Link>
             </p>

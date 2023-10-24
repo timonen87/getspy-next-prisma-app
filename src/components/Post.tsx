@@ -86,7 +86,7 @@ const Post: FC<PostProps> = ({
             {formatTimeToNow(new Date(post.createdAt))} */}
           </div>
 
-          <a href={`/cat/${categorySlug}/post/${post.id}`}>
+          <a href={`/cat/${categorySlug}/${post.slug}`}>
             <h2 className="text-2xl font-semibold py-2 leading-6 text-gray-900">
               {post.title}
             </h2>

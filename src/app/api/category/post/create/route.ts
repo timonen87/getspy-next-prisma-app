@@ -1,6 +1,6 @@
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
-
+import CyrillicToTranslit from 'cyrillic-to-translit-js';
 import { PostValidator } from '@/lib/validators/post';
 import { z } from 'zod';
 
@@ -30,6 +30,11 @@ export async function POST(req: Request) {
     await db.post.create({
       data: {
         title,
+        slug: CyrillicToTranslit()
+          .transform(title, '_')
+          .toLocaleLowerCase()
+          .replace(':', '')
+          .replace('-', ''),
         content,
         authorId: session.user.id,
         categoryId,
