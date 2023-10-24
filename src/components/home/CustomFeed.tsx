@@ -23,8 +23,8 @@ const CustomFeed = async () => {
     where: {
       published: true,
       category: {
-        slug: {
-          in: followedCommunities.map((sub) => sub.category.slug),
+        id: {
+          in: followedCommunities.map((sub) => sub.category.id),
         },
       },
     },
