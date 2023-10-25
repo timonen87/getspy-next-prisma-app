@@ -12,9 +12,10 @@ import Post from './Post';
 interface PostFeedProps {
   initialPosts: ExtendedPost[];
   categoryName?: string;
+  categorySlug?: string;
 }
 
-const DraftFeed: FC<PostFeedProps> = ({ initialPosts, categoryName }) => {
+const DraftFeed: FC<PostFeedProps> = ({ initialPosts, categorySlug }) => {
   const lastPostRef = useRef<HTMLElement>(null);
   const { ref, entry } = useIntersection({
     root: lastPostRef.current,
@@ -28,7 +29,7 @@ const DraftFeed: FC<PostFeedProps> = ({ initialPosts, categoryName }) => {
     async ({ pageParam = 1 }) => {
       const query =
         `/api/posts/drafts?limit=${INFINITE_SCROLLING_PAGINATION_RESULTS}&page=${pageParam}` +
-        (!!categoryName ? `&categoryName=${categoryName}` : '');
+        (!!categorySlug ? `&categorySlug=${categorySlug}` : '');
 
       const { data } = await axios.get(query);
       return data as ExtendedPost[];
@@ -69,6 +70,7 @@ const DraftFeed: FC<PostFeedProps> = ({ initialPosts, categoryName }) => {
                 post={post}
                 commentAmt={post.comments.length}
                 categoryName={post.category.name}
+                categorySlug={post.category.slug}
                 votesAmt={votesAmt}
                 currentVote={currentVote}
               />
@@ -81,6 +83,7 @@ const DraftFeed: FC<PostFeedProps> = ({ initialPosts, categoryName }) => {
               post={post}
               commentAmt={post.comments.length}
               categoryName={post.category.name}
+              categorySlug={post.category.slug}
               votesAmt={votesAmt}
               currentVote={currentVote}
             />

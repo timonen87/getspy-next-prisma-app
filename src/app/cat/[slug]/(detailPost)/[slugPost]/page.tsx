@@ -126,7 +126,7 @@ const CategorPostPage = async ({ params }: CategoryPostPageProps) => {
             }
           >
             {/* @ts-expect-error Server Component */}
-            <CommentsSection postId={post?.slug ?? cachedPost.slug} />
+            <CommentsSection postId={post?.id ?? cachedPost.id} />
           </Suspense>
         </div>
       </div>

@@ -12,7 +12,7 @@ import { useRouter } from 'next/navigation';
 
 interface PostFeedProps {
   initialPosts: ExtendedPost[];
-  categorySlug?: string;
+  categorySlug: string;
   categoryName?: string;
 }
 
