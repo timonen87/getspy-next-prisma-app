@@ -1,11 +1,10 @@
 'use client';
 
-import { Menu, MenuSquare, Home, Group, FileTextIcon } from 'lucide-react';
+import { Group, FileTextIcon } from 'lucide-react';
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
-import { buttonVariants } from './ui/Button';
 import { buttonVariantsLink } from './ui/ButtonMenu';
 
 const menu = [

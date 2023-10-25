@@ -71,21 +71,7 @@ const Post: FC<PostProps> = ({
               </div>
             </div>
 
-            <div className="max-h-40 mt-1 text-xs text-gray-500">
-              {/* {categoryName ? (
-              <>
-                <a
-                  className="underline text-zinc-900 text-sm underline-offset-2"
-                  href={`/cat/${categoryName}`}
-                >
-                  @ {categoryName}
-                </a>
-                <span className="px-1">•</span>
-              </>
-            ) : null} */}
-              {/* <span>{post.author.username}</span>{' '}
-            {formatTimeToNow(new Date(post.createdAt))} */}
-            </div>
+            <div className="max-h-40 mt-1 text-xs text-gray-500"></div>
 
             <a href={`/cat/${categorySlug}/${post.slug}`}>
               <h2 className="text-2xl font-semibold py-2 leading-6 text-gray-900">
