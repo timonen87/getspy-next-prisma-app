@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
-    const { name } = CategoryValidator.parse(body);
+    const { name, description, image } = CategoryValidator.parse(body);
 
     let slug = CyrillicToTranslit().transform(name, '_').toLocaleLowerCase();
 
@@ -31,6 +31,8 @@ export async function POST(req: Request) {
       data: {
         name,
         slug,
+        description,
+        image,
         creatorId: session.user.id,
       },
     });

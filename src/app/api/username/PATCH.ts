@@ -12,27 +12,25 @@ export async function PATCH(req: Request) {
     }
 
     const body = await req.json();
-    const { image, name, email } = UsernameValidator.parse(body);
+    const { name, email } = UsernameValidator.parse(body);
 
     // check if username is taken
-    // const username = await db.user.findFirst({
-    //   where: {
-    //     username: name,
-    //   },
-    // });
+    const username = await db.user.findFirst({
+      where: {
+        username: name,
+      },
+    });
 
-    // if (username) {
-    //   return new Response('Такое имя уже выбрано', { status: 409 });
-    // }
+    if (username) {
+      return new Response('Такое имя уже выбрано', { status: 409 });
+    }
 
     // update username
-    // https://lh3.googleusercontent.com/a/ACg8ocJutAw4MPNEHaf58iWGYxPCqg4pKMOvbSmB2u3DFCS38ao=s96-c
     await db.user.update({
       where: {
         id: session.user.id,
       },
       data: {
-        image: image,
         username: name,
         email: email,
       },

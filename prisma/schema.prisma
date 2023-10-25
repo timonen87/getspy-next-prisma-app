@@ -55,7 +55,6 @@ model User {
   createdCategories Category[]     @relation("CreatedBy")
   subscriptions     Subscription[]
   votes             Vote[]
-  // role              UserRole       @default(USER)
   role              String         @default("user")
 
   username String? @unique

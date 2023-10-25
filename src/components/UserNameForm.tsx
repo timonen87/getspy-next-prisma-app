@@ -66,13 +66,13 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
 
       return toast({
         title: 'Что-то произошло.',
-        description: 'Ваше имя не удалось обрновить. Попробуйте позжу',
+        description: 'Ваш профиль не удалось обрновить. Попробуйте позжу',
         variant: 'destructive',
       });
     },
     onSuccess: () => {
       toast({
-        description: 'Ваще имя успешно изменено👋 ',
+        description: 'Ваш профиль успешно изменен👋 ',
       });
       router.refresh();
     },
@@ -84,77 +84,96 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
       onSubmit={handleSubmit((e) => updateUsername(e))}
       {...props}
     >
-      <Card>
-        <CardHeader>
-          <CardTitle>{user.username}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="relative grid gap-1">
-            <div className="absolute top-0 left-0 w-8 h-10 grid place-items-center">
-              <span className="text-sm text-zinc-400"></span>
-            </div>
-            <UserAvatar
-              user={{
-                name: user.username || null,
-                image: user.image || null,
-              }}
-              className="h-28 w-28"
-            />
+      <CardHeader>
+        <CardTitle>{user.username}</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="relative grid gap-1">
+          <div className="absolute top-0 left-0 w-8 h-10 grid place-items-center">
+            <span className="text-sm text-zinc-400"></span>
           </div>
-        </CardContent>
-        <CardHeader>
-          <CardDescription>
-            Пожалуйста выберете имя, которое будет использоваться на сайте
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="relative grid gap-1">
-            <div className="absolute top-0 left-0 w-8 h-10 grid place-items-center">
-              <span className="text-sm text-zinc-400"></span>
-            </div>
-            <Label className="sr-only" htmlFor="name">
-              Имя
-            </Label>
-            <Input
-              id="name"
-              className="w-[400px] pl-2"
-              size={32}
-              {...register('name')}
-            />
-            {errors?.name && (
-              <p className="px-1 text-xs text-red-600">{errors.name.message}</p>
-            )}
+          <UserAvatar
+            user={{
+              name: user.username || null,
+              image: user.image || null,
+            }}
+            className="h-28 w-28"
+          />
+        </div>
+      </CardContent>
+      <CardHeader>
+        <CardTitle>Ссылка на аватар</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="relative grid gap-1">
+          <div className="absolute top-0 left-0 w-8 h-10 grid place-items-center">
+            <span className="text-sm text-zinc-400"></span>
           </div>
-        </CardContent>
-        <CardHeader>
-          <CardTitle>Ваш email</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="relative grid gap-1">
-            <div className="absolute top-0 left-0 w-8 h-10 grid place-items-center">
-              <span className="text-sm text-zinc-400"></span>
-            </div>
-            <Label className="sr-only" htmlFor="email">
-              email
-            </Label>
-            <Input
-              id="email"
-              className="w-[400px] pl-2"
-              size={32}
-              {...register('email')}
-            />
-            {errors?.email && (
-              <p className="px-1 text-xs text-red-600">
-                {errors.email.message}
-              </p>
-            )}
+          <Label className="sr-only" htmlFor="email">
+            url
+          </Label>
+          <Input
+            id="image"
+            className="w-full pl-2"
+            size={32}
+            {...register('image')}
+          />
+          {errors?.image && (
+            <p className="px-1 text-xs text-red-600">{errors.image.message}</p>
+          )}
+        </div>
+      </CardContent>
+      <CardHeader>
+        <CardTitle>Ваше имя</CardTitle>
+        <CardDescription>
+          Пожалуйста выберете имя, которое будет использоваться на сайте
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <div className="relative grid gap-1">
+          <div className="absolute top-0 left-0 w-8 h-10 grid place-items-center">
+            <span className="text-sm text-zinc-400"></span>
           </div>
-        </CardContent>
+          <Label className="sr-only" htmlFor="name">
+            Имя
+          </Label>
+          <Input
+            id="name"
+            className="w-full pl-2"
+            size={32}
+            {...register('name')}
+          />
+          {errors?.name && (
+            <p className="px-1 text-xs text-red-600">{errors.name.message}</p>
+          )}
+        </div>
+      </CardContent>
+      <CardHeader>
+        <CardTitle>Ваш email</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="relative grid gap-1">
+          <div className="absolute top-0 left-0 w-8 h-10 grid place-items-center">
+            <span className="text-sm text-zinc-400"></span>
+          </div>
+          <Label className="sr-only" htmlFor="email">
+            email
+          </Label>
+          <Input
+            id="email"
+            className="w-full pl-2"
+            size={32}
+            {...register('email')}
+          />
+          {errors?.email && (
+            <p className="px-1 text-xs text-red-600">{errors.email.message}</p>
+          )}
+        </div>
+      </CardContent>
 
-        <CardFooter>
-          <Button isLoading={isLoading}>Изменить</Button>
-        </CardFooter>
-      </Card>
+      <CardFooter>
+        <Button isLoading={isLoading}>Изменить</Button>
+      </CardFooter>
     </form>
   );
 }
