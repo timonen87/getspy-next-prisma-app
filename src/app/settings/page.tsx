@@ -15,20 +15,21 @@ export default async function SettingsPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto py-12">
-      <div className="grid items-start gap-8">
-        <h1 className="font-bold text-3xl md:text-4xl">Профиль</h1>
-
-        <div className="grid gap-10">
-          <UserNameForm
-            user={{
-              id: session.user.id,
-              username: session.user.username || '',
-              email: session.user.email || '',
-              image: session.user.image || '',
-            }}
-          />
+    <div className="container flex items-center h-full max-2-3xl mx-auto md:w-[700px]">
+      <div className="relative bg-white w-full h-fit p-4 rounded-lg space-y-6">
+        <div className="flex justify-between items-center">
+          <h1 className="text-xl font-semibold ml-4">Профиль</h1>
         </div>
+        <hr className="bg-zinc-500 h-px" />
+
+        <UserNameForm
+          user={{
+            id: session.user.id,
+            username: session.user.username || '',
+            email: session.user.email || '',
+            image: session.user.image || '',
+          }}
+        />
       </div>
     </div>
   );

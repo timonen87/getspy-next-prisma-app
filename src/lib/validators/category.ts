@@ -2,7 +2,8 @@ import { z } from 'zod';
 
 export const CategoryValidator = z.object({
   name: z.string().min(3).max(21),
-  // slug: z?.string(),
+  description: z?.string().max(1000),
+  image: z?.string().max(1000),
 });
 
 export const CategorySubscriptionValidator = z.object({
