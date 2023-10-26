@@ -22,8 +22,8 @@ const CustomDraftsFeed = async () => {
     where: {
       published: false,
       category: {
-        slug: {
-          in: followedCommunities.map((sub) => sub.category.name),
+        id: {
+          in: followedCommunities.map((sub) => sub.category.id),
         },
       },
     },

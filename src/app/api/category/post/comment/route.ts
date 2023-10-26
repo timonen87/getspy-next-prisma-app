@@ -34,7 +34,7 @@ export async function PATCH(req: Request) {
     }
 
     return new Response(
-      'Could not post to subreddit at this time. Please try later',
+      'Не удалось опубликовать Ваш комментарий, попробуйте позже.',
       { status: 500 }
     );
   }

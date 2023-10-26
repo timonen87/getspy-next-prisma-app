@@ -19,7 +19,7 @@ export async function generateMetadata({
   try {
     const metaData = await db.category.findFirst({
       where: {
-        name: params.slug,
+        slug: params.slug,
       },
     });
     if (!metaData)
@@ -28,8 +28,8 @@ export async function generateMetadata({
         description: 'not found',
       };
     return {
-      title: `${metaData?.slug} | Getspy.ru`,
-      description: metaData?.slug,
+      title: `${metaData?.name} | Getspy.ru`,
+      description: metaData?.name,
     };
   } catch (error) {
     return {

@@ -89,10 +89,10 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
                     router.refresh();
                   }}
                   key={category.id}
-                  value={category.name}
+                  value={category.slug}
                 >
                   <Users className="mr-2 h-4 w-4" />
-                  <a href={`/cat/${category.name}`}>{category.name}</a>
+                  <a href={`/cat/${category.slug}`}>{category.name}</a>
                 </CommandItem>
               ))}
             </CommandGroup>

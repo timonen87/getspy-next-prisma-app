@@ -1,8 +1,11 @@
+import { Icons } from '@/components/Icons';
 import SubscribeLeaveToggle from '@/components/SubscribeLeaveToggle';
+import UserAvatar from '@/components/UserAvatar ';
 import { buttonVariants } from '@/components/ui/Button';
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
 import { format } from 'date-fns';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -61,12 +64,24 @@ const layout = async ({
           <div className="ml-0 md:ml-16 xl:ml-0">
             <div className=" h-fit rounded-lg border border-gray-200 order-first md:order-last ">
               <div className="px-6 py-4">
-                <p className="text-2xl font-semibold py-3">{category.name} </p>
+                <p className=" flex gap-2 items-center text-2xl font-semibold py-3">
+                  {category.image && (
+                    <Image
+                      src={category.image}
+                      width={30}
+                      height={30}
+                      alt={category.name}
+                    />
+                  )}
+                  {category.name}
+                </p>
               </div>
 
               <dl className="divide-y divide-gray-100 px-6 py-4 text-sm leading-6 bg-white">
                 <div className="flex justify-between gap-4 py-3">
-                  <p>{category.description}</p>
+                  <p>
+                    <span>{category.description}</span>
+                  </p>
                 </div>
                 <div className="flex justify-between gap-x-4 py-3">
                   <dt className="text-gray-500">Подписчиков</dt>

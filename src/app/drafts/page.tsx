@@ -1,8 +1,6 @@
 import { getAuthSession } from '@/lib/auth';
 
 import Link from 'next/link';
-import { buttonVariants } from '@/components/ui/Button';
-import { Menu } from 'lucide-react';
 import CustomDraftsFeed from '@/components/home/CustomDraftsFeed';
 import { notFound } from 'next/navigation';
 
