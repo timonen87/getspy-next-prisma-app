@@ -68,8 +68,8 @@ const layout = async ({
                   {category.image && (
                     <Image
                       src={category.image}
-                      width={30}
-                      height={30}
+                      width={40}
+                      height={40}
                       alt={category.name}
                     />
                   )}

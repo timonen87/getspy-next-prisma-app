@@ -28,7 +28,7 @@ const CreateComment: FC<CreateCommentProps> = ({ postId, replyToId }) => {
 
       const { data } = await axios.patch(
         `/api/category/post/comment/`,
-        payload,
+        payload
       );
       return data;
     },

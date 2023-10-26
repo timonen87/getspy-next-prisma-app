@@ -1,7 +1,15 @@
 'use client';
 
 import { Group, FileTextIcon } from 'lucide-react';
-
+import {
+  ActivityLogIcon,
+  TokensIcon,
+  GridIcon,
+  CalendarIcon,
+  ChatBubbleIcon,
+  PersonIcon,
+  LayersIcon,
+} from '@radix-ui/react-icons';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
@@ -9,8 +17,8 @@ import { buttonVariantsLink } from './ui/ButtonMenu';
 
 const menu = [
   // { text: ' Главная', icon: <Home />, path: '/' },
-  { text: ' Моя лента', icon: <Group />, path: '/' },
-  { text: 'Все', icon: <FileTextIcon />, path: '/all' },
+  { text: ' Моя лента', icon: <TokensIcon />, path: '/' },
+  { text: 'Все', icon: <ActivityLogIcon />, path: '/all' },
   // { text: 'Закладки', icon: <BookMarked />, path: '/bookmarks' },
   // { text: 'Подписки', icon: <ArrowDownUp />, path: '/follows' },
 ];

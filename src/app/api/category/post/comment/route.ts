@@ -9,6 +9,8 @@ export async function PATCH(req: Request) {
 
     const { postId, text, replyToId } = CommentValidator.parse(body);
 
+    console.log(body);
+
     const session = await getAuthSession();
 
     if (!session?.user) {
