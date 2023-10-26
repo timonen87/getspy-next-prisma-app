@@ -66,7 +66,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
 
       return toast({
         title: 'Что-то произошло.',
-        description: 'Ваш профиль не удалось обрновить. Попробуйте позжу',
+        description: 'Ваш профиль не удалось обрновить. Попробуйте позжe',
         variant: 'destructive',
       });
     },
