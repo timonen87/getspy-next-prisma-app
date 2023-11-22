@@ -87,7 +87,7 @@ const Page = () => {
           // });
         }
       }
-
+      console.log(err);
       toast({
         title: 'Возникла ошибка',
         description: 'Категория не была создана',

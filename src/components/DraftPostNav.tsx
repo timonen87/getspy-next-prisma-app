@@ -8,16 +8,11 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
 import Link from 'next/link';
 import { useMutation } from '@tanstack/react-query';
-import {
-  PostCreatoionRequest,
-  PostPublishRequest,
-  PostValidator,
-} from '@/lib/validators/post';
+import { PostPublishRequest } from '@/lib/validators/post';
 import axios from 'axios';
 import { usePathname, useRouter } from 'next/navigation';
 import { toast } from '@/hooks/use-toast';

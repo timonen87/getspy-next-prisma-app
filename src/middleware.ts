@@ -6,11 +6,10 @@ import { notFound } from 'next/navigation';
 export async function middleware(req: NextRequest) {
   const token = await getToken({ req });
 
-  if (token?.role !== 'admin' ) {
+  if (token?.role !== 'admin') {
     return NextResponse.redirect(new URL('/not-premission', req.nextUrl));
     // return notFound();
   }
-
 }
 
 // See "Matching Paths" below to learn more

@@ -83,7 +83,7 @@ export default async function Home() {
                           variant: 'subtle',
                         })}
                       >
-                        {/* <Icons.main className="w-6 h-6 mr-2 ml-2" /> */}@
+                        {/* <Icons.main className="w-6 h-6 mr-2 ml-2" /> */}
                         <div className="text-sm"> {obj.category.name} </div>
                       </Link>
                     </li>

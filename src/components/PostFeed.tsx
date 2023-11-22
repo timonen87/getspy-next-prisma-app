@@ -11,7 +11,7 @@ import Post from './Post';
 
 interface PostFeedProps {
   initialPosts: ExtendedPost[];
-  categorySlug: string;
+  categorySlug?: string;
   categoryName?: string;
 }
 
