@@ -26,7 +26,7 @@ import axios, { AxiosError } from 'axios';
 import UserAvatar from './UserAvatar ';
 
 interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
-  user: Pick<User, 'id' | 'username' | 'email' | 'image'>;
+  user: Pick<User, 'id' | 'username' | 'email' | 'image' | 'role'>;
 }
 
 type FormData = z.infer<typeof UsernameValidator>;
@@ -101,28 +101,34 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
           />
         </div>
       </CardContent>
-      <CardHeader>
-        <CardTitle>Ссылка на аватар</CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="relative grid gap-1">
-          <div className="absolute top-0 left-0 w-8 h-10 grid place-items-center">
-            <span className="text-sm text-zinc-400"></span>
-          </div>
-          <Label className="sr-only" htmlFor="email">
-            url
-          </Label>
-          <Input
-            id="image"
-            className="w-full pl-2"
-            size={32}
-            {...register('image')}
-          />
-          {errors?.image && (
-            <p className="px-1 text-xs text-red-600">{errors.image.message}</p>
-          )}
+      {user.role == 'admin' && (
+        <div>
+          <CardHeader>
+            <CardTitle>Ссылка на аватар</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="relative grid gap-1">
+              <div className="absolute top-0 left-0 w-8 h-10 grid place-items-center">
+                <span className="text-sm text-zinc-400"></span>
+              </div>
+              <Label className="sr-only" htmlFor="email">
+                url
+              </Label>
+              <Input
+                id="image"
+                className="w-full pl-2"
+                size={32}
+                {...register('image')}
+              />
+              {errors?.image && (
+                <p className="px-1 text-xs text-red-600">
+                  {errors.image.message}
+                </p>
+              )}
+            </div>
+          </CardContent>
         </div>
-      </CardContent>
+      )}
       <CardHeader>
         <CardTitle>Ваше имя</CardTitle>
         <CardDescription>

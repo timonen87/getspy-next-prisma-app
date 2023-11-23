@@ -74,7 +74,7 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
         }}
         value={input}
         className="outline-none border-none focus:border-none focus:outline-none ring-0"
-        placeholder="Поиск каналов..."
+        placeholder="Поиск ..."
       />
 
       {input.length > 0 && (

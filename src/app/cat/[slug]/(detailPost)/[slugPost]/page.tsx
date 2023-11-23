@@ -95,7 +95,8 @@ const CategorPostPage = async ({ params }: CategoryPostPageProps) => {
             />
           </Suspense>
         </aside>
-        <div className="ml-0 lg:w-0 w-full flex-1 bg-white p-4 rounded-lg border border-gray-200 md:ml-16">
+
+        <div className="overflow-x-hidden lg:w-0 w-full flex-1 bg-white p-4 rounded-lg border border-gray-200 md:ml-16 ">
           <div className="flex items-center gap-1">
             <UserAvatar
               user={{

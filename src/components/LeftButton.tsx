@@ -15,11 +15,11 @@ import Link from 'next/link';
 import { buttonVariantsLink } from './ui/ButtonMenu';
 
 const menu = [
-  { text: ' Главная', icon: <GridIcon />, path: '/' },
+  // { text: ' Главная', icon: <GridIcon />, path: '/' },
   { text: ' Моя лента', icon: <TokensIcon />, path: '/my' },
   { text: 'Все', icon: <ActivityLogIcon />, path: '/all' },
-  { text: 'Закладки', icon: <CalendarIcon />, path: '/bookmarks' },
-  { text: 'Подписки', icon: <ChatBubbleIcon />, path: '/follows' },
+  // { text: 'Закладки', icon: <CalendarIcon />, path: '/bookmarks' },
+  // { text: 'Подписки', icon: <ChatBubbleIcon />, path: '/follows' },
 ];
 
 const LeftButton = () => {

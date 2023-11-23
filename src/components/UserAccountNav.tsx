@@ -14,7 +14,7 @@ import {
 import Link from 'next/link';
 
 interface UserAccountNavProps {
-  user: Pick<User, 'name' | 'image' | 'email'>;
+  user: Pick<User, 'name' | 'image' | 'email' | 'role'>;
 }
 
 const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
@@ -38,17 +38,22 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
             )}
           </div>
         </div>
+
         <DropdownMenuSeparator />
 
         <DropdownMenuItem asChild>
           <Link href="/">Моя лента</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/drafts">Черновики</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/cat/create">Добавить канал</Link>
-        </DropdownMenuItem>
+        {user.role == 'admin' && (
+          <DropdownMenuItem asChild>
+            <Link href="/drafts">Черновики</Link>
+          </DropdownMenuItem>
+        )}
+        {user.role == 'admin' && (
+          <DropdownMenuItem asChild>
+            <Link href="/cat/create">Добавить канал</Link>
+          </DropdownMenuItem>
+        )}
 
         <DropdownMenuItem asChild>
           <Link href="/settings">Профиль</Link>

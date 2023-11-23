@@ -1,10 +1,7 @@
-import { Icons } from '@/components/Icons';
 import SubscribeLeaveToggle from '@/components/SubscribeLeaveToggle';
-import UserAvatar from '@/components/UserAvatar ';
 import { buttonVariants } from '@/components/ui/Button';
 import { getAuthSession } from '@/lib/auth';
 import { db } from '@/lib/db';
-import { format } from 'date-fns';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -55,70 +52,68 @@ const layout = async ({
   });
 
   return (
-    <div className="container max-w-7xl mx-auto h-full pt-4">
-      <div>
-        {/* Кнопка НАЗАД */}
-        <div className="grid grid-cols-1 xl:grid-cols-4 gap-y-4 xl:gap-x-4">
-          <ul className="flex flex-col col-span-3 space-y-6">{children}</ul>
-          {/* Правый блок */}
-          <div className="ml-0 md:ml-16 xl:ml-0">
-            <div className=" h-fit rounded-lg border border-gray-200 order-first md:order-last ">
-              <div className="px-6 py-4">
-                <p className=" flex gap-2 items-center text-2xl font-semibold py-3">
-                  {category.image && (
-                    <Image
-                      src={category.image}
-                      width={40}
-                      height={40}
-                      alt={category.name}
-                    />
-                  )}
-                  {category.name}
+    // <div className="container max-w-7xl mx-auto h-full pt-4">
+    <>
+      {/* Кнопка НАЗАД */}
+      <div className="grid grid-cols-1 xl:grid-cols-4 gap-y-4 xl:gap-x-4">
+        <ul className="flex flex-col col-span-3 space-y-6">{children}</ul>
+        {/* Правый блок */}
+        <div className="ml-0 md:ml-16 xl:ml-0">
+          <div className=" h-fit rounded-lg border border-gray-200 order-first md:order-last ">
+            <div className="px-6 py-4">
+              <p className=" flex gap-2 items-center text-2xl font-semibold py-3">
+                {category.image && (
+                  <Image
+                    src={category.image}
+                    width={40}
+                    height={40}
+                    alt={category.name}
+                  />
+                )}
+                {category.name}
+              </p>
+            </div>
+
+            <dl className="divide-y divide-gray-100 px-6 py-4 text-sm leading-6 bg-white">
+              <div className="flex justify-between gap-4 py-3">
+                <p>
+                  <span>{category.description}</span>
                 </p>
               </div>
+              <div className="flex justify-between gap-x-4 py-3">
+                <dt className="text-gray-500">Подписчиков</dt>
+                <dd className="flex items-start gap-x-2">
+                  <div className="text-gray-900">{memberCount}</div>
+                </dd>
+              </div>
 
-              <dl className="divide-y divide-gray-100 px-6 py-4 text-sm leading-6 bg-white">
-                <div className="flex justify-between gap-4 py-3">
-                  <p>
-                    <span>{category.description}</span>
-                  </p>
-                </div>
+              {category.creatorId === session?.user?.id ? (
                 <div className="flex justify-between gap-x-4 py-3">
-                  <dt className="text-gray-500">Подписчиков</dt>
-                  <dd className="flex items-start gap-x-2">
-                    <div className="text-gray-900">{memberCount}</div>
-                  </dd>
+                  <dt className="text-gray-500">Вы создали данную категорию</dt>
                 </div>
-
-                {category.creatorId === session?.user?.id ? (
-                  <div className="flex justify-between gap-x-4 py-3">
-                    <dt className="text-gray-500">
-                      Вы создали данную категорию
-                    </dt>
-                  </div>
-                ) : null}
-                {category.creatorId !== session?.user?.id ? (
-                  <SubscribeLeaveToggle
-                    isSubcribed={isSubcribed}
-                    categoryName={category.slug}
-                    categoryId={category.id}
-                  />
-                ) : null}
-                <Link
-                  className={buttonVariants({
-                    variant: 'outline',
-                    className: 'w-full mb-6',
-                  })}
-                  href={`/cat/${slug}/submit`}
-                >
-                  Создать пост
-                </Link>
-              </dl>
-            </div>
+              ) : null}
+              {category.creatorId !== session?.user?.id ? (
+                <SubscribeLeaveToggle
+                  isSubcribed={isSubcribed}
+                  categoryName={category.slug}
+                  categoryId={category.id}
+                />
+              ) : null}
+              <Link
+                className={buttonVariants({
+                  variant: 'outline',
+                  className: 'w-full mb-6',
+                })}
+                href={`/cat/${slug}/submit`}
+              >
+                Создать пост
+              </Link>
+            </dl>
           </div>
         </div>
       </div>
-    </div>
+    </>
+    // </div>
   );
 };
 
