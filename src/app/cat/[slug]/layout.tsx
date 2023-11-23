@@ -55,7 +55,7 @@ const layout = async ({
     // <div className="container max-w-7xl mx-auto h-full pt-4">
     <>
       {/* Кнопка НАЗАД */}
-      <div className="grid grid-cols-1 xl:grid-cols-4 gap-y-4 xl:gap-x-4">
+      <div className="grid grid-cols-1 xl:grid-cols-4 gap-y-4 xl:gap-x-4 pt-3">
         <ul className="flex flex-col col-span-3 space-y-6">{children}</ul>
         {/* Правый блок */}
         <div className="ml-0 md:ml-16 xl:ml-0">
@@ -99,15 +99,19 @@ const layout = async ({
                   categoryId={category.id}
                 />
               ) : null}
-              <Link
-                className={buttonVariants({
-                  variant: 'outline',
-                  className: 'w-full mb-6',
-                })}
-                href={`/cat/${slug}/submit`}
-              >
-                Создать пост
-              </Link>
+              {session?.user.role == 'admin' ? (
+                <Link
+                  className={buttonVariants({
+                    variant: 'outline',
+                    className: 'w-full mb-6',
+                  })}
+                  href={`/cat/${slug}/submit`}
+                >
+                  Создать пост
+                </Link>
+              ) : (
+                ''
+              )}
             </dl>
           </div>
         </div>

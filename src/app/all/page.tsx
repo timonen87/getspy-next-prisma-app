@@ -71,7 +71,7 @@ const page = async () => {
   return (
     <>
       {/* <h1 className="font-bold text-3xl md:text-4xl">Лента</h1> */}
-      <div className="grid sm:grid-cols-1 md:gap-x-4 md:grid-cols-5 xl:grid-cols-7 py-6">
+      <div className="grid sm:grid-cols-1 md:gap-x-4 md:grid-cols-5  py-6">
         <div className="hidden w-full min-w-100 md:block col-auto">
           <LeftButton />
           <hr className="mb-4" />

@@ -76,7 +76,11 @@ const page = async ({ params }: PageProps) => {
         <ToFeedButton />
       </div>
 
-      <MiniCreatePost session={session} />
+      {session?.user.role == 'admin' ? (
+        <MiniCreatePost session={session} />
+      ) : (
+        ''
+      )}
 
       <PostFeed initialPosts={category.posts} categorySlug={category.slug} />
     </>
