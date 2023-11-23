@@ -8,4 +8,5 @@ export const UsernameValidator = z.object({
     .regex(/^[a-zA-Z0-9_]+$/),
   email: z.string().email(),
   image: z.string(),
+  role: z.string(),
 });

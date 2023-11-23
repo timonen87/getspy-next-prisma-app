@@ -28,6 +28,7 @@ export default async function SettingsPage() {
             username: session.user.username || '',
             email: session.user.email || '',
             image: session.user.image || '',
+            role: session.user.role || '',
           }}
         />
       </div>

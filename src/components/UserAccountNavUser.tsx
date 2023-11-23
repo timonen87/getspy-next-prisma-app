@@ -17,11 +17,7 @@ interface UserAccountNavProps {
   user: Pick<User, 'name' | 'image' | 'email'>;
 }
 
-// interface UserAccountNavProps extends React.HTMLAttributes<HTMLFormElement> {
-//   user: Pick<User, 'name' | 'email' | 'image'>;
-// }
-
-const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
+const UserAccountNavUser: FC<UserAccountNavProps> = ({ user }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -46,13 +42,6 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
         <DropdownMenuItem asChild>
           <Link href="/">Моя лента</Link>
         </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/drafts">Черновики</Link>
-        </DropdownMenuItem>
-
-        <DropdownMenuItem asChild>
-          <Link href="/cat/create">Добавить канал</Link>
-        </DropdownMenuItem>
 
         <DropdownMenuItem asChild>
           <Link href="/settings">Профиль</Link>
@@ -74,4 +63,4 @@ const UserAccountNav: FC<UserAccountNavProps> = ({ user }) => {
   );
 };
 
-export default UserAccountNav;
+export default UserAccountNavUser;

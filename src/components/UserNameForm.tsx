@@ -43,12 +43,13 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
       name: user?.username || '',
       email: user?.email || '',
       image: user?.image || '',
+      role: user?.role || '',
     },
   });
 
   const { mutate: updateUsername, isLoading } = useMutation({
-    mutationFn: async ({ name, email, image }: FormData) => {
-      const payload: FormData = { name, email, image };
+    mutationFn: async ({ name, email, image, role }: FormData) => {
+      const payload: FormData = { name, email, image, role };
 
       const { data } = await axios.patch(`/api/username/`, payload);
       return data;

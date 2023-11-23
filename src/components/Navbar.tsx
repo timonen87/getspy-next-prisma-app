@@ -8,6 +8,7 @@ import DropdownMenuButton from './DropdownMenuButton';
 import SearchBar from './SearchBar';
 import SheetNavMobile from './SheetNavMobile';
 import LogoBack from './home/LogoBack';
+import UserAccountNavUser from './UserAccountNavUser';
 
 const Navbar = async () => {
   const session = await getAuthSession();
@@ -25,10 +26,13 @@ const Navbar = async () => {
             <SearchBar />
           </div>
         </div>
-
-        {session?.user ? (
+        {session?.user.role == 'admin' && (
           <UserAccountNav user={session.user} />
-        ) : (
+        )}
+        {session?.user.role == 'user' && (
+          <UserAccountNavUser user={session.user} />
+        )}
+        {!session && (
           <div className="flex items-center gap-2">
             <Link
               href="/sign-in"
@@ -36,9 +40,6 @@ const Navbar = async () => {
             >
               Войти
             </Link>
-            {/* <Link href="/sign-up" className={buttonVariants()}>
-              Регистрация
-            </Link> */}
           </div>
         )}
       </div>

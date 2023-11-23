@@ -7,7 +7,7 @@ import { Roboto } from 'next/font/google';
 import Footer from '@/components/Footer';
 
 export const metadata = {
-  title: 'GetSpy.ru - о программировании и не только!',
+  title: 'GetSpy.ru ',
   description: 'Блог о программировании',
 };
 
