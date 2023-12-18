@@ -36,7 +36,7 @@ export async function generateMetadata({
       description: metaData?.title,
     };
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return {
       title: 'Not Found',
       description: 'not found',

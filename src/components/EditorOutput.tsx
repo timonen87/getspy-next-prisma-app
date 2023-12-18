@@ -20,23 +20,23 @@ const renderers = {
 
 const style = {
   paragraph: {
-    fontSize: '1rem',
+    fontSize: '14px',
     lineHeight: '1.5rem',
   },
   header: {
     h2: {
-      fontSize: '1.5rem',
-      lineHeight: '2rem',
+      fontSize: '1.2rem',
+      lineHeight: '1rem',
       fontWeight: '600',
     },
     h3: {
       fontSize: '1.2rem',
-      lineHeight: '2rem',
+      lineHeight: '1rem',
       fontWeight: '600',
     },
     h4: {
       fontSize: '1.2rem',
-      lineHeight: '2rem',
+      lineHeight: '1rem',
       fontWeight: '600',
     },
   },
