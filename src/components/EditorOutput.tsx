@@ -26,17 +26,17 @@ const style = {
   header: {
     h2: {
       fontSize: '1.2rem',
-      lineHeight: '1rem',
+      lineHeight: '2rem',
       fontWeight: '600',
     },
     h3: {
       fontSize: '1.2rem',
-      lineHeight: '1rem',
+      lineHeight: '2rem',
       fontWeight: '600',
     },
     h4: {
       fontSize: '1.2rem',
-      lineHeight: '1rem',
+      lineHeight: '2rem',
       fontWeight: '600',
     },
   },
@@ -54,8 +54,8 @@ function CustomCodeRenderer({ data }: any) {
   data;
 
   return (
-    <pre className="bg-gray-700 rounded-md p-4">
-      <code className="text-gray-100 text-sm ">{data.code}</code>
+    <pre className="bg-gray-700 rounded-md p-4 overflow-auto">
+      <code className="text-xs md:text-sm text-gray-100">{data.code}</code>
     </pre>
   );
 }
