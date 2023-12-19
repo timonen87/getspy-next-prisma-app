@@ -71,8 +71,8 @@ const page = async ({ params }: PageProps) => {
 
   return (
     <>
-      <div className="flex justify-between items-center">
-        <h1 className="font-bold text-3xl md:text-4xl h-14">{category.name}</h1>
+      <div className="flex justify-between items-center gap-2">
+        <h1 className="text-2xl font-bold  md:text-4xl">{category.name}</h1>
         <ToFeedButton />
       </div>
 

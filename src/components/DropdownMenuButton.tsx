@@ -28,13 +28,19 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/DropdownMenu';
 import { Icons } from './Icons';
+import { ActivityLogIcon, TokensIcon } from '@radix-ui/react-icons';
 import { FC } from 'react';
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
+import { UserCategoryBlock } from '@/types/db';
 
-interface DropdownMenuButtonProps {}
+interface DropdownMenuButtonProps {
+  sideMenuCategory: UserCategoryBlock[];
+}
 
-const DropdownMenuButton: FC<DropdownMenuButtonProps> = () => {
+const DropdownMenuButton: FC<DropdownMenuButtonProps> = ({
+  sideMenuCategory,
+}: DropdownMenuButtonProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -45,105 +51,42 @@ const DropdownMenuButton: FC<DropdownMenuButtonProps> = () => {
           <ChevronDown className="p-1 h-7 w-7" /> */}
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="ml-2 w-60">
-        <DropdownMenuLabel>Главная</DropdownMenuLabel>
-        <DropdownMenuSeparator />
+      <DropdownMenuContent className="w-60 ml-2">
+        {/* <DropdownMenuLabel>Главная</DropdownMenuLabel> */}
+        {/* <DropdownMenuSeparator /> */}
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <Home className="mr-2 h-4 w-4" />
             <Link href="/">Главная</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Group className="mr-2 h-4 w-4" />
+            <TokensIcon className="mr-2 h-4 w-4" />
             <Link href="/">Моя лента</Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <FileTextIcon className="mr-2 h-4 w-4" />
-            <Link href="/">Все</Link>
+            <ActivityLogIcon className="mr-2 h-4 w-4" />
+            <Link href="/all">Все</Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>
 
-        <DropdownMenuLabel>Категории</DropdownMenuLabel>
+        {/* <DropdownMenuLabel>Категории</DropdownMenuLabel> */}
         <DropdownMenuSeparator />
 
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <Group className="mr-2 h-4 w-4" />
-            <span>Python</span>
-            <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Settings className="mr-2 h-4 w-4" />
-            <span>FastApi</span>
-            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Keyboard className="mr-2 h-4 w-4" />
-            <span>Node JS</span>
-            <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
-          </DropdownMenuItem>
+          <ul className="flex-col gap-2">
+            {sideMenuCategory &&
+              sideMenuCategory
+                .map((category) => (
+                  <DropdownMenuItem key={category.categoryId}>
+                    <Link href={`/cat/${category.slug}`} className="flex gap-2">
+                      {/* <Group className="mr-2 h-4 w-4" /> */}#
+                      <div className="text-sm"> {category.name} </div>
+                    </Link>
+                  </DropdownMenuItem>
+                ))
+                .slice(0, 4)}
+          </ul>
         </DropdownMenuGroup>
-
-        {/* Githab и Аккаунт */}
-        {/* <DropdownMenuLabel>Аккаунт</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <Plus className="mr-2 h-4 w-4" />
-            <Link href="/cat/create">Добавить канал</Link>
-
-            <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Plus className="mr-2 h-4 w-4" />
-            <span>Добавить пост</span>
-            <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Users className="mr-2 h-4 w-4" />
-            <Link href="/settings">Настройки</Link>
-          </DropdownMenuItem>
-          <DropdownMenuSub>
-            <DropdownMenuSubTrigger>
-              <UserPlus className="mr-2 h-4 w-4" />
-              <span>Написать автору</span>
-            </DropdownMenuSubTrigger>
-            <DropdownMenuPortal>
-              <DropdownMenuSubContent>
-                <DropdownMenuItem>
-                  <Mail className="mr-2 h-4 w-4" />
-                  <span>Email</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <MessageSquare className="mr-2 h-4 w-4" />
-                  <span>Message</span>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem>
-                  <PlusCircle className="mr-2 h-4 w-4" />
-                  <span>Больше...</span>
-                </DropdownMenuItem>
-              </DropdownMenuSubContent>
-            </DropdownMenuPortal>
-          </DropdownMenuSub>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <Github className="mr-2 h-4 w-4" />
-          <span>GitHub</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem>
-          <LifeBuoy className="mr-2 h-4 w-4" />
-          <span>Поддержка</span>
-        </DropdownMenuItem>
-        <DropdownMenuItem disabled>
-          <Cloud className="mr-2 h-4 w-4" />
-          <span>API</span>
-        </DropdownMenuItem> */}
-        {/* Githab и Аккаунт */}
-
-
-
       </DropdownMenuContent>
     </DropdownMenu>
   );

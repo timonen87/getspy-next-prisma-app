@@ -30,3 +30,7 @@ export type SideExtendedPost = Post & {
   comments: Comment[];
   category: Category;
 };
+
+export type sideMenuCategory = Category & {
+  posts: Post[];
+};

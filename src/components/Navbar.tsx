@@ -8,17 +8,20 @@ import SearchBar from './SearchBar';
 import SheetNavMobile from './SheetNavMobile';
 import LogoBack from './home/LogoBack';
 import UserAccountNavUser from './UserAccountNavUser';
+import DropdownMenuButton from './DropdownMenuButton';
+import { db } from '@/lib/db';
 
 const Navbar = async () => {
   const session = await getAuthSession();
+  const sideMenuCategory = await db.category.findMany({});
 
   return (
     <div className="fixed top-0 inset-x-0 bg-white border-b border-zinc-300 z-[10] py-2">
       <div className="container  max-w-7xl h-full mx-auto flex items-center justify-between gap-2">
         <div className="flex gap-2 items-center">
           <div className="block md:hidden">
-            {/* <DropdownMenuButton /> */}
-            <SheetNavMobile />
+            <DropdownMenuButton sideMenuCategory={sideMenuCategory} />
+            {/* <SheetNavMobile /> */}
           </div>
           <LogoBack />
           <div className="hidden md:block w-[400px]">
