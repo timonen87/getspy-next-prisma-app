@@ -50,13 +50,13 @@ const SheetNavMobile: FC<SheetNavMobileProps> = ({}) => {
         <SheetContent side={'left'} className="w-[300px] ">
           <div className="flex justify-between items-center mb-8">
             <Link href="/">
-              <Icons.logo className="w-24 ml-5 absolute top-3" />
+              <Icons.logo className="w-20 md:w-28 ml-3 absolute top-3" />
             </Link>
             <SheetClose asChild></SheetClose>
           </div>
-          <div className="w-[250px] ml-2 mb-2">
+          {/* <div className="w-[250px] ml-2 mb-2">
             <SearchBar />
-          </div>
+          </div> */}
           <SheetHeader>
             <SheetDescription>
               <div>

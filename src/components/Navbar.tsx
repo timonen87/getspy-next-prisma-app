@@ -1,10 +1,9 @@
 import Link from 'next/link';
-import { Icons } from './Icons';
+
 import { buttonVariants } from './ui/Button';
 import { cn } from '@/lib/utils';
 import { getAuthSession } from '@/lib/auth';
 import UserAccountNav from './UserAccountNav';
-import DropdownMenuButton from './DropdownMenuButton';
 import SearchBar from './SearchBar';
 import SheetNavMobile from './SheetNavMobile';
 import LogoBack from './home/LogoBack';
@@ -36,7 +35,7 @@ const Navbar = async () => {
           <div className="flex items-center gap-2">
             <Link
               href="/sign-in"
-              className={cn(buttonVariants({ variant: 'ghost' }))}
+              className={cn(buttonVariants({ variant: 'default' }))}
             >
               Войти
             </Link>

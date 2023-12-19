@@ -8,14 +8,11 @@ import { Icons } from '../Icons';
 const LogoBack = () => {
   const pathname = usePathname();
 
-  // if path is /r/mycom, turn into /
-  // if path is /r/mycom/post/cligad6jf0003uhest4qqkeco, turn into /r/mycom
-
   const categoryPath = getCategoryPath(pathname);
 
   return (
     <a href={categoryPath}>
-      <Icons.logo className="w-28" />
+      <Icons.logo className="w-20 md:w-28" />
     </a>
   );
 };
