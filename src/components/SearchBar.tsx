@@ -1,6 +1,6 @@
 'use client';
 
-import { Category, Prisma } from '@prisma/client';
+import { Category, Post, Prisma } from '@prisma/client';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import debounce from 'lodash.debounce';
@@ -49,8 +49,9 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
     queryFn: async () => {
       if (!input) return [];
       const { data } = await axios.get(`/api/search?q=${input}`);
-      return data as (Category & {
-        _count: Prisma.CategoryCountOutputType;
+      return data as (Post & {
+        _count: Prisma.PostCountOutputType;
+        category: Category;
       })[];
     },
     queryKey: ['search-query'],
@@ -82,17 +83,19 @@ const SearchBar: FC<SearchBarProps> = ({}) => {
           {isFetched && <CommandEmpty>Ничего не найдено.</CommandEmpty>}
           {(queryResults?.length ?? 0) > 0 ? (
             <CommandGroup heading="Найдено ...">
-              {queryResults?.map((category) => (
+              {queryResults?.map((post) => (
                 <CommandItem
                   onSelect={(e) => {
-                    router.push(`/cat/${e}`);
+                    router.push(`/cat/${post.category.slug}/${e}`);
                     router.refresh();
                   }}
-                  key={category.id}
-                  value={category.slug}
+                  key={post.id}
+                  value={post.slug}
                 >
                   <Users className="mr-2 h-4 w-4" />
-                  <a href={`/cat/${category.slug}`}>{category.name}</a>
+                  <a href={`/cat/${post.category.slug}/${post.slug}`}>
+                    {post.title}
+                  </a>
                 </CommandItem>
               ))}
             </CommandGroup>

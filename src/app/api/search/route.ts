@@ -6,14 +6,13 @@ export async function GET(req: Request) {
 
   if (!q) return new Response('Ошибка запроса', { status: 400 });
 
-  const results = await db.category.findMany({
+  const results = await db.post.findMany({
     where: {
-      name: {
-        startsWith: q,
-      },
+      title: { contains: q },
     },
     include: {
       _count: true,
+      category: true,
     },
     take: 5,
   });

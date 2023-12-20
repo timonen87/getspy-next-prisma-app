@@ -46,13 +46,13 @@ const style = {
       listStyle: 'disc',
       listStylePosition: 'outside',
       marginLeft: '18px',
+      fontSize: '14px',
     },
   },
 };
 
 function CustomCodeRenderer({ data }: any) {
   data;
-
   return (
     <pre className="bg-gray-700 rounded-md p-4 overflow-auto">
       <code className="text-xs md:text-sm text-gray-100">{data.code}</code>

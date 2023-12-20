@@ -42,7 +42,6 @@ interface DropdownMenuButtonProps {
 const DropdownMenuButton: FC<DropdownMenuButtonProps> = ({
   sideMenuCategory,
 }: DropdownMenuButtonProps) => {
-  const router = useRouter();
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
