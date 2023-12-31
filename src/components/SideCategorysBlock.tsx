@@ -7,6 +7,7 @@ import { FC } from 'react';
 
 import { buttonVariants } from './ui/Button';
 import { Icons } from './Icons';
+import { buttonVariantsLink } from './ui/ButtonMenu';
 
 interface SideCategoryBlockProps {
   category: UserCategoryBlock[];
@@ -19,11 +20,11 @@ const SideCategoryBlock: FC<SideCategoryBlockProps> = ({ category }) => {
         <ul className="flex-col justify-start gap-4">
           {category &&
             category.map((obj) => (
-              <li className="pb-1 " key={obj.id}>
+              <li className="pb-1" key={obj.id}>
                 <Link
                   href={`/cat/${obj.category.slug}`}
-                  className={buttonVariants({
-                    variant: 'ghost_full',
+                  className={buttonVariantsLink({
+                    variant: 'subtle',
                   })}
                 >
                   {/* <Icons.main className="w-6 h-6 mr-2 ml-2" /> */}#
