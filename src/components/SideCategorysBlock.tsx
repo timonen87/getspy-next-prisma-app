@@ -16,15 +16,15 @@ interface SideCategoryBlockProps {
 const SideCategoryBlock: FC<SideCategoryBlockProps> = ({ category }) => {
   return (
     <>
-      <div className="hidden col-span-1 md:block w-[200px]">
-        <ul className="flex-col justify-start gap-4">
+      <div className="hidden col-span-1 md:block w-[150px]">
+        <ul className="flex-col justify-start gap-4 mb-2">
           {category &&
             category.map((obj) => (
               <li className="pb-1" key={obj.id}>
                 <Link
                   href={`/cat/${obj.category.slug}`}
                   className={buttonVariantsLink({
-                    variant: 'subtle',
+                    variant: 'ghost',
                   })}
                 >
                   {/* <Icons.main className="w-6 h-6 mr-2 ml-2" /> */}#
