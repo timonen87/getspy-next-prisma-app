@@ -6,6 +6,10 @@ import { Toaster } from '@/components/ui/Toaster';
 import { Roboto } from 'next/font/google';
 import Footer from '@/components/Footer';
 
+// import { YMInitializer } from 'react-yandex-metrika';
+import Ym from '@/components/Ym';
+import Script from 'next/script';
+
 export const metadata = {
   title: 'GetSpy.ru ',
   description: 'Блог о программировании',
@@ -33,6 +37,19 @@ export default function RootLayout({
     >
       <body className="min-h-screen pt-12 bg-slate-50 antialiased">
         <Providers>
+          <Script id="metrika-counter" strategy="afterInteractive">
+            {`(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+              m[i].l=1*new Date();
+              for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+              k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+              (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+              ym(95082773, "init", {
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true
+              });`}
+          </Script>
           {/* @ts-expect-error Server Component */}
           <Navbar />
           {authModal}
@@ -43,6 +60,8 @@ export default function RootLayout({
           <Footer />
         </Providers>
         <Toaster />
+
+        <Ym />
       </body>
     </html>
   );
