@@ -9,6 +9,7 @@ import { FC } from 'react';
 interface PageProps {
   params: {
     slug: string;
+    slugPost: string;
   };
 }
 
@@ -20,6 +21,16 @@ const page = async ({ params }: PageProps) => {
   });
 
   if (!category) {
+    return notFound();
+  }
+
+  const post = await db.post.findFirst({
+    where: {
+      slug: params.slugPost,
+    },
+  });
+
+  if (!post) {
     return notFound();
   }
 
@@ -36,7 +47,7 @@ const page = async ({ params }: PageProps) => {
         </div>
       </div>
 
-      <PostEditor categoryId={category.id} />
+      <PostEditor categoryId={category.id} initialData={post} />
 
       <div className="w-full flex justify-end gap-2">
         <Button type="submit" className="w-full" form="category-post-form">

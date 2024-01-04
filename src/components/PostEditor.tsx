@@ -1,10 +1,14 @@
 'use client';
-import EditorJS from '@editorjs/editorjs';
+import EditorJS, { OutputBlockData } from '@editorjs/editorjs';
 
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import { useForm } from 'react-hook-form';
-import { PostCreatoionRequest, PostValidator } from '@/lib/validators/post';
+import {
+  PostCreatoionRequest,
+  PostUpdateRequest,
+  PostValidator,
+} from '@/lib/validators/post';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { uploadFiles } from '@/lib/uploadthing';
 import { toast } from '@/hooks/use-toast';
@@ -15,10 +19,11 @@ import { Post } from '@prisma/client';
 
 interface EditorProps {
   categoryId: string;
-  initialData?: Post;
+  initialData: Post;
 }
 
 const PostEditor: FC<EditorProps> = ({ categoryId, initialData }) => {
+  // console.log(initialData?.content);
   const {
     register,
     handleSubmit,
@@ -37,20 +42,27 @@ const PostEditor: FC<EditorProps> = ({ categoryId, initialData }) => {
   const router = useRouter();
   const pathname = usePathname();
   const _titleRef = useRef<HTMLTextAreaElement>(null);
+  const currentData = initialData.content.blocks;
+  const slug = initialData.slug;
+  console.log(slug);
 
   const { mutate: updatePost } = useMutation({
     mutationFn: async ({
       title,
       content,
       categoryId,
-    }: PostCreatoionRequest) => {
-      const payload: PostCreatoionRequest = {
+      slug,
+    }: PostUpdateRequest) => {
+      const payload: PostUpdateRequest = {
         categoryId,
         title,
         content,
+        slug,
       };
 
       //   const currentPostId = pathname.split('/').slice(-1).join();
+      const { data } = await axios.patch('/api/category/post/edit', payload);
+      return data;
     },
     onError: () => {
       return toast({
@@ -90,7 +102,10 @@ const PostEditor: FC<EditorProps> = ({ categoryId, initialData }) => {
         },
         placeholder: 'Здесь вы можете написать свой пост',
         inlineToolbar: true,
-        data: { blocks: [] },
+        data: {
+          blocks: [...currentData],
+        },
+
         tools: {
           header: Header,
           LinkTool: {
@@ -99,6 +114,7 @@ const PostEditor: FC<EditorProps> = ({ categoryId, initialData }) => {
               endpoint: '/api/link',
             },
           },
+
           image: {
             class: ImageTool,
             config: {
@@ -163,13 +179,14 @@ const PostEditor: FC<EditorProps> = ({ categoryId, initialData }) => {
     }
   }, [isMounted, initializeEditor]);
 
-  async function onSubmit(data: PostCreatoionRequest) {
+  async function onSubmit(data: PostUpdateRequest) {
     const blocks = await ref.current?.save();
 
-    const payload: PostCreatoionRequest = {
+    const payload: PostUpdateRequest = {
       title: data.title,
       content: blocks,
       categoryId,
+      slug: slug,
     };
 
     updatePost(payload);

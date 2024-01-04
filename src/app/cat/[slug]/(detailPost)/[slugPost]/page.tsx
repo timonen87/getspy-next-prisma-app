@@ -1,7 +1,7 @@
 import CommentsSection from '@/components/CommentsSection';
 import EditorOutput from '@/components/EditorOutput';
 import PostVoteServer from '@/components/post-vote/PostVoteServer';
-import { buttonVariants } from '@/components/ui/Button';
+import { Button, buttonVariants } from '@/components/ui/Button';
 import { db } from '@/lib/db';
 import { redis } from '@/lib/redis';
 import { formatTimeToNow } from '@/lib/utils';
@@ -9,9 +9,10 @@ import { CachedPost } from '@/types/redis';
 import { Post, User, Vote } from '@prisma/client';
 
 import { ArrowBigDown, ArrowBigUp, Loader2 } from 'lucide-react';
-import { notFound } from 'next/navigation';
+import { notFound, usePathname } from 'next/navigation';
 import { Suspense } from 'react';
 import UserAvatar from '@/components/UserAvatar ';
+import Link from 'next/link';
 
 export async function generateMetadata({
   params,
@@ -97,7 +98,7 @@ const CategorPostPage = async ({ params }: CategoryPostPageProps) => {
         </aside>
 
         <div className="overflow-x-hidden lg:w-0 w-full flex-1 bg-white p-4 rounded-lg border border-gray-200 md:ml-16 ">
-          <div className="flex items-center gap-1">
+          <div className="flex items-center  gap-1">
             <UserAvatar
               user={{
                 name:
@@ -114,6 +115,7 @@ const CategorPostPage = async ({ params }: CategoryPostPageProps) => {
                 )}
               </span>
             </div>
+            {/* <Link href="edit">Edit</Link> */}
           </div>
 
           <h1 className="text-3xl font-semibold  py-2 text-gray-900">
