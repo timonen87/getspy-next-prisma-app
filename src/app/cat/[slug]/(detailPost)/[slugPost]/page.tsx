@@ -14,6 +14,7 @@ import { Suspense } from 'react';
 import UserAvatar from '@/components/UserAvatar ';
 import Link from 'next/link';
 import DraftPostNav from '@/components/DraftPostNav';
+import { getAuthSession } from '@/lib/auth';
 
 export async function generateMetadata({
   params,
@@ -56,6 +57,7 @@ export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';
 
 const CategorPostPage = async ({ params }: CategoryPostPageProps) => {
+  const session = await getAuthSession();
   const cachedPost = (await redis.hgetall(
     `post:${params.slugPost}`
   )) as CachedPost;
@@ -122,7 +124,11 @@ const CategorPostPage = async ({ params }: CategoryPostPageProps) => {
               </div>
             </div>
             <div className="flex items-center text-2xl">
-              <DraftPostNav postId={post?.slug} />
+              {session?.user.role == 'admin' ? (
+                <DraftPostNav postId={post?.slug} />
+              ) : (
+                ''
+              )}
             </div>
           </div>
 
