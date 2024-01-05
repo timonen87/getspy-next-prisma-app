@@ -13,6 +13,7 @@ import { notFound, usePathname } from 'next/navigation';
 import { Suspense } from 'react';
 import UserAvatar from '@/components/UserAvatar ';
 import Link from 'next/link';
+import DraftPostNav from '@/components/DraftPostNav';
 
 export async function generateMetadata({
   params,
@@ -98,24 +99,31 @@ const CategorPostPage = async ({ params }: CategoryPostPageProps) => {
         </aside>
 
         <div className="overflow-x-hidden lg:w-0 w-full flex-1 bg-white p-4 rounded-lg border border-gray-200 md:ml-16 ">
-          <div className="flex items-center  gap-1">
-            <UserAvatar
-              user={{
-                name:
-                  post?.author.username ?? (cachedPost.authorUsername || null),
-                image: post?.author.image ?? (cachedPost.image || null),
-              }}
-              className="h-10 w-10"
-            />
-            <div className="flex flex-col items-start gap-0 ml-2">
-              <span>{post?.author.username ?? cachedPost.authorUsername}</span>{' '}
-              <span className="text-xs">
-                {formatTimeToNow(
-                  new Date(post?.createdAt ?? cachedPost.createdAt)
-                )}
-              </span>
+          <div className="flex items-center justify-between gap-1">
+            <div className="flex items-center">
+              <UserAvatar
+                user={{
+                  name:
+                    post?.author.username ??
+                    (cachedPost.authorUsername || null),
+                  image: post?.author.image ?? (cachedPost.image || null),
+                }}
+                className="h-10 w-10"
+              />
+              <div className="flex flex-col items-start gap-0 ml-2">
+                <span>
+                  {post?.author.username ?? cachedPost.authorUsername}
+                </span>{' '}
+                <span className="text-xs">
+                  {formatTimeToNow(
+                    new Date(post?.createdAt ?? cachedPost.createdAt)
+                  )}
+                </span>
+              </div>
             </div>
-            {/* <Link href="edit">Edit</Link> */}
+            <div className="flex items-center text-2xl">
+              <DraftPostNav postId={post?.slug} />
+            </div>
           </div>
 
           <h1 className="text-3xl font-semibold  py-2 text-gray-900">

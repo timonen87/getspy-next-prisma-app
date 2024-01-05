@@ -2,6 +2,8 @@ import Editor from '@/components/Editor';
 import PostEditor from '@/components/PostEditor';
 import { Button } from '@/components/ui/Button';
 import { db } from '@/lib/db';
+import { initialDataPost } from '@/types/db';
+import { OutputData } from '@editorjs/editorjs';
 import { notFound } from 'next/navigation';
 
 import { FC } from 'react';
@@ -11,6 +13,7 @@ interface PageProps {
     slug: string;
     slugPost: string;
   };
+  // initialData: initialDataPost;
 }
 
 const page = async ({ params }: PageProps) => {
@@ -51,7 +54,7 @@ const page = async ({ params }: PageProps) => {
 
       <div className="w-full flex justify-end gap-2">
         <Button type="submit" className="w-full" form="category-post-form">
-          Отправить на модерацию
+          Сохранить
         </Button>
         {/* <Button
           type="submit"

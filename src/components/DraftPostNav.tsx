@@ -18,12 +18,13 @@ import { usePathname, useRouter } from 'next/navigation';
 import { toast } from '@/hooks/use-toast';
 
 interface DraftPostNavProps {
-  postId: string;
+  postId?: string;
 }
 
 const DraftPostNav: FC<DraftPostNavProps> = ({ postId }) => {
   const router = useRouter();
   const pathname = usePathname();
+
   const { mutate: publishPost } = useMutation({
     mutationFn: async ({ postId }: PostPublishRequest) => {
       const payload: PostPublishRequest = {
@@ -55,10 +56,16 @@ const DraftPostNav: FC<DraftPostNavProps> = ({ postId }) => {
 
       <DropdownMenuContent className=" bg-white" align="end">
         <DropdownMenuItem asChild>
-          <button onClick={() => {}}>Редактрировать</button>
+          <button onClick={() => {}}>
+            <Link href={`${pathname}/edit`}>Редактрировать</Link>
+          </button>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <button onClick={() => publishPost({ postId })}>Опубликовать</button>
+          {postId && (
+            <button onClick={() => publishPost({ postId })}>
+              Опубликовать
+            </button>
+          )}
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <button onClick={() => {}}>Удалить</button>

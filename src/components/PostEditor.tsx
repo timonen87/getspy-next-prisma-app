@@ -1,39 +1,33 @@
 'use client';
-import EditorJS, { OutputBlockData } from '@editorjs/editorjs';
+import EditorJS, { OutputData } from '@editorjs/editorjs';
 
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import { useForm } from 'react-hook-form';
-import {
-  PostCreatoionRequest,
-  PostUpdateRequest,
-  PostValidator,
-} from '@/lib/validators/post';
+import { PostUpdateRequest, PostValidator } from '@/lib/validators/post';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { uploadFiles } from '@/lib/uploadthing';
 import { toast } from '@/hooks/use-toast';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { usePathname, useRouter } from 'next/navigation';
-import { Post } from '@prisma/client';
 
 interface EditorProps {
   categoryId: string;
-  initialData: Post;
+  initialData?: any;
 }
 
 const PostEditor: FC<EditorProps> = ({ categoryId, initialData }) => {
-  // console.log(initialData?.content);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<PostCreatoionRequest>({
+  } = useForm<PostUpdateRequest>({
     resolver: zodResolver(PostValidator),
     defaultValues: {
       categoryId,
       title: initialData?.title,
-      content: initialData?.content,
+      content: initialData.content.blocks,
     },
   });
 
@@ -42,9 +36,6 @@ const PostEditor: FC<EditorProps> = ({ categoryId, initialData }) => {
   const router = useRouter();
   const pathname = usePathname();
   const _titleRef = useRef<HTMLTextAreaElement>(null);
-  const currentData = initialData.content.blocks;
-  const slug = initialData.slug;
-  console.log(slug);
 
   const { mutate: updatePost } = useMutation({
     mutationFn: async ({
@@ -78,7 +69,7 @@ const PostEditor: FC<EditorProps> = ({ categoryId, initialData }) => {
       router.refresh();
 
       return toast({
-        description: 'Ваш пост сохранен и отравлен на модерацию.',
+        description: 'Ваш пост сохранен.',
       });
     },
   });
@@ -94,6 +85,9 @@ const PostEditor: FC<EditorProps> = ({ categoryId, initialData }) => {
     const InlineCode = (await import('@editorjs/inline-code')).default;
     const ImageTool = (await import('@editorjs/image')).default;
 
+    // const currentData = initialData?.content?.blocks;
+    // const slug = initialData.slug;
+
     if (!ref.current) {
       const editor = new EditirJS({
         holder: 'editor',
@@ -103,7 +97,7 @@ const PostEditor: FC<EditorProps> = ({ categoryId, initialData }) => {
         placeholder: 'Здесь вы можете написать свой пост',
         inlineToolbar: true,
         data: {
-          blocks: [...currentData],
+          blocks: [...initialData.content.blocks],
         },
 
         tools: {
@@ -186,7 +180,7 @@ const PostEditor: FC<EditorProps> = ({ categoryId, initialData }) => {
       title: data.title,
       content: blocks,
       categoryId,
-      slug: slug,
+      slug: initialData.slug,
     };
 
     updatePost(payload);

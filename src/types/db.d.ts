@@ -1,3 +1,4 @@
+import { OutputData } from '@editorjs/editorjs';
 import { Category, Post, User, Vote, Comment } from '@prisma/client';
 
 export type ExtendedPost = Post & {
@@ -33,4 +34,10 @@ export type SideExtendedPost = Post & {
 
 export type sideMenuCategory = Category & {
   posts: Post[];
+};
+
+export type initialDataPost = Post & {
+  content: {
+    blocks: OutputData['blocks'];
+  };
 };
