@@ -49,7 +49,7 @@ const DropdownMenuButton: FC<DropdownMenuButtonProps> = ({
           <Icons.burger />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-60 ml-2">
+      <DropdownMenuContent className="w-60 ml-2 ">
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <Home className="mr-2 h-4 w-4" />
