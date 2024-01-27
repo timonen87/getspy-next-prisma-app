@@ -125,7 +125,7 @@ const CategorPostPage = async ({ params }: CategoryPostPageProps) => {
             </div>
             <div className="flex items-center text-2xl">
               {session?.user.role == 'admin' ? (
-                <DraftPostNav postId={post?.slug} />
+                <DraftPostNav postId={post?.id ?? cachedPost.id} />
               ) : (
                 ''
               )}
