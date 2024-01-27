@@ -68,7 +68,7 @@ export default async function Home() {
           <ul className="flex flex-col md:col-span-4 xl:col-span-4 space-y-6">
             {/* @ts-expect-error server component */}
 
-            {session && <CustomFeed />}
+            {session ? <CustomFeed /> : <GeneralFeed />}
           </ul>
         ) : (
           <ul className="flex flex-col md:col-span-5 xl:col-span-5 space-y-6">
@@ -88,7 +88,7 @@ export default async function Home() {
                       </Link>
                     </li>
                   ))
-                  .slice(1, 4)}
+                  .slice(0, 4)}
               </ul>
             </div>
             {/* @ts-expect-error server component */}
@@ -100,7 +100,7 @@ export default async function Home() {
         <div className=" hidden flex-col gap-4 xl:block col-span-2">
           <div className=" mb-4">
             <SidePostFeed sidePosts={sidePosts} />
-            {!comments && <SideCommnetsItem comments={comments} />}
+            <SideCommnetsItem comments={comments} />
           </div>
         </div>
       </div>
