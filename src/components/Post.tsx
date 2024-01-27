@@ -60,7 +60,7 @@ const Post: FC<PostProps> = ({
                   </span>
                 </div>
               </div>
-              <div>
+              {/* <div>
                 {post.published == false ? (
                   <div className="text-3xl font-bold cursor-pointer">
                     <DraftPostNav postId={post.id} />
@@ -68,7 +68,7 @@ const Post: FC<PostProps> = ({
                 ) : (
                   ''
                 )}
-              </div>
+              </div> */}
             </div>
 
             <div className="max-h-40 mt-1 text-xs text-gray-500"></div>

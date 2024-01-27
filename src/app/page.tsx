@@ -88,7 +88,7 @@ export default async function Home() {
                       </Link>
                     </li>
                   ))
-                  .slice(0, 4)}
+                  .slice(1, 4)}
               </ul>
             </div>
             {/* @ts-expect-error server component */}
