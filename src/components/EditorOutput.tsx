@@ -66,7 +66,7 @@ const style = {
 const styleMobile = {
   paragraph: {
     fontSize: '1rem',
-    lineHeight: '1.2rem',
+    lineHeight: '1.8rem',
     margin: '0 0 1.125rem 0',
   },
 
@@ -101,9 +101,10 @@ const styleMobile = {
     listItem: {
       listStyle: 'disc',
       listStylePosition: 'outside',
-      marginLeft: '18px',
-      fontSize: '1.125rem',
+      marginLeft: '2rem',
+      fontSize: '1rem',
       lineHeight: '1.8rem',
+      marginBottom: '0.2rem',
     },
   },
 };
