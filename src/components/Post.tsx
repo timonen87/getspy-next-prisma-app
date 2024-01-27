@@ -74,9 +74,9 @@ const Post: FC<PostProps> = ({
             <div className="max-h-40 mt-1 text-xs text-gray-500"></div>
 
             <a href={`/cat/${categorySlug}/${post.slug}`}>
-              <h2 className="sm: text-xl md:text-2xl font-semibold py-2 leading-6 text-gray-900">
+              {/* <h2 className="sm: text-xl md:text-2xl font-semibold py-2 leading-6 text-gray-900">
                 {post.title}
-              </h2>
+              </h2> */}
 
               <div
                 className="relative text-sm max-h-40 w-full overflow-clip"
