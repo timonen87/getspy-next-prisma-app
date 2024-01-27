@@ -37,7 +37,7 @@ export async function POST(req: Request) {
       },
     });
 
-    return new Response(post);
+    return new Response('Пост успешно удален', { status: 200 });
   } catch (error) {
     return new Response('Не удалось получить посты', { status: 500 });
   }
