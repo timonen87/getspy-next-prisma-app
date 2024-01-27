@@ -12,13 +12,13 @@ import {
 } from '@/components/ui/DropdownMenu';
 import Link from 'next/link';
 import { useMutation } from '@tanstack/react-query';
-import { PostPublishRequest } from '@/lib/validators/post';
+import { PostDeletePublish, PostPublishRequest } from '@/lib/validators/post';
 import axios from 'axios';
 import { usePathname, useRouter } from 'next/navigation';
 import { toast } from '@/hooks/use-toast';
 
 interface DraftPostNavProps {
-  postId?: string;
+  postId: string;
 }
 
 const DraftPostNav: FC<DraftPostNavProps> = ({ postId }) => {
@@ -50,6 +50,31 @@ const DraftPostNav: FC<DraftPostNavProps> = ({ postId }) => {
     },
   });
 
+  const { mutate: deletePost } = useMutation({
+    mutationFn: async ({ postId }: PostDeletePublish) => {
+      const payload: PostDeletePublish = {
+        postId,
+      };
+
+      const {} = await axios.post('/api/posts/delete', payload);
+    },
+    onError: () => {
+      return toast({
+        title: 'Возникла ошибка.',
+        description: 'Пост не удален. Попробуйте позже',
+        variant: 'destructive',
+      });
+    },
+    onSuccess: () => {
+      // const newPathname = pathname.split('/').slice(0, -1).join('/');
+      router.push('/');
+      router.refresh();
+      return toast({
+        description: 'Ваш пост удален.',
+      });
+    },
+  });
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>...</DropdownMenuTrigger>
@@ -68,7 +93,13 @@ const DraftPostNav: FC<DraftPostNavProps> = ({ postId }) => {
           )}
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <button onClick={() => {}}>Удалить</button>
+          <button
+            onClick={() => {
+              deletePost({ postId });
+            }}
+          >
+            Удалить
+          </button>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

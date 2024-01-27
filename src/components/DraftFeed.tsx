@@ -2,7 +2,7 @@
 import { ExtendedPost } from '@/types/db';
 import { FC, useEffect, useRef } from 'react';
 import { useIntersection } from '@mantine/hooks';
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation, useQuery } from '@tanstack/react-query';
 import { INFINITE_SCROLLING_PAGINATION_RESULTS } from '@/config';
 import axios from 'axios';
 import { Loader2 } from 'lucide-react';

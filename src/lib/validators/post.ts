@@ -28,3 +28,9 @@ export const PostValidatorPublish = z.object({
 });
 
 export type PostPublishRequest = z.infer<typeof PostValidatorPublish>;
+
+export const PostDeletePublish = z.object({
+  postId: z.string(),
+});
+
+export type PostDeletePublish = z.infer<typeof PostValidatorPublish>;

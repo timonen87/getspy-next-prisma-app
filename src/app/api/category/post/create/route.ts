@@ -27,14 +27,19 @@ export async function POST(req: Request) {
       return new Response('Подписаться на пост', { status: 400 });
     }
 
+    // const b = a
+    //   .toLowerCase()
+    //   .replace(/ /g, '-')
+    //   .replace(/[^\w-]+/g, '');
+
     await db.post.create({
       data: {
         title,
         slug: CyrillicToTranslit()
           .transform(title, '_')
           .toLocaleLowerCase()
-          .replace(':', '')
-          .replace('-', ''),
+          .replace(/ /g, '-')
+          .replace(/[^\w-]+/g, ''),
         content,
         authorId: session.user.id,
         categoryId,

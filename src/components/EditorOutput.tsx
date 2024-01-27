@@ -20,13 +20,13 @@ const renderers = {
 
 const style = {
   paragraph: {
-    fontSize: '14px',
-    lineHeight: '1.5rem',
+    fontSize: '1.125rem',
+    lineHeight: '1.8rem',
   },
   header: {
     h2: {
-      fontSize: '1.2rem',
-      lineHeight: '2rem',
+      fontSize: '1.5rem',
+      lineHeight: '1.25rem',
       fontWeight: '600',
     },
     h3: {
@@ -46,7 +46,8 @@ const style = {
       listStyle: 'disc',
       listStylePosition: 'outside',
       marginLeft: '18px',
-      fontSize: '14px',
+      fontSize: '1.125rem',
+      lineHeight: '1.8rem',
     },
   },
 };
