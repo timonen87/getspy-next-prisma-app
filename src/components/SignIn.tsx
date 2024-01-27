@@ -7,7 +7,7 @@ const SignIn = () => {
     <div className="container mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[400px]">
       <div className="flex flex-col space-y-2 text-center">
         <h1 className="text-2xl font-semibold tracking-tight">
-          С возвращением на GetSpy.ru
+          Добро пожаловать на GetSpy.ru
         </h1>
       </div>
       <UserAuthForm />

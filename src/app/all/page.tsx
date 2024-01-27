@@ -45,37 +45,12 @@ const page = async () => {
 
   if (!posts) return notFound;
 
-  // const comments = await db.comment.findMany({
-  //   orderBy: {
-  //     createdAt: 'desc',
-  //   },
-  //   include: {
-  //     post: {
-  //       include: {
-  //         category: true,
-  //       },
-  //     },
-  //     author: true,
-  //   },
-  // });
-
-  // const category = await db.subscription.findMany({
-  //   where: {
-  //     userId: session?.user.id,
-  //   },
-  //   include: {
-  //     category: true,
-  //   },
-  // });
-
   return (
     <>
-      {/* <h1 className="font-bold text-3xl md:text-4xl">Лента</h1> */}
       <div className="grid sm:grid-cols-1 md:gap-x-4 md:grid-cols-5  py-6">
         <div className="hidden w-full min-w-100 md:block col-auto">
           <LeftButton />
           <hr className="mb-4" />
-          {/* {session ? <SideCategoryBlock category={category} /> : ''} */}
         </div>
         <ul className="flex flex-col md:col-span-4 xl:col-span-4 space-y-6">
           <div className="flex justify-between ">
@@ -87,7 +62,7 @@ const page = async () => {
 
           <GeneralFeed />
 
-          {/* <PostFeed initialPosts={posts} /> */}
+          <PostFeed initialPosts={posts} />
         </ul>
 
         {/* subreddit info */}
