@@ -100,7 +100,7 @@ export default async function Home() {
         <div className=" hidden flex-col gap-4 xl:block col-span-2">
           <div className=" mb-4">
             <SidePostFeed sidePosts={sidePosts} />
-            <SideCommnetsItem comments={comments} />
+            {!comments && <SideCommnetsItem comments={comments} />}
           </div>
         </div>
       </div>
