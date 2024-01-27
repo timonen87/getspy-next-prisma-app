@@ -68,7 +68,7 @@ export default async function Home() {
           <ul className="flex flex-col md:col-span-4 xl:col-span-4 space-y-6">
             {/* @ts-expect-error server component */}
 
-            <CustomFeed />
+            {session && <CustomFeed />}
           </ul>
         ) : (
           <ul className="flex flex-col md:col-span-5 xl:col-span-5 space-y-6">
