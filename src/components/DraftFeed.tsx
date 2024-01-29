@@ -25,7 +25,7 @@ const DraftFeed: FC<PostFeedProps> = ({ initialPosts }) => {
   const { data, fetchNextPage, isFetchingNextPage } = useInfiniteQuery(
     ['infinite-query'],
     async ({ pageParam = 1 }) => {
-      const query = `/api/posts/drafts?limit=${INFINITE_SCROLLING_PAGINATION_RESULTS}&page=${pageParam}`;
+      const query = `/api/drafts?limit=${INFINITE_SCROLLING_PAGINATION_RESULTS}&page=${pageParam}`;
 
       const { data } = await axios.get(query);
       return data as ExtendedPost[];
@@ -46,6 +46,8 @@ const DraftFeed: FC<PostFeedProps> = ({ initialPosts }) => {
   }, [entry, fetchNextPage]);
 
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
+
+  // console.log(posts);
 
   return (
     <div>

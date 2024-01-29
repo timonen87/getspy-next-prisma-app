@@ -18,7 +18,7 @@ const CustomDraftsFeed = async () => {
     },
   });
 
-  const posts = await db.post.findMany({
+  const postsDrafts = await db.post.findMany({
     where: {
       published: false,
       category: {
@@ -39,7 +39,7 @@ const CustomDraftsFeed = async () => {
     take: INFINITE_SCROLLING_PAGINATION_RESULTS,
   });
 
-  return <DraftFeed initialPosts={posts} />;
+  return <DraftFeed initialPosts={postsDrafts} />;
 };
 
 export default CustomDraftsFeed;

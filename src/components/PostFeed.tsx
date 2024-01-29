@@ -51,6 +51,8 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, categorySlug }) => {
 
   const posts = data?.pages.flatMap((page) => page) ?? initialPosts;
 
+  // console.log(posts);
+
   return (
     <div>
       <ul className="flex flex-col md:col-span-4 xl:col-span-4 space-y-6">
@@ -64,10 +66,24 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, categorySlug }) => {
           const currentVote = post.votes.find(
             (vote) => vote.userId === session?.user.id
           );
-          if (index === posts.length - 1) {
-            return (
-              <li key={post.id} ref={ref}>
+          if (post.published == true) {
+            if (index === posts.length - 1) {
+              return (
+                <li key={post.id} ref={ref}>
+                  <Post
+                    post={post}
+                    commentAmt={post.comments.length}
+                    categoryName={post.category.name}
+                    categorySlug={post.category.slug}
+                    votesAmt={votesAmt}
+                    currentVote={currentVote}
+                  />
+                </li>
+              );
+            } else {
+              return (
                 <Post
+                  key={post.id}
                   post={post}
                   commentAmt={post.comments.length}
                   categoryName={post.category.name}
@@ -75,20 +91,8 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, categorySlug }) => {
                   votesAmt={votesAmt}
                   currentVote={currentVote}
                 />
-              </li>
-            );
-          } else {
-            return (
-              <Post
-                key={post.id}
-                post={post}
-                commentAmt={post.comments.length}
-                categoryName={post.category.name}
-                categorySlug={post.category.slug}
-                votesAmt={votesAmt}
-                currentVote={currentVote}
-              />
-            );
+              );
+            }
           }
         })}
         {isFetchingNextPage && (

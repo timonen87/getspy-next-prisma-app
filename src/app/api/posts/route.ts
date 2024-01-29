@@ -47,11 +47,11 @@ export async function GET(req: Request) {
     } else if (session) {
       whereClause = {
         published: true,
-        category: {
-          id: {
-            in: followedCommunitiesIds,
-          },
-        },
+        // category: {
+        //   id: {
+        //     in: followedCommunitiesIds,
+        //   },
+        // },
       };
     }
 

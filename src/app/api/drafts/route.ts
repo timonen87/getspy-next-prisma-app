@@ -35,17 +35,17 @@ export async function GET(req: Request) {
         page: url.searchParams.get('page'),
       });
 
-    let whereClause = {};
+    let whereClauseDrafts = {};
 
     if (categoryName) {
-      whereClause = {
+      whereClauseDrafts = {
         published: false,
         category: {
           name: categoryName,
         },
       };
     } else if (session) {
-      whereClause = {
+      whereClauseDrafts = {
         published: false,
         category: {
           id: {
@@ -67,7 +67,7 @@ export async function GET(req: Request) {
         author: true,
         comments: true,
       },
-      where: whereClause,
+      where: whereClauseDrafts,
     });
 
     return new Response(JSON.stringify(posts));

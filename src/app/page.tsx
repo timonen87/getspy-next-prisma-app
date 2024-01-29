@@ -1,6 +1,7 @@
 import LeftButton from '@/components/LeftButton';
 import CustomFeed from '@/components/home/CustomFeed';
 import GeneralFeed from '@/components/home/GeneralFeed';
+import { INFINITE_SCROLLING_PAGINATION_RESULTS } from '@/config';
 
 import { getAuthSession } from '@/lib/auth';
 
@@ -12,6 +13,7 @@ import SidePostFeed from '@/components/SidePostFeed';
 import SideCategoryItem from '@/components/SideCategoryItem';
 import SideCategoryMain from '@/components/home/sideCategory';
 import SideCategoryBlock from '@/components/SideCategorysBlock';
+import PostFeed from '@/components/PostFeed';
 
 export default async function Home() {
   const session = await getAuthSession();
@@ -51,6 +53,22 @@ export default async function Home() {
     },
   });
 
+  const posts = await db.post.findMany({
+    where: {
+      published: true,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+    include: {
+      votes: true,
+      author: true,
+      comments: true,
+      category: true,
+    },
+    take: INFINITE_SCROLLING_PAGINATION_RESULTS,
+  });
+
   return (
     <>
       {/* <h1 className="font-bold text-3xl md:text-4xl">Лента</h1> */}
@@ -60,7 +78,7 @@ export default async function Home() {
             <LeftButton />
             <hr className="mb-4" />
 
-            {session ? <SideCategoryBlock category={sideCategory} /> : ''}
+            <SideCategoryBlock category={sideCategory} />
           </div>
         ) : (
           ''
@@ -75,7 +93,6 @@ export default async function Home() {
         ) : (
           <ul className="flex flex-col md:col-span-5 xl:col-span-5 space-y-6">
             <SideCategoryMain sideCategory={sideCategory} />
-
             {/* @ts-expect-error server component */}
             <GeneralFeed />
           </ul>

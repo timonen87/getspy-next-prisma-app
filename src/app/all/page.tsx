@@ -13,38 +13,6 @@ import { db } from '@/lib/db';
 import { notFound } from 'next/navigation';
 
 const page = async () => {
-  // const session = await getAuthSession();
-  // const posts = await db.post.findMany({
-  //   orderBy: {
-  //     createdAt: 'desc',
-  //   },
-  //   include: {
-  //     votes: true,
-  //     author: true,
-  //     comments: true,
-  //     category: true,
-  //   },
-  //   take: INFINITE_SCROLLING_PAGINATION_RESULTS, // 4 to demonstrate infinite scroll, should be higher in production
-  // });
-
-  const posts = await db.post.findMany({
-    where: {
-      published: true,
-    },
-    orderBy: {
-      createdAt: 'desc',
-    },
-    include: {
-      votes: true,
-      author: true,
-      comments: true,
-      category: true,
-    },
-    take: INFINITE_SCROLLING_PAGINATION_RESULTS, // 4 to demonstrate infinite scroll, should be higher in production
-  });
-
-  if (!posts) return notFound;
-
   return (
     <>
       <div className="grid sm:grid-cols-1 md:gap-x-4 md:grid-cols-5  py-6">
@@ -61,8 +29,6 @@ const page = async () => {
           {/* @ts-expect-error server component */}
 
           <GeneralFeed />
-
-          <PostFeed initialPosts={posts} />
         </ul>
 
         {/* subreddit info */}
