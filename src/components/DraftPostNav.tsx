@@ -19,9 +19,17 @@ import { toast } from '@/hooks/use-toast';
 
 interface DraftPostNavProps {
   postId: string;
+  slugPost: string;
+  published: boolean;
+  slug: string;
 }
 
-const DraftPostNav: FC<DraftPostNavProps> = ({ postId }) => {
+const DraftPostNav: FC<DraftPostNavProps> = ({
+  postId,
+  slugPost,
+  slug,
+  published,
+}) => {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -46,6 +54,31 @@ const DraftPostNav: FC<DraftPostNavProps> = ({ postId }) => {
       router.refresh();
       return toast({
         description: 'Ваш пост опубликован.',
+      });
+    },
+  });
+
+  const { mutate: unPublishPost } = useMutation({
+    mutationFn: async ({ postId }: PostPublishRequest) => {
+      const payload: PostPublishRequest = {
+        postId,
+      };
+
+      const {} = await axios.post('/api/posts/unpublish', payload);
+    },
+    onError: () => {
+      return toast({
+        title: 'Возникла ошибка.',
+        description: 'Пост не снят с публикации. Попробуйте позже',
+        variant: 'destructive',
+      });
+    },
+    onSuccess: () => {
+      const newPathname = pathname.split('/').slice(0, -1).join('/');
+      router.push(newPathname);
+      router.refresh();
+      return toast({
+        description: 'Ваш пост cнят с публикации.',
       });
     },
   });
@@ -82,13 +115,17 @@ const DraftPostNav: FC<DraftPostNavProps> = ({ postId }) => {
       <DropdownMenuContent className=" bg-white" align="end">
         <DropdownMenuItem asChild>
           <button onClick={() => {}}>
-            <Link href={`${pathname}/edit`}>Редактрировать</Link>
+            <Link href={`/cat/${slug}/${slugPost}/edit`}>Редактрировать</Link>
           </button>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          {postId && (
+          {published == false ? (
             <button onClick={() => publishPost({ postId })}>
               Опубликовать
+            </button>
+          ) : (
+            <button onClick={() => unPublishPost({ postId })}>
+              Снять с публикации
             </button>
           )}
         </DropdownMenuItem>

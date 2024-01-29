@@ -50,6 +50,8 @@ export async function generateMetadata({
 interface CategoryPostPageProps {
   params: {
     slugPost: string;
+    slug: string;
+    published: boolean;
   };
 }
 
@@ -125,7 +127,12 @@ const CategorPostPage = async ({ params }: CategoryPostPageProps) => {
             </div>
             <div className="flex items-center text-2xl">
               {session?.user.role == 'admin' ? (
-                <DraftPostNav postId={post?.id ?? cachedPost.id} />
+                <DraftPostNav
+                  postId={post?.id ?? cachedPost.id}
+                  slugPost={post?.slug ?? cachedPost.slugPost}
+                  slug={params.slug}
+                  published={post?.published ?? cachedPost.published}
+                />
               ) : (
                 ''
               )}

@@ -1,4 +1,5 @@
 import { Vote } from '@prisma/client';
+import { Factory } from 'react';
 
 export type CachedPost = {
   id: string;
@@ -9,4 +10,5 @@ export type CachedPost = {
   content: string;
   currentVote: Vote['type'] | null;
   createdAt: Date;
+  published: boolean;
 };
