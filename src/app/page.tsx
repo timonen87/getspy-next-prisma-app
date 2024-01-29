@@ -4,13 +4,14 @@ import GeneralFeed from '@/components/home/GeneralFeed';
 
 import { getAuthSession } from '@/lib/auth';
 
-import SideCategoryBlock from '@/components/SideCategorysBlock';
 import { db } from '@/lib/db';
 import SideCommnetsItem from '@/components/SideCommenItem';
 import Link from 'next/link';
 import { buttonVariants } from '@/components/ui/Button';
 import SidePostFeed from '@/components/SidePostFeed';
-import { notFound } from 'next/navigation';
+import SideCategoryItem from '@/components/SideCategoryItem';
+import SideCategoryMain from '@/components/home/sideCategory';
+import SideCategoryBlock from '@/components/SideCategorysBlock';
 
 export default async function Home() {
   const session = await getAuthSession();
@@ -69,29 +70,12 @@ export default async function Home() {
           <ul className="flex flex-col md:col-span-4 xl:col-span-4 space-y-6">
             {/* @ts-expect-error server component */}
 
-            {session.user.role == 'admin' ? <CustomFeed /> : <GeneralFeed />}
+            <CustomFeed />
           </ul>
         ) : (
           <ul className="flex flex-col md:col-span-5 xl:col-span-5 space-y-6">
-            <div>
-              <ul className="flex gap-2">
-                {sideCategory
-                  .map((obj) => (
-                    <li className="pb-1 " key={obj.categoryId}>
-                      <Link
-                        href={`/cat/${obj.category.slug}`}
-                        className={buttonVariants({
-                          variant: 'subtle',
-                        })}
-                      >
-                        {/* <Icons.main className="w-6 h-6 mr-2 ml-2" /> */}
-                        <div className="text-sm"> {obj.category.name} </div>
-                      </Link>
-                    </li>
-                  ))
-                  .slice(1, 4)}
-              </ul>
-            </div>
+            <SideCategoryMain sideCategory={sideCategory} />
+
             {/* @ts-expect-error server component */}
             <GeneralFeed />
           </ul>
