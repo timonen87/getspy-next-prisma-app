@@ -16,37 +16,6 @@ import Link from 'next/link';
 import DraftPostNav from '@/components/DraftPostNav';
 import { getAuthSession } from '@/lib/auth';
 
-export async function generateMetadata({
-  params,
-}: {
-  params: {
-    slugPost: string;
-  };
-}) {
-  try {
-    const metaData = await db.post.findFirst({
-      where: {
-        slug: params.slugPost,
-      },
-    });
-    if (!metaData)
-      return {
-        title: 'Not Found',
-        description: 'not found',
-      };
-    return {
-      title: metaData?.title,
-      description: metaData?.title,
-    };
-  } catch (error) {
-    // console.log(error);
-    return {
-      title: 'Not Found',
-      description: 'not found',
-    };
-  }
-}
-
 interface CategoryPostPageProps {
   params: {
     slugPost: string;
@@ -71,7 +40,7 @@ const CategorPostPage = async ({ params }: CategoryPostPageProps) => {
     post = await db.post.findFirst({
       where: {
         slug: params.slugPost,
-        published: true,
+        published: false,
       },
       include: {
         votes: true,

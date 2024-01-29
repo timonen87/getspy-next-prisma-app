@@ -18,5 +18,6 @@ export const config = {
     '/cat/create',
     '/cat/:path*/:path*/edit',
     '/drafts',
+    '/cat/:path*/:path*/draft',
   ],
 };

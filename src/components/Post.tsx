@@ -60,20 +60,17 @@ const Post: FC<PostProps> = ({
                   </span>
                 </div>
               </div>
-              {/* <div>
-                {post.published == false ? (
-                  <div className="text-3xl font-bold cursor-pointer">
-                    <DraftPostNav postId={post.id} />
-                  </div>
-                ) : (
-                  ''
-                )}
-              </div> */}
             </div>
 
             <div className="max-h-40 mt-1 text-xs text-gray-500"></div>
 
-            <a href={`/cat/${categorySlug}/${post.slug}`}>
+            <a
+              href={
+                post.published == true
+                  ? `/cat/${categorySlug}/${post.slug}`
+                  : `/cat/${categorySlug}/${post.slug}/draft`
+              }
+            >
               <h1 className="text-2xl md:text-3xl font-semibold py-2 leading-6 text-gray-900">
                 {post.title}
               </h1>

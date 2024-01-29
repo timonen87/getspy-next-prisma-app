@@ -10,6 +10,7 @@ import SideCommnetsItem from '@/components/SideCommenItem';
 import Link from 'next/link';
 import { buttonVariants } from '@/components/ui/Button';
 import SidePostFeed from '@/components/SidePostFeed';
+import { notFound } from 'next/navigation';
 
 export default async function Home() {
   const session = await getAuthSession();
@@ -100,7 +101,11 @@ export default async function Home() {
         <div className=" hidden flex-col gap-4 xl:block col-span-2">
           <div className=" mb-4">
             <SidePostFeed sidePosts={sidePosts} />
-            {comments && <SideCommnetsItem comments={comments} />}
+            {comments.length > 0 ? (
+              <SideCommnetsItem comments={comments} />
+            ) : (
+              ''
+            )}
           </div>
         </div>
       </div>
