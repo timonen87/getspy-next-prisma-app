@@ -12,7 +12,7 @@ const LogoBack = () => {
 
   return (
     <a href={categoryPath}>
-      <Icons.logo className="w-20 md:w-28" />
+      <Icons.logo className="w-20 w-28" />
     </a>
   );
 };

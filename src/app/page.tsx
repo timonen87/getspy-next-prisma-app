@@ -11,9 +11,9 @@ import Link from 'next/link';
 import { buttonVariants } from '@/components/ui/Button';
 import SidePostFeed from '@/components/SidePostFeed';
 import SideCategoryItem from '@/components/SideCategoryItem';
-import SideCategoryMain from '@/components/home/sideCategory';
 import SideCategoryBlock from '@/components/SideCategorysBlock';
 import PostFeed from '@/components/PostFeed';
+import SideCategoryMain from '@/components/home/SideCategoryMain';
 
 export default async function Home() {
   const session = await getAuthSession();

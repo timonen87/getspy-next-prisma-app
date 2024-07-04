@@ -20,7 +20,7 @@ const Navbar = async () => {
       <div className="container  max-w-7xl h-full mx-auto flex items-center justify-between gap-2">
         <div className="flex gap-2 items-center">
           <div className="block md:hidden">
-            <DropdownMenuButton sideMenuCategory={sideMenuCategory} />
+            {/* <DropdownMenuButton sideMenuCategory={sideMenuCategory} /> */}
             {/* <SheetNavMobile /> */}
           </div>
           <LogoBack />

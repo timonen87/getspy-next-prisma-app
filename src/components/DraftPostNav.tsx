@@ -2,7 +2,7 @@
 
 import { User } from 'next-auth';
 import UserAvatar from './UserAvatar ';
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { signOut } from 'next-auth/react';
 import {
   DropdownMenu,
@@ -16,6 +16,7 @@ import { PostDeletePublish, PostPublishRequest } from '@/lib/validators/post';
 import axios from 'axios';
 import { usePathname, useRouter } from 'next/navigation';
 import { toast } from '@/hooks/use-toast';
+import { AlertModal } from './modal/AlertModal';
 
 interface DraftPostNavProps {
   postId: string;
@@ -32,6 +33,8 @@ const DraftPostNav: FC<DraftPostNavProps> = ({
 }) => {
   const router = useRouter();
   const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const { mutate: publishPost } = useMutation({
     mutationFn: async ({ postId }: PostPublishRequest) => {
@@ -109,37 +112,40 @@ const DraftPostNav: FC<DraftPostNavProps> = ({
   });
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger>...</DropdownMenuTrigger>
+    <>
+      <AlertModal
+        isOpen={open}
+        onClose={() => setOpen(false)}
+        onConfirm={() => {deletePost({postId})}}
+        loading={loading}
+      />
+      <DropdownMenu>
+        <DropdownMenuTrigger>...</DropdownMenuTrigger>
 
-      <DropdownMenuContent className=" bg-white" align="end">
-        <DropdownMenuItem asChild>
-          <button onClick={() => {}}>
-            <Link href={`/cat/${slug}/${slugPost}/edit`}>Редактрировать</Link>
-          </button>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
+        <DropdownMenuContent className=" bg-white" align="end">
+          <DropdownMenuItem  onClick={() => {}}>
+              <Link href={`/cat/${slug}/${slugPost}/edit`}>Редактрировать</Link>
+
+          </DropdownMenuItem>
+
+
           {published == false ? (
-            <button onClick={() => publishPost({ postId })}>
-              Опубликовать
-            </button>
-          ) : (
-            <button onClick={() => unPublishPost({ postId })}>
-              Снять с публикации
-            </button>
-          )}
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <button
-            onClick={() => {
-              deletePost({ postId });
-            }}
-          >
-            Удалить
-          </button>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+              <DropdownMenuItem onClick={() => publishPost({ postId })}>Опубликовать</DropdownMenuItem>
+            ) : (
+
+              <DropdownMenuItem onClick={() => unPublishPost({ postId })}>
+                Снять с публикации
+              </DropdownMenuItem>
+            )}
+          <DropdownMenuItem
+              onClick={() => setOpen(true)}
+            >
+              Удалить
+
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
   );
 };
 

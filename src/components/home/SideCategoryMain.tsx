@@ -14,7 +14,7 @@ const SideCategoryMain: FC<SideCategoryMainProps> = ({
     <ul className="flex gap-2">
       {sideCategory
         .map((obj) => (
-          <li className="pb-1 " key={obj.categoryId}>
+          <li className="pb-1 " key={obj.categoryId} >
             <Link
               href={`/cat/${obj.category.slug}`}
               className={buttonVariants({

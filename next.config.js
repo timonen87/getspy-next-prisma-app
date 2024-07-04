@@ -5,6 +5,7 @@ const nextConfig = {
       'uploadthing.com',
       'lh3.googleusercontent.com',
       'res.cloudinary.com',
+      'wiki-bucket.hb.ru-msk.vkcs.cloud',
     ],
   },
   experimental: {

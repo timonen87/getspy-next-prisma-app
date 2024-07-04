@@ -71,7 +71,7 @@ const DropdownMenuButton: FC<DropdownMenuButtonProps> = ({
             {sideMenuCategory &&
               sideMenuCategory
                 .map((category) => (
-                  <DropdownMenuItem key={category.categoryId}>
+                  <DropdownMenuItem key={category.categoryId} >
                     <Link
                       href={`/cat/${category.slug}`}
                       className="flex gap-2"

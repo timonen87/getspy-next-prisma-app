@@ -20,8 +20,8 @@ const SideCategoryBlock: FC<SideCategoryBlockProps> = ({ category }) => {
         <ul className="flex-col justify-start gap-4 mb-2">
           {category &&
             category.map((obj) => (
-              <li className="pb-1" key={obj.id}>
-                <Link
+              <li className="pb-1" >
+                <Link key={obj.categoyId}
                   href={`/cat/${obj.category.slug}`}
                   className={buttonVariantsLink({
                     variant: 'ghost',
